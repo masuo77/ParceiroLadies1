@@ -1,5 +1,6 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,30 +40,37 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i(LOG, "Click");
 
-                // TEST
-                mDbHelper = new DatabaseHelper(MainActivity.this);
 
-                Log.i(LOG, "Click2");
+                startActivity(new Intent(MainActivity.this, PlayerListActivity.class));
 
-//                setDatabase();
 
-                db = mDbHelper.getReadableDatabase();
-
-//                try {
-//                    mDbHelper.createEmptyDatabase();
-//                } catch (IOException ioe) {
-//                    throw new Error("Unable to create database");
-//                }
+//                // TEST
+//                mDbHelper = new DatabaseHelper(MainActivity.this);
+//
+//                Log.i(LOG, "Click2");
+//
+////                setDatabase();
 //
 //                db = mDbHelper.getReadableDatabase();
-
-                Cursor c = db.rawQuery("SELECT * FROM Players;", null);
-                if (c.moveToFirst()) {
-                    do {
-                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_JOIN_COMMENT)));
-                    } while (c.moveToNext());
-                }
-                c.close();
+//
+////                try {
+////                    mDbHelper.createEmptyDatabase();
+////                } catch (IOException ioe) {
+////                    throw new Error("Unable to create database");
+////                }
+////
+////                db = mDbHelper.getReadableDatabase();
+//
+//                Cursor c = db.rawQuery("SELECT * FROM Players;", null);
+//                if (c.moveToFirst()) {
+//                    do {
+//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NAME)));
+//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_BIRTHDAY)));
+//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_HOMETOWN)));
+//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_JOIN_COMMENT)));
+//                    } while (c.moveToNext());
+//                }
+//                c.close();
 
             }
 
