@@ -29,13 +29,16 @@ public class PlayerListActivity extends AppCompatActivity {
         // リストビューに表示する要素を設定
 
         // TEST
-        mDbHelper = new DatabaseHelper(this);
+//        mDbHelper = new DatabaseHelper(this, PlayerContract.DATABASE_NAME, PlayerContract.DATABASE_VERSION, PlayerContract.ASSETS_DATABASE_NAME);
+        ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(this);
+
 
         Log.i(LOG, "Click2");
 
 //                setDatabase();
 
-        db = mDbHelper.getReadableDatabase();
+//        db = mDbHelper.getReadableDatabase();
+        parceiroDBAdapter.open();
 
 //                try {
 //                    mDbHelper.createEmptyDatabase();
@@ -45,21 +48,55 @@ public class PlayerListActivity extends AppCompatActivity {
 //
 //                db = mDbHelper.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM Players;", null);
+//        Cursor c = db.rawQuery("SELECT * FROM Players;", null);
+        Cursor c = parceiroDBAdapter.getAllPlayers();
+
+
+        String[] strs = c.getColumnNames();
+
+                for(int s = 0; s < strs.length; s++){
+                    Log.v("Column:", strs[s] + "["+c.getString(s)+"]");
+                }
+
+
         ArrayList<PlayerListItem> listItems = new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
-                PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher, c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NAME)));
+                PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher,
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)),
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))
+                );
                 listItems.add(item);
 
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NAME)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_BIRTHDAY)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_HOMETOWN)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_JOIN_COMMENT)));
+                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
+                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BIRTHDAY)));
+                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
+                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
+                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NEW_MEMBER)));
+
+                if (c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)) == false) {
+                    Log.v("Player j ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)));
+                }
+                if (c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)) == false) {
+                    Log.v("Player l ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)));
+                }
+
+//                Log.v("Player", c.getString(c.getColumnIndex("leavings.comment")));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersTable.COL_COMMENT)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.MemberInformation.COL_NUMBER)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.MemberInformation.COL_POSITION)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.MemberInformation.COL_YEAR)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.MemberInformation.COL_NOTE)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NOTE)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_HEIGHT)));
             } while (c.moveToNext());
 
+            // アダプタの取得した情報を渡す
             PlayerListViewAdapter adapter = new PlayerListViewAdapter(this, R.layout.player_list, listItems );
+
+            // 情報をセットするアダプタを渡す
+            // 後はListViewでスクロールなどやってくれる。
             listView.setAdapter(adapter);
 
 
@@ -69,5 +106,6 @@ public class PlayerListActivity extends AppCompatActivity {
 
 
 
+        parceiroDBAdapter.close();
     }
 }

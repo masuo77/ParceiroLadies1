@@ -20,10 +20,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static String LOG = "DatabaseHelper";
 
-//    private SQLiteDatabase mDatabase;
     private final Context mContext;
     private final File mDatabaseFile;
     private  boolean mCopyFromAssets = false;
+
+    private final String mAssetDatabaseName;
+
 
     // プリセットデータベースの利用法：
     // assetsにデータベースを格納し、ビルドする。
@@ -35,12 +37,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // SQLiteOpenHelperでは onCreate/onUpgradeメソッドのOverrideは必須
 
-    public DatabaseHelper(Context context) {
-        super(context, PlayerContract.DATABASE_NAME, null, PlayerContract.DATABASE_VERSION);
+    public DatabaseHelper(Context context, String databaseName, int databaseVersion, String assetDatabaseName) {
+        super(context, databaseName, null, databaseVersion);
 
         // Databaseのpathを得る
         mContext = context;
-        mDatabaseFile = mContext.getDatabasePath(PlayerContract.DATABASE_NAME);
+        mDatabaseFile = mContext.getDatabasePath(databaseName);
+        mAssetDatabaseName = assetDatabaseName;
         Log.i(LOG, mDatabaseFile.toString());
     }
 
@@ -60,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (mCopyFromAssets) {
             try {
                 // assetsに格納したデータベースをデフォルトのデータベースパスに作成したデータベースへコピーする
-                db = copyDatabaseFromAssets(db, mContext, mDatabaseFile, PlayerContract.ASSETS_DATABASE_NAME);
+                db = copyDatabaseFromAssets(db, mContext, mDatabaseFile, mAssetDatabaseName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -80,11 +83,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i(LOG, "onUpgrade" + " " + Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
+
+
+        // データベースは存在するが、最新ではない
+
+        Log.i(LOG, Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
+
+        // 削除し、データベースが存在しないことを示す
+        // journalも削除
+        // API Level 16以降
+        //SQLiteDatabase.deleteDatabase(mDatabaseFile);
+
+        Log.i(LOG, "Delete " + mDatabaseFile.getPath());
+
+        mCopyFromAssets = true;
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onDowngrade(db, oldVersion, newVersion);
+//        super.onDowngrade(db, oldVersion, newVersion);
 
         Log.i(LOG, "onDowngrade" + " " + Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
 
@@ -95,7 +112,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // 削除し、データベースが存在しないことを示す
         // journalも削除
         // API Level 16以降
-        SQLiteDatabase.deleteDatabase(mDatabaseFile);
+//        SQLiteDatabase.deleteDatabase(mDatabaseFile);
+
+        mCopyFromAssets = true;
     }
 
     /**

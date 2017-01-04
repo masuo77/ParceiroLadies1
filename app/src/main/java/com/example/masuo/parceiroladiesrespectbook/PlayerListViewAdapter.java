@@ -28,6 +28,7 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerListItem> {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    // ListViewからgetViewが呼ばれる
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -48,6 +49,9 @@ public class PlayerListViewAdapter extends ArrayAdapter<PlayerListItem> {
 
         TextView name = (TextView)view.findViewById(R.id.list_name);
         name.setText(item.getName());
+
+        TextView pos = (TextView)view.findViewById(R.id.list_info);
+        pos.setText(item.getPosition());
 
         return view;
     }
