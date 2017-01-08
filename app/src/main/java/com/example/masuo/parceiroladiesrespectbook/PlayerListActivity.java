@@ -15,8 +15,8 @@ public class PlayerListActivity extends AppCompatActivity {
 
     private static final String LOG = "PlayerListActivity";
 
-    private DatabaseHelper mDbHelper;
-    private SQLiteDatabase db;
+//    private DatabaseHelper mDbHelper;
+//    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,38 +35,31 @@ public class PlayerListActivity extends AppCompatActivity {
 
         Log.i(LOG, "Click2");
 
-//                setDatabase();
-
-//        db = mDbHelper.getReadableDatabase();
         parceiroDBAdapter.open();
-
-//                try {
-//                    mDbHelper.createEmptyDatabase();
-//                } catch (IOException ioe) {
-//                    throw new Error("Unable to create database");
-//                }
-//
-//                db = mDbHelper.getReadableDatabase();
 
 //        Cursor c = db.rawQuery("SELECT * FROM Players;", null);
         Cursor c = parceiroDBAdapter.getAllPlayers();
 
-
         String[] strs = c.getColumnNames();
-
-                for(int s = 0; s < strs.length; s++){
-                    Log.v("Column:", strs[s] + "["+c.getString(s)+"]");
-                }
-
+        for(int s = 0; s < strs.length; s++){
+            Log.v("Column:", strs[s] + "["+c.getString(s)+"]");
+        }
 
         ArrayList<PlayerListItem> listItems = new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
+//                PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher,
+//                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)),
+//                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))
+//                );
+//
                 PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher,
                         c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)),
-                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)),
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION))
                 );
+
                 listItems.add(item);
 
                 Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
@@ -75,10 +68,10 @@ public class PlayerListActivity extends AppCompatActivity {
                 Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
                 Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NEW_MEMBER)));
 
-                if (c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)) == false) {
+                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))) {
                     Log.v("Player j ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)));
                 }
-                if (c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)) == false) {
+                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT))) {
                     Log.v("Player l ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)));
                 }
 

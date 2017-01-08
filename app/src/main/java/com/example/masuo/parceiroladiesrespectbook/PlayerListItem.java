@@ -7,16 +7,21 @@ package com.example.masuo.parceiroladiesrespectbook;
 public class PlayerListItem {
     private int imageRes;
     private String name;
-    private String position;
     private String number;
+    private String position;
+    private String note;
+    private String join;
+    private String leaving;
 
     public PlayerListItem(int imageRes, String name) {
         this.imageRes = imageRes;
         this.name = name;
     }
-    public PlayerListItem(int imageRes, String name, String position) {
+
+    public PlayerListItem(int imageRes, String name, String number, String position) {
         this.imageRes = imageRes;
         this.name = name;
+        this.number = number;
         this.position = position;
     }
 
@@ -41,5 +46,29 @@ public class PlayerListItem {
     public String getNumber() { return number; }
 
     public void setNumber(String number) { this.number = number; }
+
+    public String getJoin() {
+        return join;
+    }
+
+    public void setJoin(String join) {
+        this.join = join;
+    }
+
+    public String getLeaving() {
+        return leaving;
+    }
+
+    public void setLeaving(String leaving) {
+        this.leaving = leaving;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
 }

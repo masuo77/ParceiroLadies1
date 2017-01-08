@@ -30,19 +30,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(LOG, "Start2");
 
-//        buttonTest = (Button)findViewById(R.id.buttonTest);
-//        button.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v) {
-//                buttonTest.setText("実行");
-//                Log.i(LOG, "Click Test");
-//                startActivity(new Intent(MainActivity.this, PlayerListActivity.class));
-//
-//            }
-//        });
+        buttonTest = (Button)findViewById(R.id.buttonTest);
+        buttonTest.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                buttonTest.setText("実行");
+                Log.i(LOG, "Click Test");
+                startActivity(new Intent(MainActivity.this, PlayerListRecyclerViewActivity.class));
 
-
+            }
+        });
 
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
