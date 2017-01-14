@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final  int    DATABASE_VERSION   = 3;
+    public static final  int    DATABASE_VERSION   = 1;
     public static final  String ASSETS_DATABASE_NAME      = "ParceiroLadies.sqlite";
     public static final  String DATABASE_NAME      = "ParceiroLadies.db";
     private static final String TEXT_TYPE          = " TEXT";
@@ -25,7 +25,7 @@ public class PlayerContract {
     // シーズンごとの選手リスト
     public static final String MEMBERS_TABLE_NAME   = "members";
     // シーズンごとの成績
-    public static final String RANK_TABLE_NAME      = "rank";
+    public static final String SEASON_TABLE_NAME    = "season";
 
     // 新加入マーク
     public static final String NEW_MEMBER_MARK     = "☆";
@@ -153,7 +153,7 @@ public class PlayerContract {
 
     //テーブル生成定義
     public static final String CREATE_RANK_TABLE = "CREATE TABLE " +
-            RANK_TABLE_NAME + " (" +
+            SEASON_TABLE_NAME + " (" +
             RankTable._ID          + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
             RankTable.COL_YEAR     + INTEGER_TYPE  + COMMA_SEP +
             RankTable.COL_LEAGUE   + TEXT_TYPE     + COMMA_SEP +

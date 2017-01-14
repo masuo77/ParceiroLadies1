@@ -1,12 +1,21 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,11 +29,11 @@ import android.view.ViewGroup;
 public class PlayerListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "season";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String mSeason;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -55,7 +64,7 @@ public class PlayerListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mSeason = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -63,8 +72,107 @@ public class PlayerListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_player_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_player_list, container, false);
+
+        Context context = v.getContext();
+
+        ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
+
+        parceiroDBAdapter.open();
+
+        Cursor c = parceiroDBAdapter.getAllPlayers(mSeason);
+
+        ArrayList<PlayerListItem> listItems = new ArrayList<>();
+
+        final List<String> nameList = new ArrayList<>();
+
+
+        if (c.moveToFirst()) {
+            do {
+                PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher,
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)),
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)),
+                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION))
+                );
+
+                List<String> infoList = new ArrayList<>();
+
+                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)))) {
+                    infoList.add(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
+                }
+                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
+                    infoList.add("新加入");
+                }
+                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)))) {
+                    infoList.add("退団");
+                }
+
+                int i = 0;
+                for (String s : infoList
+                        ) {
+                    if (!TextUtils.isEmpty(s)) {
+                        switch (i) {
+                            case 0:
+                                item.setNote(s);
+                                break;
+                            case 1:
+                                item.setJoin(s);
+                                break;
+                            case 2:
+                            default:
+                                item.setLeaving(s);
+                                break;
+                        }
+                        i++;
+                    }
+                }
+
+
+                listItems.add(item);
+
+                nameList.add(item.getName());
+
+            } while (c.moveToNext());
+
+        }
+
+        c.close();
+        parceiroDBAdapter.close();
+
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.player_list_view);
+
+        assert recyclerView != null;
+        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this));
+
+        RecyclerAdapter adapter = new RecyclerAdapter(context, listItems);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new RecyclerAdapter.onItemClickListener() {
+            @Override
+            public void onClick(View view, int position, String name) {
+                Toast.makeText(getActivity(), Integer.toString(position) + " " + name, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        adapter.setOnImageButtonInfoClickListener(new RecyclerAdapter.onImageButtonInfoClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(getActivity(), "Click " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -77,12 +185,14 @@ public class PlayerListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+
+
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override

@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.player_list_recycler_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.card_view_player_list, parent, false);
         return new CustomViewHolder(view);
     }
 
@@ -47,12 +47,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
         String note = playerListItems.get(position).getNote();
         String join = playerListItems.get(position).getJoin();
         String leaving = playerListItems.get(position).getLeaving();
-
-        Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
-
         holder.textViewName.setText(name);
 
         holder.textViewNumber.setText(number);
+        Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
         holder.textViewNumber.setTypeface(face);
 
         holder.textViewPosition.setText(pos);

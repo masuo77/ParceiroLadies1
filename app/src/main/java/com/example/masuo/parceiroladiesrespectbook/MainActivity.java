@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -27,7 +28,7 @@ import java.util.GregorianCalendar;
 import static android.R.style.Theme_Holo_Dialog;
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TestFragment.OnFragmentInteractionListener {
 
     private static final String LOG = "MainActivity";
 
@@ -38,85 +39,100 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonTest;
     private Button buttonDate;
 
-
     @Override
+    public void onFragmentInteraction() {
+        // TODO Auto-generated method stub
+        Toast.makeText(this, "Click in Fragment", Toast.LENGTH_SHORT).show();
+
+        PlayerListFragment fragment = new PlayerListFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment.newInstance("2015", ""));
+        transaction.commit();
+
+
+
+    }
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-//        TestFragment fragment = new TestFragment();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.container, fragment);
-//        transaction.commit();
-
-
 
         setContentView(R.layout.activity_main);
         Log.i(LOG, "Start2");
 
+        TestFragment fragment = new TestFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, fragment);
+        transaction.commit();
 
-        buttonDate = (Button)findViewById(R.id.buttonDate);
-        buttonDate.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Log.i(LOG, "Click Test");
-                buttonDate.setText("実行");
 
-                showDatePickerDialog(-1, "");
-            }
-        });
 
-        buttonTest = (Button)findViewById(R.id.buttonTest);
-        buttonTest.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                buttonTest.setText("実行");
-                Log.i(LOG, "Click Test");
-                startActivity(new Intent(MainActivity.this, PlayerListRecyclerViewActivity.class));
 
-            }
-        });
 
-        button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button.setText("On");
-                Log.i(LOG, "Click");
-                startActivity(new Intent(MainActivity.this, PlayerListActivity.class));
-//                // TEST
-//                mDbHelper = new DatabaseHelper(MainActivity.this);
+
+
+//        buttonDate = (Button)findViewById(R.id.buttonDate);
+//        buttonDate.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(LOG, "Click Test");
+//                buttonDate.setText("実行");
 //
-//                Log.i(LOG, "Click2");
+//                showDatePickerDialog(-1, "");
+//            }
+//        });
 //
-////                setDatabase();
+//        buttonTest = (Button)findViewById(R.id.buttonTest);
+//        buttonTest.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v) {
+//                buttonTest.setText("実行");
+//                Log.i(LOG, "Click Test");
+//                startActivity(new Intent(MainActivity.this, PlayerListRecyclerViewActivity.class));
 //
-//                db = mDbHelper.getReadableDatabase();
+//            }
+//        });
 //
-////                try {
-////                    mDbHelper.createEmptyDatabase();
-////                } catch (IOException ioe) {
-////                    throw new Error("Unable to create database");
-////                }
+//        button = (Button)findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                button.setText("On");
+//                Log.i(LOG, "Click");
+//                startActivity(new Intent(MainActivity.this, PlayerListActivity.class));
+////                // TEST
+////                mDbHelper = new DatabaseHelper(MainActivity.this);
+////
+////                Log.i(LOG, "Click2");
+////
+//////                setDatabase();
 ////
 ////                db = mDbHelper.getReadableDatabase();
+////
+//////                try {
+//////                    mDbHelper.createEmptyDatabase();
+//////                } catch (IOException ioe) {
+//////                    throw new Error("Unable to create database");
+//////                }
+//////
+//////                db = mDbHelper.getReadableDatabase();
+////
+////                Cursor c = db.rawQuery("SELECT * FROM Players;", null);
+////                if (c.moveToFirst()) {
+////                    do {
+////                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NAME)));
+////                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_BIRTHDAY)));
+////                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_HOMETOWN)));
+////                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_JOIN_COMMENT)));
+////                    } while (c.moveToNext());
+////                }
+////                c.close();
 //
-//                Cursor c = db.rawQuery("SELECT * FROM Players;", null);
-//                if (c.moveToFirst()) {
-//                    do {
-//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_NAME)));
-//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_BIRTHDAY)));
-//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_HOMETOWN)));
-//                        Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayerInformation.COL_JOIN_COMMENT)));
-//                    } while (c.moveToNext());
-//                }
-//                c.close();
-
-            }
-
-        });
+//            }
+//
+//        });
 
 
 //        try {
