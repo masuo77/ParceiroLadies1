@@ -29,13 +29,12 @@ public class PlayerListRecyclerViewActivity extends AppCompatActivity {
 
         parceiroDBAdapter.open();
 
-//        Cursor c = db.rawQuery("SELECT * FROM Players;", null);
         Cursor c = parceiroDBAdapter.getAllPlayers();
 
-        String[] strs = c.getColumnNames();
-        for(int s = 0; s < strs.length; s++){
-            Log.v("Column:", strs[s] + "["+c.getString(s)+"]");
-        }
+//        String[] strs = c.getColumnNames();
+//        for(int s = 0; s < strs.length; s++){
+//            Log.v("Column:", strs[s] + "["+c.getString(s)+"]");
+//        }
 
         ArrayList<PlayerListItem> listItems = new ArrayList<>();
 
@@ -83,37 +82,23 @@ public class PlayerListRecyclerViewActivity extends AppCompatActivity {
                     }
                 }
 
-//                item.setNote(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
-//
-//                String join_info = "";
-//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
-//                    join_info = "新加入";
-//                }
-//                item.setJoin(join_info);
-//
-//                String leaving_info = "";
-//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_NOTE)))) {
-//                    leaving_info = "退団";
-//                }
-//                item.setLeaving(leaving_info);
-//
 
                 listItems.add(item);
 
                 nameList.add(item.getName());
 
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BIRTHDAY)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
-                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NEW_MEMBER)));
-
-                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))) {
-                    Log.v("Player j ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)));
-                }
-                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT))) {
-                    Log.v("Player l ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)));
-                }
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BIRTHDAY)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
+//                Log.v("Player", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NEW_MEMBER)));
+//
+//                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT))) {
+//                    Log.v("Player j ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)));
+//                }
+//                if (!c.isNull(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT))) {
+//                    Log.v("Player l ", c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)));
+//                }
 
             } while (c.moveToNext());
 
@@ -129,6 +114,7 @@ public class PlayerListRecyclerViewActivity extends AppCompatActivity {
         parceiroDBAdapter.close();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this));
@@ -139,10 +125,17 @@ public class PlayerListRecyclerViewActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new RecyclerAdapter.onItemClickListener() {
             @Override
             public void onClick(View view, int position, String name) {
-//                Toast.makeText(PlayerListRecyclerViewActivity.this, Integer.toString(position) + " " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlayerListRecyclerViewActivity.this, Integer.toString(position) + " " + name, Toast.LENGTH_SHORT).show();
             }
         });
 
+        adapter.setOnImageButtonInfoClickListener(new RecyclerAdapter.onImageButtonInfoClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(PlayerListRecyclerViewActivity.this, "Click " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 }

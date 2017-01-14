@@ -1,17 +1,30 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import static android.R.style.Theme_Holo_Dialog;
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +36,36 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
     private Button buttonTest;
+    private Button buttonDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        TestFragment fragment = new TestFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.container, fragment);
+//        transaction.commit();
+
+
+
         setContentView(R.layout.activity_main);
         Log.i(LOG, "Start2");
+
+
+        buttonDate = (Button)findViewById(R.id.buttonDate);
+        buttonDate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Log.i(LOG, "Click Test");
+                buttonDate.setText("実行");
+
+                showDatePickerDialog(-1, "");
+            }
+        });
 
         buttonTest = (Button)findViewById(R.id.buttonTest);
         buttonTest.setOnClickListener(new View.OnClickListener()
@@ -131,5 +168,62 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private Context ctx = this;
+    DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+    int callerId = -1;
+    //  public static final String DATE_FORMAT = "yyyy/MM/dd";
+    public static final String DATE_FORMAT = "EEE, MMM d, yyyy";
+
+    /**
+     * Method used to show date picker dialog
+     *
+     * @param callerId
+     * @param dateText
+     */
+    public void showDatePickerDialog(int callerId, String dateText) {
+        this.callerId = callerId;
+        Date date = null;
+
+        try {
+            if (dateText.equals(""))
+                date = new Date();
+            else
+                date = dateFormatter.parse(dateText);
+        } catch (Exception exp) {
+            // In case of expense initializa date with new Date
+            date = new Date();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH); // calendar month 0-11
+        int day = calendar.get(Calendar.DATE);
+        // date picker initialization
+//        DatePickerDialog datePicker = new DatePickerDialog(ctx, android.R.style.Theme_Holo_Dialog,new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePicker = new DatePickerDialog(ctx,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+//                handleOnDateSet(year, month, day);
+            }
+        }, year, month, day);
+
+//        datePicker.getDatePicker().setCalendarViewShown(false);
+//
+//        int day_id = Resources.getSystem().getIdentifier("day", "id", "android");
+//        int month_id = Resources.getSystem().getIdentifier("month", "id", "android");
+//        datePicker.getDatePicker().findViewById(day_id).setVisibility(View.GONE);
+//        datePicker.getDatePicker().findViewById(month_id).setVisibility(View.GONE);
+
+        datePicker.setTitle("My date picker");
+        datePicker.setButton(DatePickerDialog.BUTTON_POSITIVE, "Ok", datePicker);
+        datePicker.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Cancel button clicked
+            }
+        });
+        datePicker.show();
+    }
 
 }
