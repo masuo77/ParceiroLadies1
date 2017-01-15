@@ -6,29 +6,25 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
 
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 
 /**
  * Created by Masuo on 2017/01/04.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.CustomViewHolder> {
+public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRecyclerAdapter.CustomViewHolder> {
     private Context context;
     private List<PlayerListItem> playerListItems;
     private onItemClickListener listener;
     private onImageButtonInfoClickListener onImageButtonInfoClickListener;
 
-    public RecyclerAdapter(Context context, List<PlayerListItem> playerListItems) {
+    public PlayerListRecyclerAdapter(Context context, List<PlayerListItem> playerListItems) {
         this.context = context;
         this.playerListItems = playerListItems;
     }
@@ -112,14 +108,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Custom
 
         public CustomViewHolder(View itemView) {
             super(itemView);
-            linearLayout = (CardView) itemView.findViewById(R.id.recycler_view_linear_layout);
+            linearLayout = (CardView) itemView.findViewById(R.id.card_view_player_list);
             textViewName = (TextView) itemView.findViewById(R.id.list_item_name);
             textViewNumber = (TextView) itemView.findViewById(R.id.list_item_number);
             textViewPosition = (TextView) itemView.findViewById(R.id.list_item_position);
             textViewNote = (TextView) itemView.findViewById(R.id.list_item_note);
             textViewJoin = (TextView) itemView.findViewById(R.id.list_item_join);
             textViewLeaving = (TextView) itemView.findViewById(R.id.list_item_leaving);
-            imageButtonInfo = (ImageButton) itemView.findViewById(R.id.imageButtonInfo);
+            imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
     }
 }

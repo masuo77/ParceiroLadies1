@@ -13,17 +13,15 @@ public class PlayerListItem {
     private String join;
     private String leaving;
 
-    public PlayerListItem(int imageRes, String name) {
-        this.imageRes = imageRes;
-        this.name = name;
+    public PlayerListItem() {
     }
 
-    public PlayerListItem(int imageRes, String name, String number, String position) {
-        this.imageRes = imageRes;
-        this.name = name;
-        this.number = number;
-        this.position = position;
-    }
+//    public PlayerListItem(int imageRes, String name, String number, String position) {
+//        this.imageRes = imageRes;
+//        this.name = name;
+//        this.number = number;
+//        this.position = position;
+//    }
 
     public int getImageRes() {
         return imageRes;

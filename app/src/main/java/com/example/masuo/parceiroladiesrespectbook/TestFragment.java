@@ -30,7 +30,6 @@ public class TestFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-
     public TestFragment() {
         // Required empty public constructor
     }
@@ -66,7 +65,7 @@ public class TestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.fragment_test, container, false);
+        View v = inflater.inflate(R.layout.fragment_test, container, false);
 
         Button b = (Button)v.findViewById(R.id.buttonTest);
         b.setOnClickListener(new View.OnClickListener() {

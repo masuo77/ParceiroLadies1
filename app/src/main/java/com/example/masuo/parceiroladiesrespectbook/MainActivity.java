@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -28,7 +29,10 @@ import java.util.GregorianCalendar;
 import static android.R.style.Theme_Holo_Dialog;
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
-public class MainActivity extends AppCompatActivity implements TestFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements  TestFragment.OnFragmentInteractionListener, SeasonListFragment.OnFragmentInteractionListener,
+        PlayerListFragment.OnFragmentInteractionListener
+{
 
     private static final String LOG = "MainActivity";
 
@@ -42,18 +46,60 @@ public class MainActivity extends AppCompatActivity implements TestFragment.OnFr
     @Override
     public void onFragmentInteraction() {
         // TODO Auto-generated method stub
-        Toast.makeText(this, "Click in Fragment", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Click in Fragment", Toast.LENGTH_SHORT).show();
+
+//        PlayerListFragment fragment = new PlayerListFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, fragment.newInstance("2015", ""));
+//        transaction.commit();
+
+        SeasonListFragment fragment = new SeasonListFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(String year) {
+        // TODO Auto-generated method stub
+//        Toast.makeText(this, "Click in Fragment", Toast.LENGTH_SHORT).show();
 
         PlayerListFragment fragment = new PlayerListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment.newInstance("2015", ""));
+        transaction.replace(R.id.fragment_container, fragment.newInstance(year, ""));
+        transaction.addToBackStack(null);
         transaction.commit();
-
 
 
     }
 
-        @Override
+    @Override
+    public void onFragmentInteractionPlayerList(String year, int id) {
+        // TODO Auto-generated method stub
+//        Toast.makeText(this, "Click in Fragment", Toast.LENGTH_SHORT).show();
+
+        PlayerInfoFragment fragment = new PlayerInfoFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment.newInstance(year, id));
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+    }
+
+//    @Override
+//    public void itemClicked(View v, int year)
+//    {
+//        Toast.makeText(this, "Click form ClickListner", Toast.LENGTH_SHORT).show();
+//
+//        PlayerListFragment fragment = new PlayerListFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, fragment.newInstance("2016", ""));
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//
+//    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -64,11 +110,6 @@ public class MainActivity extends AppCompatActivity implements TestFragment.OnFr
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, fragment);
         transaction.commit();
-
-
-
-
-
 
 
 //        buttonDate = (Button)findViewById(R.id.buttonDate);

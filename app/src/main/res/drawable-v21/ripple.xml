@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@android:color/holo_orange_light">
+    <item
+    android:id="@android:id/mask"
+    android:drawable="@android:color/white" />
+
+</ripple>
+
+<!--<item>-->
+<!--<shape>-->
+    <!--<solid android:color="@android:color/transparent" />-->
+<!--</shape>-->
+<!--</item>-->
+
+<!--<item android:id="@android:id/mask" android:drawable="@drawable/mask" />  &lt;!&ndash; 波紋を広げる範囲 &ndash;&gt;-->
+<!--<item android:drawable="@drawable/back" />&lt;!&ndash; ボタンの背景&ndash;&gt;-->
+
+
+
+

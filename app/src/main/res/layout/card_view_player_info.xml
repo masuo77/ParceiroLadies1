@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_player_info"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dip" >
+
+        <TextView
+            android:id="@+id/text_view_player_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="名前: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_view_player_info_yomi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAMAE"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_yomi_j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ひらがな"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="誕生日"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身長: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_view_player_info_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="体重: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_view_player_info_blood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="血液型"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出身"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_career"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="経歴"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="番号"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ポジション: "
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_season_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="シーズンノート"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_joining_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入年"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_joining_announced_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入リリース"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_joining_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入コメント"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_joining_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入ノート"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_leaving_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退団年"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_leaving_announced_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退団リリース"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_leaving_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退団コメント"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_leaving_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退団ノート"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_info_after_leaving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退団後"
+            />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

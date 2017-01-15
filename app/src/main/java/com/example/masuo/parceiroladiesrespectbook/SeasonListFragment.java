@@ -1,12 +1,17 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
-import android.net.Uri;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -64,13 +69,80 @@ public class SeasonListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_season_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_season_list, container, false);
+
+        createSeasonList(v);
+
+        return v;
     }
 
+    private void createSeasonList(View v) {
+        Context context = v.getContext();
+
+        ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
+
+        parceiroDBAdapter.open();
+
+        Cursor c = parceiroDBAdapter.getSeasonList();
+
+        ArrayList<SeasonListItem> listItems = new ArrayList<>();
+
+        if (c.moveToFirst()) {
+            do {
+                SeasonListItem item = new SeasonListItem();
+                item.setYear(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_YEAR)));
+                item.setLeague(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_LEAGUE)));
+                item.setRank(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_RANK)));
+
+                listItems.add(item);
+
+            } while (c.moveToNext());
+
+        }
+
+        c.close();
+        parceiroDBAdapter.close();
+
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.season_list_recycler_view);
+
+        assert recyclerView != null;
+        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this));
+
+        final SeasonListRecyclerAdapter adapter = new SeasonListRecyclerAdapter(context, listItems);
+        recyclerView.setAdapter(adapter);
+
+        //
+//        adapter.setClickListener(this);
+
+        adapter.setOnItemClickListener(new SeasonListRecyclerAdapter.onItemClickListener() {
+            @Override
+            public void onClick(View view, int position, final String year) {
+                if (mListener != null) {
+                    mListener.onFragmentInteraction(year);
+                }
+            }
+        });
+
+        adapter.setOnImageButtonInfoClickListener(new SeasonListRecyclerAdapter.onImageButtonInfoClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(getActivity(), "Click " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+//    @Override
+//    public void itemClicked(View view, int position)
+//    {
+//        Toast.makeText(getActivity(), "ClickClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+//    }
+
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(String year) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(year);
         }
     }
 
@@ -103,6 +175,9 @@ public class SeasonListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String year);
+
     }
+
+
 }

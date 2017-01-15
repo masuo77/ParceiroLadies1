@@ -2,7 +2,6 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -76,6 +76,16 @@ public class PlayerListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_player_list, container, false);
 
+        TextView textView = (TextView)v.findViewById(R.id.text_view_year);
+
+        textView.setText(mSeason);
+
+        createPlayerList(v);
+
+        return v;
+    }
+
+    private void createPlayerList(View v) {
         Context context = v.getContext();
 
         ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
@@ -85,18 +95,18 @@ public class PlayerListFragment extends Fragment {
         Cursor c = parceiroDBAdapter.getAllPlayers(mSeason);
 
         ArrayList<PlayerListItem> listItems = new ArrayList<>();
-
-        final List<String> nameList = new ArrayList<>();
-
+//        final List<String> nameList = new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
-                PlayerListItem item = new PlayerListItem(R.mipmap.ic_launcher,
-                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)),
-                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)),
-                        c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION))
-                );
 
+                PlayerListItem item = new PlayerListItem();
+                item.setImageRes(R.mipmap.ic_launcher);
+                item.setName(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
+                item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
+                item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
+
+                // 追加情報
                 List<String> infoList = new ArrayList<>();
 
                 if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)))) {
@@ -129,10 +139,9 @@ public class PlayerListFragment extends Fragment {
                     }
                 }
 
-
                 listItems.add(item);
 
-                nameList.add(item.getName());
+//                nameList.add(item.getName());
 
             } while (c.moveToNext());
 
@@ -141,33 +150,32 @@ public class PlayerListFragment extends Fragment {
         c.close();
         parceiroDBAdapter.close();
 
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.player_list_view);
-
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.player_list_recycler_view);
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
-        RecyclerAdapter adapter = new RecyclerAdapter(context, listItems);
+        PlayerListRecyclerAdapter adapter = new PlayerListRecyclerAdapter(context, listItems);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new RecyclerAdapter.onItemClickListener() {
+        adapter.setOnItemClickListener(new PlayerListRecyclerAdapter.onItemClickListener() {
             @Override
             public void onClick(View view, int position, String name) {
                 Toast.makeText(getActivity(), Integer.toString(position) + " " + name, Toast.LENGTH_SHORT).show();
             }
         });
 
-        adapter.setOnImageButtonInfoClickListener(new RecyclerAdapter.onImageButtonInfoClickListener() {
+        adapter.setOnImageButtonInfoClickListener(new PlayerListRecyclerAdapter.onImageButtonInfoClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(getActivity(), "Click " + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
+                if (mListener != null) {
+                    mListener.onFragmentInteractionPlayerList(mSeason, position);
+                }
+
             }
         });
-
-
-        return v;
     }
 
     @Override
@@ -176,23 +184,21 @@ public class PlayerListFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -213,6 +219,6 @@ public class PlayerListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteractionPlayerList(String year, int id);
     }
 }
