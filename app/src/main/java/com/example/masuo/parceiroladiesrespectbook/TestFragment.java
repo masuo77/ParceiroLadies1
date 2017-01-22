@@ -72,7 +72,7 @@ public class TestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onFragmentInteraction();
+                    mListener.onTestFragmentInteraction();
                 }
             }
         });
@@ -83,7 +83,7 @@ public class TestFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction();
+            mListener.onTestFragmentInteraction();
         }
     }
 
@@ -116,6 +116,6 @@ public class TestFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction();
+        void onTestFragmentInteraction();
     }
 }

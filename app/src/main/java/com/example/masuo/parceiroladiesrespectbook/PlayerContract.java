@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final  int    DATABASE_VERSION   = 2;
+    public static final  int    DATABASE_VERSION   = 1;
     public static final  String ASSETS_DATABASE_NAME      = "ParceiroLadies.sqlite";
     public static final  String DATABASE_NAME      = "ParceiroLadies.db";
     private static final String TEXT_TYPE          = " TEXT";
@@ -146,9 +146,10 @@ public class PlayerContract {
     // year league rank
 
     public static abstract class SeasonTable implements BaseColumns {
-        public static final String COL_YEAR = "year";
+        public static final String COL_YEAR = "season";
         public static final String COL_LEAGUE = "league";
         public static final String COL_RANK = "rank";
+        public static final String COL_SLOGAN = "slogan";
     }
 
     //テーブル生成定義
@@ -158,6 +159,7 @@ public class PlayerContract {
             SeasonTable.COL_YEAR     + INTEGER_TYPE  + COMMA_SEP +
             SeasonTable.COL_LEAGUE   + TEXT_TYPE     + COMMA_SEP +
             SeasonTable.COL_RANK     + TEXT_TYPE     + COMMA_SEP +
+            SeasonTable.COL_SLOGAN   + TEXT_TYPE     + COMMA_SEP +
             " )";
 
 

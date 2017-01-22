@@ -1,17 +1,19 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
+import java.io.Serializable;
+
 /**
  * Created by Masuo on 2016/12/11.
  */
 
-public class PlayerInfoItem {
+public class PlayerInfoItem implements Serializable {
     private int imageRes;
     private String name;
     private String yomi;
     private String yomi_j;
     private String birthday;
     private String height;
-    private String weigth;
+    private String weight;
     private String blood;
     private String home;
     private String career;
@@ -80,12 +82,12 @@ public class PlayerInfoItem {
         this.height = height;
     }
 
-    public String getWeigth() {
-        return weigth;
+    public String getWeight() {
+        return weight;
     }
 
-    public void setWeigth(String weigth) {
-        this.weigth = weigth;
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public String getBlood() {

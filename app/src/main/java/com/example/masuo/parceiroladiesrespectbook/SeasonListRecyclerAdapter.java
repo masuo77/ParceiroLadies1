@@ -30,8 +30,6 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
     private onItemClickListener listener;
     private onImageButtonInfoClickListener onImageButtonInfoClickListener;
 
-    private ClickListener clicklistener = null;
-
     public SeasonListRecyclerAdapter(Context context, List<SeasonListItem> seasonListItems) {
         this.context = context;
         this.seasonListItems = seasonListItems;
@@ -45,13 +43,15 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
 
     @Override
     public void onBindViewHolder(final CustomViewHolder holder, int position) {
-        String year = seasonListItems.get(position).getYear();
+        int year = seasonListItems.get(position).getYear();
         String league = seasonListItems.get(position).getLeague();
         String rank = seasonListItems.get(position).getRank();
+        String slogan = seasonListItems.get(position).getSlogan();
 
-        holder.textViewYear.setText(year);
+        holder.textViewYear.setText(String.valueOf(year));
         holder.textViewLeague.setText(league);
         holder.textViewRank.setText(rank);
+        holder.textViewSlogan.setText("「"+ slogan + "」");
 
         // Itemクリック
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +64,6 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
                         listener.onClick(view, holder.getAdapterPosition(), seasonListItems.get(holder.getAdapterPosition()).getYear());
                     }
                 }, 200);
-
-//                listener.onClick(view, holder.getAdapterPosition(), seasonListItems.get(holder.getAdapterPosition()).getYear());
             }
         });
 
@@ -90,7 +88,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
     }
 
     public interface onItemClickListener {
-        void onClick(View view, int position, String year);
+        void onClick(View view, int position, int year);
     }
 
     // Buttonクリック
@@ -102,10 +100,6 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         void onClick(View view, int position);
     }
 
-    public void setClickListener(ClickListener listener) {
-        this.clicklistener = listener;
-    }
-
     // ここでViewの中の要素を登録する。
 
     public class CustomViewHolder extends RecyclerView.ViewHolder{
@@ -113,29 +107,19 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         final TextView textViewYear;
         final TextView textViewLeague;
         final TextView textViewRank;
+        final TextView textViewSlogan;
         final ImageButton imageButtonInfo;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
 
-//            itemView.setOnClickListener(this);
-
             linearLayout = (CardView) itemView.findViewById(R.id.card_view_season_list);
             textViewYear = (TextView) itemView.findViewById(R.id.text_view_season);
             textViewLeague = (TextView) itemView.findViewById(R.id.text_view_league);
             textViewRank = (TextView) itemView.findViewById(R.id.text_view_rank);
+            textViewSlogan = (TextView) itemView.findViewById(R.id.text_view_slogan);
             imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
 
-//        @Override
-//        public void onClick(View v) {
-//            Toast.makeText(v.getContext().getApplicationContext(), "Click2 ", Toast.LENGTH_SHORT).show();
-//            if (clicklistener != null) {
-//                Toast.makeText(v.getContext().getApplicationContext(), "Click2 ", Toast.LENGTH_SHORT).show();
-//
-//                clicklistener.itemClicked(v, getAdapterPosition());
-//            }
-//
-//        }
     }
 }

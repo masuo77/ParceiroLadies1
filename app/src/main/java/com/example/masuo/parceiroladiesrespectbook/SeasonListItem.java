@@ -6,15 +6,16 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 public class SeasonListItem {
 
-    private String year;
+    private int year;
     private String league;
     private String rank;
+    private String slogan;
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -32,6 +33,14 @@ public class SeasonListItem {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public String getSlogan() {
+        return slogan;
+    }
+
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
     }
 
 

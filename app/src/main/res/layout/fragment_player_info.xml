@@ -1,16 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerInfoFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/player_info_frame_layout"
+    tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerListFragment"
+    >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/player_info_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+   <include layout="@layout/card_view_player_info"></include>
 
-</FrameLayout>
+
+</LinearLayout>

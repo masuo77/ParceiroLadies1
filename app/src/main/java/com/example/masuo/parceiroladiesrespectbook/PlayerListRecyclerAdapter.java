@@ -58,7 +58,10 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onClick(view, holder.getAdapterPosition(), playerListItems.get(holder.getAdapterPosition()).getName());
+                // 行のクリック
+                int id = playerListItems.get(holder.getAdapterPosition()).getId();
+                String name = playerListItems.get(holder.getAdapterPosition()).getName();
+                listener.onClick(view, holder.getAdapterPosition(), id, name);
             }
         });
 
@@ -66,7 +69,9 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
         holder.imageButtonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
+                int id = playerListItems.get(holder.getAdapterPosition()).getId();
+                onImageButtonInfoClickListener.onClick(v, id);
+//                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
             }
         });
     }
@@ -82,7 +87,7 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
     }
 
     public interface onItemClickListener {
-        void onClick(View view, int position, String name);
+        void onClick(View view, int position, int id, String name);
     }
 
     // Buttonクリック
@@ -97,6 +102,7 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
     // ここでViewの中の要素を登録する。
 
     static class CustomViewHolder extends RecyclerView.ViewHolder {
+        final int id;
         final CardView linearLayout;
         final TextView textViewName;
         final TextView textViewNumber;
@@ -108,6 +114,7 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
 
         public CustomViewHolder(View itemView) {
             super(itemView);
+            id = 0;
             linearLayout = (CardView) itemView.findViewById(R.id.card_view_player_list);
             textViewName = (TextView) itemView.findViewById(R.id.list_item_name);
             textViewNumber = (TextView) itemView.findViewById(R.id.list_item_number);

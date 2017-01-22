@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/player_info_layout"
+    android:background="#ffffff"
+    >
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_name"
+        android:textSize="20sp"
+        android:padding="8dp"
+        />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_yomi"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_yomi_j"
+        android:textSize="10sp"
+        />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_position"
+        android:textSize="16sp"
+        android:padding="8dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="12"
+        android:background="#F57000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_toRightOf="@+id/imageView"
+        android:textColor="@android:color/background_light"
+        android:textStyle="normal"
+        android:letterSpacing="-0.08"
+        android:gravity="center_horizontal"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.PagerTitleStrip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="#CCCCCC"
+            android:textColor="#000000"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

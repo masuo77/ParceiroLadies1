@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,15 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class PlayerListFragment extends Fragment {
+    private static final String LOG = "PlayerListFragment";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "season";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mSeason;
+    private int mSeason;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -51,10 +54,10 @@ public class PlayerListFragment extends Fragment {
      * @return A new instance of fragment PlayerListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerListFragment newInstance(String param1, String param2) {
+    public static PlayerListFragment newInstance(int param1, String param2) {
         PlayerListFragment fragment = new PlayerListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -63,8 +66,9 @@ public class PlayerListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(LOG, "onCreate");
         if (getArguments() != null) {
-            mSeason = getArguments().getString(ARG_PARAM1);
+            mSeason = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -73,12 +77,14 @@ public class PlayerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.i(LOG, "onCreateView");
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_player_list, container, false);
 
         TextView textView = (TextView)v.findViewById(R.id.text_view_year);
 
-        textView.setText(mSeason);
+        textView.setText(String.valueOf(mSeason));
 
         createPlayerList(v);
 
@@ -95,13 +101,13 @@ public class PlayerListFragment extends Fragment {
         Cursor c = parceiroDBAdapter.getAllPlayers(mSeason);
 
         ArrayList<PlayerListItem> listItems = new ArrayList<>();
-//        final List<String> nameList = new ArrayList<>();
 
         if (c.moveToFirst()) {
             do {
 
                 PlayerListItem item = new PlayerListItem();
                 item.setImageRes(R.mipmap.ic_launcher);
+                item.setId(c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_ID)));
                 item.setName(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
                 item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
                 item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
@@ -112,12 +118,23 @@ public class PlayerListFragment extends Fragment {
                 if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)))) {
                     infoList.add(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
                 }
-                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
+
+                int joinSeason = c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON));
+                int leaveSeason = c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON));
+
+                if (joinSeason == mSeason) {
                     infoList.add("新加入");
                 }
-                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)))) {
+                if (leaveSeason == mSeason) {
                     infoList.add("退団");
                 }
+
+//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
+//                    infoList.add("新加入");
+//                }
+//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)))) {
+//                    infoList.add("退団");
+//                }
 
                 int i = 0;
                 for (String s : infoList
@@ -152,16 +169,16 @@ public class PlayerListFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.player_list_recycler_view);
         assert recyclerView != null;
-        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         PlayerListRecyclerAdapter adapter = new PlayerListRecyclerAdapter(context, listItems);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new PlayerListRecyclerAdapter.onItemClickListener() {
             @Override
-            public void onClick(View view, int position, String name) {
-                Toast.makeText(getActivity(), Integer.toString(position) + " " + name, Toast.LENGTH_SHORT).show();
+            public void onClick(View view, int position, int id, String name) {
+                Toast.makeText(getActivity(), Integer.toString(position) + " " +  id + " " + name, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -171,7 +188,7 @@ public class PlayerListFragment extends Fragment {
                 Toast.makeText(getActivity(), "Click " + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
                 if (mListener != null) {
-                    mListener.onFragmentInteractionPlayerList(mSeason, position);
+                    mListener.onPlayerListFragmentInteraction(mSeason, position);
                 }
 
             }
@@ -186,7 +203,7 @@ public class PlayerListFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
+//            mListener.onSeasonListFragmentInteraction(uri);
 //        }
 //    }
 
@@ -219,6 +236,6 @@ public class PlayerListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteractionPlayerList(String year, int id);
+        void onPlayerListFragmentInteraction(int year, int id);
     }
 }

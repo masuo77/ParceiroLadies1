@@ -1,13 +1,11 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -42,8 +40,9 @@ public class PlayerInfoRecyclerAdapter extends RecyclerView.Adapter<PlayerInfoRe
         String yomi_j = playerInfoItems.get(position).getYomi_j();
         String birthday = playerInfoItems.get(position).getBirthday();
         String height = playerInfoItems.get(position).getHeight();
-        String weight = playerInfoItems.get(position).getWeigth();
+        String weight = playerInfoItems.get(position).getWeight();
         String blood = playerInfoItems.get(position).getBlood();
+        String home = playerInfoItems.get(position).getHome();
         String career = playerInfoItems.get(position).getCareer();
         String number = playerInfoItems.get(position).getNumber();
         String position2 = playerInfoItems.get(position).getPosition();
@@ -51,6 +50,7 @@ public class PlayerInfoRecyclerAdapter extends RecyclerView.Adapter<PlayerInfoRe
         String joining_season = playerInfoItems.get(position).getJoining_season();
         String joining_announced_at = playerInfoItems.get(position).getJoining_announced_at();
         String joining_comment = playerInfoItems.get(position).getJoining_comment();
+        String joining_note = playerInfoItems.get(position).getJoining_note();
         String leaving_season = playerInfoItems.get(position).getLeaving_season();
         String leaving_announced_at = playerInfoItems.get(position).getLeaving_announced_at();
         String leaving_comment = playerInfoItems.get(position).getLeaving_comment();
@@ -64,6 +64,7 @@ public class PlayerInfoRecyclerAdapter extends RecyclerView.Adapter<PlayerInfoRe
         holder.height.setText(height);
         holder.weight.setText(weight);
         holder.blood.setText(blood);
+        holder.home.setText(home);
         holder.career.setText(career);
         holder.number.setText(number);
         holder.position.setText(position2);
@@ -71,6 +72,7 @@ public class PlayerInfoRecyclerAdapter extends RecyclerView.Adapter<PlayerInfoRe
         holder.joining_season.setText(joining_season);
         holder.joining_announced_at.setText(joining_announced_at);
         holder.joining_comment.setText(joining_comment);
+        holder.joining_note.setText(joining_note);
         holder.leaving_season.setText(leaving_season);
         holder.leaving_announced_at.setText(leaving_announced_at);
         holder.leaving_comment.setText(leaving_comment);
@@ -133,7 +135,6 @@ public class PlayerInfoRecyclerAdapter extends RecyclerView.Adapter<PlayerInfoRe
         final TextView height;
         final TextView weight;
         final TextView blood;
-
         final TextView home;
         final TextView career;
 

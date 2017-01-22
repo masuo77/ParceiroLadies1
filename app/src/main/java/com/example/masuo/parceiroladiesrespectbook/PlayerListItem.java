@@ -6,6 +6,7 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 public class PlayerListItem {
     private int imageRes;
+    private int id;
     private String name;
     private String number;
     private String position;
@@ -32,6 +33,14 @@ public class PlayerListItem {
     }
 
     public String getName() { return name; }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;

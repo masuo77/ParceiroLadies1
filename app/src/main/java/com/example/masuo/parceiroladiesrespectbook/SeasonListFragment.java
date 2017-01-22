@@ -90,9 +90,10 @@ public class SeasonListFragment extends Fragment {
         if (c.moveToFirst()) {
             do {
                 SeasonListItem item = new SeasonListItem();
-                item.setYear(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_YEAR)));
+                item.setYear(c.getInt(c.getColumnIndex(PlayerContract.SeasonTable.COL_YEAR)));
                 item.setLeague(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_LEAGUE)));
                 item.setRank(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_RANK)));
+                item.setSlogan(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SLOGAN)));
 
                 listItems.add(item);
 
@@ -106,21 +107,18 @@ public class SeasonListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.season_list_recycler_view);
 
         assert recyclerView != null;
-        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         final SeasonListRecyclerAdapter adapter = new SeasonListRecyclerAdapter(context, listItems);
         recyclerView.setAdapter(adapter);
-
-        //
-//        adapter.setClickListener(this);
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
         adapter.setOnItemClickListener(new SeasonListRecyclerAdapter.onItemClickListener() {
             @Override
-            public void onClick(View view, int position, final String year) {
+            public void onClick(View view, int position, final int year) {
                 if (mListener != null) {
-                    mListener.onFragmentInteraction(year);
+                    mListener.onSeasonListFragmentInteraction(year);
                 }
             }
         });
@@ -133,16 +131,10 @@ public class SeasonListFragment extends Fragment {
         });
     }
 
-//    @Override
-//    public void itemClicked(View view, int position)
-//    {
-//        Toast.makeText(getActivity(), "ClickClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
-//    }
-
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String year) {
+    public void onButtonPressed(int year) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(year);
+            mListener.onSeasonListFragmentInteraction(year);
         }
     }
 
@@ -175,7 +167,7 @@ public class SeasonListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(String year);
+        void onSeasonListFragmentInteraction(int year);
 
     }
 
