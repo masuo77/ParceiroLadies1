@@ -1,23 +1,16 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-
-import static android.R.attr.delay;
 
 
 /**
@@ -51,7 +44,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         holder.textViewYear.setText(String.valueOf(year));
         holder.textViewLeague.setText(league);
         holder.textViewRank.setText(rank);
-        holder.textViewSlogan.setText("「"+ slogan + "」");
+        holder.textViewSlogan.setText("「" + slogan + "」");
 
         // Itemクリック
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -63,18 +56,18 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
                     public void run() {
                         listener.onClick(view, holder.getAdapterPosition(), seasonListItems.get(holder.getAdapterPosition()).getYear());
                     }
-                }, 200);
+                }, 240);
             }
         });
 
 
-        // Buttonクリック
-        holder.imageButtonInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
-            }
-        });
+//        // Buttonクリック
+//        holder.imageButtonInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
+//            }
+//        });
     }
 
     @Override
@@ -102,7 +95,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
 
     // ここでViewの中の要素を登録する。
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder{
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
         final CardView linearLayout;
         final TextView textViewYear;
         final TextView textViewLeague;

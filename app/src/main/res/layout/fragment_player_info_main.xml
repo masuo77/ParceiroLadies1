@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/player_info_main_layout"
+
     >
 
     <ScrollView
@@ -13,12 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            android:padding="6dip">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -37,7 +40,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -57,7 +62,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -75,7 +82,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -93,7 +102,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -111,7 +122,9 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -124,6 +137,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="3sp"
+
                     android:text="パルセイロ"
                     />
             </LinearLayout>

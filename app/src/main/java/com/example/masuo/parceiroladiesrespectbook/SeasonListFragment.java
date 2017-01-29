@@ -1,7 +1,6 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData;
+
+import java.util.List;
 
 
 /**
@@ -79,33 +80,9 @@ public class SeasonListFragment extends Fragment {
     private void createSeasonList(View v) {
         Context context = v.getContext();
 
-        ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
-
-        parceiroDBAdapter.open();
-
-        Cursor c = parceiroDBAdapter.getSeasonList();
-
-        ArrayList<SeasonListItem> listItems = new ArrayList<>();
-
-        if (c.moveToFirst()) {
-            do {
-                SeasonListItem item = new SeasonListItem();
-                item.setYear(c.getInt(c.getColumnIndex(PlayerContract.SeasonTable.COL_YEAR)));
-                item.setLeague(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_LEAGUE)));
-                item.setRank(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_RANK)));
-                item.setSlogan(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SLOGAN)));
-
-                listItems.add(item);
-
-            } while (c.moveToNext());
-
-        }
-
-        c.close();
-        parceiroDBAdapter.close();
+        List<SeasonListItem> listItems = TeamData.getAllSeasonListItem(context);
 
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.season_list_recycler_view);
-
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this));

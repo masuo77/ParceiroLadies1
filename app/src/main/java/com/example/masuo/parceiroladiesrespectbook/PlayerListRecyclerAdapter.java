@@ -2,7 +2,10 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +14,20 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import android.support.v7.widget.RecyclerView;
-
-
 /**
  * Created by Masuo on 2017/01/04.
  */
 
-public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRecyclerAdapter.CustomViewHolder> {
+public class PlayerListRecyclerAdapter
+        extends RecyclerView.Adapter<PlayerListRecyclerAdapter.CustomViewHolder> {
+    private static final String LOG = "PRecyclerAdapter";
+
     private Context context;
     private List<PlayerListItem> playerListItems;
     private onItemClickListener listener;
-    private onImageButtonInfoClickListener onImageButtonInfoClickListener;
 
-    public PlayerListRecyclerAdapter(Context context, List<PlayerListItem> playerListItems) {
+    public PlayerListRecyclerAdapter(Context context,
+                                     List<PlayerListItem> playerListItems) {
         this.context = context;
         this.playerListItems = playerListItems;
     }
@@ -37,41 +40,27 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
 
     @Override
     public void onBindViewHolder(final CustomViewHolder holder, int position) {
-        String name = playerListItems.get(position).getName();
-        String number = playerListItems.get(position).getNumber();
-        String pos = playerListItems.get(position).getPosition();
-        String note = playerListItems.get(position).getNote();
-        String join = playerListItems.get(position).getJoin();
-        String leaving = playerListItems.get(position).getLeaving();
-        holder.textViewName.setText(name);
 
-        holder.textViewNumber.setText(number);
-        Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
-        holder.textViewNumber.setTypeface(face);
-
-        holder.textViewPosition.setText(pos);
-        holder.textViewNote.setText(note);
-        holder.textViewJoin.setText(join);
-        holder.textViewLeaving.setText(leaving);
+        PlayerListItem item = playerListItems.get(position);
+        if (item != null) {
+            holder.bind(context, item);
+        }
 
         // Itemクリック
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 // 行のクリック
-                int id = playerListItems.get(holder.getAdapterPosition()).getId();
-                String name = playerListItems.get(holder.getAdapterPosition()).getName();
-                listener.onClick(view, holder.getAdapterPosition(), id, name);
-            }
-        });
-
-        // Buttonクリック
-        holder.imageButtonInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int id = playerListItems.get(holder.getAdapterPosition()).getId();
-                onImageButtonInfoClickListener.onClick(v, id);
-//                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onClick(view,
+                                holder.getAdapterPosition(),
+                                playerListItems.get(holder.getAdapterPosition()).getId(),
+                                playerListItems.get(holder.getAdapterPosition()).getName());
+                    }
+                }, 240);
             }
         });
     }
@@ -90,18 +79,9 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
         void onClick(View view, int position, int id, String name);
     }
 
-    // Buttonクリック
-    public void setOnImageButtonInfoClickListener(onImageButtonInfoClickListener listener) {
-        this.onImageButtonInfoClickListener = listener;
-    }
+// ここでViewの中の要素を登録する。
 
-    public interface onImageButtonInfoClickListener {
-        void onClick(View view, int position);
-    }
-
-    // ここでViewの中の要素を登録する。
-
-    static class CustomViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
         final int id;
         final CardView linearLayout;
         final TextView textViewName;
@@ -124,5 +104,25 @@ public class PlayerListRecyclerAdapter extends RecyclerView.Adapter<PlayerListRe
             textViewLeaving = (TextView) itemView.findViewById(R.id.list_item_leaving);
             imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
+
+        public void bind(Context context, @NonNull PlayerListItem item) {
+            String name = item.getName();
+            String number = item.getNumber();
+            String pos = item.getPosition();
+            String note = item.getNote();
+            String join = item.getJoin();
+            String leaving = item.getLeaving();
+
+            textViewName.setText(name);
+            textViewNumber.setText(number);
+            Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
+            textViewNumber.setTypeface(face);
+            textViewPosition.setText(pos);
+            textViewNote.setText(note);
+            textViewJoin.setText(join);
+            textViewLeaving.setText(leaving);
+        }
+
     }
+
 }

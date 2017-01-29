@@ -17,13 +17,6 @@ public class PlayerListItem {
     public PlayerListItem() {
     }
 
-//    public PlayerListItem(int imageRes, String name, String number, String position) {
-//        this.imageRes = imageRes;
-//        this.name = name;
-//        this.number = number;
-//        this.position = position;
-//    }
-
     public int getImageRes() {
         return imageRes;
     }
@@ -32,7 +25,9 @@ public class PlayerListItem {
         this.imageRes = imageRes;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public int getId() {
         return id;
@@ -46,13 +41,21 @@ public class PlayerListItem {
         this.name = name;
     }
 
-    public String getPosition() { return position; }
+    public String getPosition() {
+        return position;
+    }
 
-    public void setPosition(String position) { this.position = position; }
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-    public String getNumber() { return number; }
+    public String getNumber() {
+        return number;
+    }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public String getJoin() {
         return join;

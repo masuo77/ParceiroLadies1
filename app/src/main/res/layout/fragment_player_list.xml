@@ -5,22 +5,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerListFragment"
-    >
+    tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerListFragment">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:padding="8dp"
-        android:id="@+id/text_view_year" />
+        android:minHeight="72dp">
+
+
+        <TextView
+            android:text="2016"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="24dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:id="@+id/text_view_season" />
+
+        <LinearLayout
+            android:id="@+id/textview_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/text_view_season"
+            android:layout_toLeftOf="@+id/image_button_season_info">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="プレナスチャレンジリーグ　EAST"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_view_league"
+                    android:layout_alignParentTop="true"
+                    android:textSize="14dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+
+                    />
+
+                <TextView
+                    android:text="3位"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:id="@+id/text_view_rank"
+                    android:layout_marginLeft="16dp"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:text="共超"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/text_view_slogan" />
+
+
+        </LinearLayout>
+
+
+        <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:srcCompat="@drawable/ic_info_black_18dp"-->
+        <!--android:id="@+id/image_button_season_info"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:background="@null"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:tint="@android:color/darker_gray"-->
+        <!--/>-->
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/player_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="300dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:fabSize="mini"
+        android:layout_gravity="bottom|right" />
+
 
 </LinearLayout>

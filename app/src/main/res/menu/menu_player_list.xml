@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:compat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_reorder"
+        android:title="並び替え"
+        android:icon="@drawable/ic_reorder_white_24dp"
+        compat:showAsAction="always" />
+</menu>

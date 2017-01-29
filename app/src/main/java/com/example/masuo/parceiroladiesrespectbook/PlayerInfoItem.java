@@ -210,9 +210,6 @@ public class PlayerInfoItem implements Serializable {
         this.after_leaving = after_leaving;
     }
 
-
-
-
     public PlayerInfoItem() {
     }
 

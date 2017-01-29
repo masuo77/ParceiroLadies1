@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
     </style>
-    <!--<item name="android:selectableItemBackground">@drawable/ripple</item>-->
+    <!--&lt;!&ndash;<item name="android:selectableItemBackground">@drawable/ripple</item>&ndash;&gt;-->
+
+
 </resources>

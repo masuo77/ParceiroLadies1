@@ -1,7 +1,7 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData;
 
 
 /**
@@ -83,41 +85,7 @@ public class PlayerInfoBaseFragment extends Fragment {
 
         Context context = view.getContext();
 
-        ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
-        parceiroDBAdapter.open();
-        Cursor c = parceiroDBAdapter.getPlayer(mSeason, mId);
-
-        PlayerInfoItem item = new PlayerInfoItem();
-
-        if (c.moveToFirst()) {
-            Log.i(LOG, "set database");
-
-            // item.setImageRes(R.mipmap.ic_launcher);
-            item.setName(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
-            item.setYomi(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_YOMI)));
-            item.setYomi_j(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_YOMI_J)));
-            item.setBirthday(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BIRTHDAY)));
-            item.setHeight(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HEIGHT)));
-            item.setWeight(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_WEIGHT)));
-            item.setBlood(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BLOOD)));
-            item.setHome(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
-            item.setCareer(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_CAREER)));
-            item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
-            item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
-            item.setSeason_note(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
-            item.setJoining_season(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON)));
-            item.setJoining_announced_at(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_ANNOUNCED_AT)));
-            item.setJoining_comment(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)));
-            item.setJoining_note(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_NOTE)));
-            item.setLeaving_season(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON)));
-            item.setLeaving_announced_at(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_ANNOUNCED_AT)));
-            item.setLeaving_comment(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)));
-            item.setLeaving_note(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_NOTE)));
-            item.setAfter_leaving(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_AFTER_LEAVING)));
-        }
-
-        c.close();
-        parceiroDBAdapter.close();
+        PlayerInfoItem item = TeamData.getPlayerInfo(context, mSeason, mId);
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.player_info_layout);
 
@@ -128,19 +96,22 @@ public class PlayerInfoBaseFragment extends Fragment {
         TextView position = (TextView) layout.findViewById(R.id.tv_position);
 
         name.setText(item.getName());
-        yomi.setText(item.getYomi() + " / " + item.getYomi_j());
+        if (item.getName().length() >= 10) {
+            Log.i(LOG, "Length=" + item.getName().length() + " " + name.getTextSize());
+            name.setTextSize(20);
+        }
+
+        yomi.setText(item.getYomi());
         yomi_j.setText(item.getYomi_j());
         number.setText(item.getNumber());
 
         Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
         number.setTypeface(face);
 
-
         position.setText(item.getPosition());
 
         Boolean leaving = false;
-        if (!TextUtils.isEmpty(item.getLeaving_season()))
-        {
+        if (!TextUtils.isEmpty(item.getLeaving_season())) {
             leaving = true;
         }
 
@@ -149,6 +120,11 @@ public class PlayerInfoBaseFragment extends Fragment {
         PlayerInfoFragmentPagerAdapter adapter = new PlayerInfoFragmentPagerAdapter(manager, item, leaving);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setAdapter(adapter);
+
+        Resources resources = this.getResources();
+        int viewPagerPageMargin = resources.getDimensionPixelSize(R.dimen.view_pager_page_margin);
+        viewPager.setPageMargin(viewPagerPageMargin);
+        viewPager.setPageMarginDrawable(R.drawable.shape_view_pager_divider);
 
         // Inflate the layout for this fragment
         return view;
@@ -195,8 +171,6 @@ public class PlayerInfoBaseFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
 
 
 }

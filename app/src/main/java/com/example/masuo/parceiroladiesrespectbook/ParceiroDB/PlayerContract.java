@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.ParceiroDB;
 
 import android.provider.BaseColumns;
 
@@ -7,28 +7,28 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final  int    DATABASE_VERSION   = 1;
-    public static final  String ASSETS_DATABASE_NAME      = "ParceiroLadies.sqlite";
-    public static final  String DATABASE_NAME      = "ParceiroLadies.db";
-    private static final String TEXT_TYPE          = " TEXT";
-    private static final String INTEGER_TYPE       = " INTEGER";
-    private static final String PRIMARY_TYPE       = " PRIMARY KEY AUTOINCREMENT";
-    private static final String COMMA_SEP          = ",";
+    public static final int DATABASE_VERSION = 1;
+    public static final String ASSETS_DATABASE_NAME = "ParceiroLadies.sqlite";
+    public static final String DATABASE_NAME = "ParceiroLadies.db";
+    private static final String TEXT_TYPE = " TEXT";
+    private static final String INTEGER_TYPE = " INTEGER";
+    private static final String PRIMARY_TYPE = " PRIMARY KEY AUTOINCREMENT";
+    private static final String COMMA_SEP = ",";
 
     // テーブル名
     // 選手リスト
-    public static final String PLAYERS_TABLE_NAME   = "players";
+    public static final String PLAYERS_TABLE_NAME = "players";
     // 入団選手、コメント
-    public static final String JOININGS_TABLE_NAME  = "joinings";
+    public static final String JOININGS_TABLE_NAME = "joinings";
     // 退団選手、コメント
-    public static final String LEAVINGS_TABLE_NAME  = "leavings";
+    public static final String LEAVINGS_TABLE_NAME = "leavings";
     // シーズンごとの選手リスト
-    public static final String MEMBERS_TABLE_NAME   = "members";
+    public static final String MEMBERS_TABLE_NAME = "members";
     // シーズンごとの成績
-    public static final String SEASON_TABLE_NAME    = "season";
+    public static final String SEASON_TABLE_NAME = "season";
 
     // 新加入マーク
-    public static final String NEW_MEMBER_MARK     = "☆";
+    public static final String NEW_MEMBER_MARK = "☆";
 
     // コントラクト・クラスを偶然実体化することからいくつかのことを防ぐ
     // 空コンストラクタが与えられる。
@@ -54,17 +54,17 @@ public class PlayerContract {
     //テーブル生成定義
     public static final String CREATE_PLAYERS_TABLE = "CREATE TABLE " +
             PLAYERS_TABLE_NAME + " (" +
-            PlayersTable._ID                + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
-            PlayersTable.COL_ID             + INTEGER_TYPE  + COMMA_SEP +
-            PlayersTable.COL_NAME           + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_YOMI           + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_YOMI_J         + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_BIRTHDAY       + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_HEIGHT         + INTEGER_TYPE  + COMMA_SEP +
-            PlayersTable.COL_WEIGHT         + INTEGER_TYPE  + COMMA_SEP +
-            PlayersTable.COL_BLOOD          + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_HOMETOWN       + TEXT_TYPE     + COMMA_SEP +
-            PlayersTable.COL_CAREER         + TEXT_TYPE     + COMMA_SEP +
+            PlayersTable._ID + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
+            PlayersTable.COL_ID + INTEGER_TYPE + COMMA_SEP +
+            PlayersTable.COL_NAME + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_YOMI + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_YOMI_J + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_BIRTHDAY + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_HEIGHT + INTEGER_TYPE + COMMA_SEP +
+            PlayersTable.COL_WEIGHT + INTEGER_TYPE + COMMA_SEP +
+            PlayersTable.COL_BLOOD + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_HOMETOWN + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_CAREER + TEXT_TYPE + COMMA_SEP +
             " )";
 
 
@@ -83,13 +83,13 @@ public class PlayerContract {
     //テーブル生成定義
     public static final String CREATE_MEMBERS_TABLE = "CREATE TABLE " +
             MEMBERS_TABLE_NAME + " (" +
-            MembersTable._ID          + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
-            MembersTable.COL_ID       + INTEGER_TYPE  + COMMA_SEP +
-            MembersTable.COL_NAME     + TEXT_TYPE     + COMMA_SEP +
-            MembersTable.COL_SEASON   + INTEGER_TYPE  + COMMA_SEP +
-            MembersTable.COL_NUMBER   + INTEGER_TYPE  + COMMA_SEP +
-            MembersTable.COL_POSITION + TEXT_TYPE     + COMMA_SEP +
-            MembersTable.COL_NOTE     + TEXT_TYPE     + COMMA_SEP +
+            MembersTable._ID + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
+            MembersTable.COL_ID + INTEGER_TYPE + COMMA_SEP +
+            MembersTable.COL_NAME + TEXT_TYPE + COMMA_SEP +
+            MembersTable.COL_SEASON + INTEGER_TYPE + COMMA_SEP +
+            MembersTable.COL_NUMBER + INTEGER_TYPE + COMMA_SEP +
+            MembersTable.COL_POSITION + TEXT_TYPE + COMMA_SEP +
+            MembersTable.COL_NOTE + TEXT_TYPE + COMMA_SEP +
             " )";
 
 
@@ -108,13 +108,13 @@ public class PlayerContract {
     //テーブル生成定義
     public static final String CREATE_JOININGS_TABLE = "CREATE TABLE " +
             JOININGS_TABLE_NAME + " (" +
-            JoiningsTable._ID          + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
-            JoiningsTable.COL_ID       + INTEGER_TYPE  + COMMA_SEP +
-            JoiningsTable.COL_NAME     + TEXT_TYPE     + COMMA_SEP +
-            JoiningsTable.COL_SEASON   + INTEGER_TYPE  + COMMA_SEP +
-            JoiningsTable.COL_ANNOUNCED_AT + TEXT_TYPE     + COMMA_SEP +
-            JoiningsTable.COL_COMMENT  + TEXT_TYPE     + COMMA_SEP +
-            JoiningsTable.COL_NOTE     + TEXT_TYPE     + COMMA_SEP +
+            JoiningsTable._ID + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
+            JoiningsTable.COL_ID + INTEGER_TYPE + COMMA_SEP +
+            JoiningsTable.COL_NAME + TEXT_TYPE + COMMA_SEP +
+            JoiningsTable.COL_SEASON + INTEGER_TYPE + COMMA_SEP +
+            JoiningsTable.COL_ANNOUNCED_AT + TEXT_TYPE + COMMA_SEP +
+            JoiningsTable.COL_COMMENT + TEXT_TYPE + COMMA_SEP +
+            JoiningsTable.COL_NOTE + TEXT_TYPE + COMMA_SEP +
             " )";
 
     // 退団
@@ -133,20 +133,20 @@ public class PlayerContract {
     //テーブル生成定義
     public static final String CREATE_LEAVINGS_TABLE = "CREATE TABLE " +
             LEAVINGS_TABLE_NAME + " (" +
-            LeavingsTable._ID          + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
-            LeavingsTable.COL_ID       + INTEGER_TYPE  + COMMA_SEP +
-            LeavingsTable.COL_NAME     + TEXT_TYPE     + COMMA_SEP +
-            LeavingsTable.COL_SEASON   + INTEGER_TYPE  + COMMA_SEP +
-            LeavingsTable.COL_ANNOUNCED_AT + TEXT_TYPE     + COMMA_SEP +
-            LeavingsTable.COL_COMMENT  + TEXT_TYPE     + COMMA_SEP +
-            LeavingsTable.COL_NOTE     + TEXT_TYPE     + COMMA_SEP +
-            LeavingsTable.COL_AFTER_LEAVING + TEXT_TYPE     + COMMA_SEP +
+            LeavingsTable._ID + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
+            LeavingsTable.COL_ID + INTEGER_TYPE + COMMA_SEP +
+            LeavingsTable.COL_NAME + TEXT_TYPE + COMMA_SEP +
+            LeavingsTable.COL_SEASON + INTEGER_TYPE + COMMA_SEP +
+            LeavingsTable.COL_ANNOUNCED_AT + TEXT_TYPE + COMMA_SEP +
+            LeavingsTable.COL_COMMENT + TEXT_TYPE + COMMA_SEP +
+            LeavingsTable.COL_NOTE + TEXT_TYPE + COMMA_SEP +
+            LeavingsTable.COL_AFTER_LEAVING + TEXT_TYPE + COMMA_SEP +
             " )";
 
     // year league rank
 
     public static abstract class SeasonTable implements BaseColumns {
-        public static final String COL_YEAR = "season";
+        public static final String COL_SEASON = "season";
         public static final String COL_LEAGUE = "league";
         public static final String COL_RANK = "rank";
         public static final String COL_SLOGAN = "slogan";
@@ -155,11 +155,11 @@ public class PlayerContract {
     //テーブル生成定義
     public static final String CREATE_RANK_TABLE = "CREATE TABLE " +
             SEASON_TABLE_NAME + " (" +
-            SeasonTable._ID          + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
-            SeasonTable.COL_YEAR     + INTEGER_TYPE  + COMMA_SEP +
-            SeasonTable.COL_LEAGUE   + TEXT_TYPE     + COMMA_SEP +
-            SeasonTable.COL_RANK     + TEXT_TYPE     + COMMA_SEP +
-            SeasonTable.COL_SLOGAN   + TEXT_TYPE     + COMMA_SEP +
+            SeasonTable._ID + INTEGER_TYPE + PRIMARY_TYPE + COMMA_SEP +
+            SeasonTable.COL_SEASON + INTEGER_TYPE + COMMA_SEP +
+            SeasonTable.COL_LEAGUE + TEXT_TYPE + COMMA_SEP +
+            SeasonTable.COL_RANK + TEXT_TYPE + COMMA_SEP +
+            SeasonTable.COL_SLOGAN + TEXT_TYPE + COMMA_SEP +
             " )";
 
 

@@ -23,32 +23,36 @@
             <!--android:textSize="10sp"-->
             <!--android:padding="50dp"/>-->
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="96dp"
-                    android:layout_height="wrap_content"
-                    android:text="シーズンノート"
-                    android:layout_marginLeft="16dp"
-                    />
-                <TextView
-                    android:id="@+id/text_view_player_info_season_note"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="あああ"
-                    />
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="96dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="シーズンノート"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/text_view_player_info_season_note"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="あああ"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
-                    android:text="加入年"
+                    android:text="加入"
                     android:layout_marginLeft="16dp"
                     />
                 <TextView
@@ -62,12 +66,15 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
                     android:text="加入リリース"
                     android:layout_marginLeft="16dp"
+
                     />
                 <TextView
                     android:id="@+id/text_view_player_info_joining_announced_at"
@@ -80,7 +87,9 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -94,15 +103,19 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:lineSpacingExtra="3sp"
-                    android:text="あああ"
+                    android:text="あ"
+                    android:layout_marginTop="8dp"
                     />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
+                    android:id="@+id/tv_joining_note_label"
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
                     android:text="加入ノート"
@@ -112,7 +125,12 @@
                     android:id="@+id/text_view_player_info_joining_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="あああ"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:lineSpacingExtra="3sp"
+                    android:text="あ"
+                    android:layout_marginTop="8dp"
+
                     />
             </LinearLayout>
 

@@ -26,11 +26,13 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
-                    android:text="退団年"
+                    android:text="退団"
                     android:layout_marginLeft="16dp"
                     />
                 <TextView
@@ -45,7 +47,9 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -64,6 +68,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
                 >
                 <TextView
                     android:layout_width="96dp"
@@ -78,14 +83,17 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:lineSpacingExtra="3sp"
+                    android:layout_marginTop="8dp"
 
                     android:text="あああ"
                     />
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -96,14 +104,20 @@
                     android:id="@+id/text_view_player_info_leaving_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:lineSpacingExtra="3sp"
+                    android:layout_marginTop="8dp"
+                    android:text="あ"
                     />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
@@ -114,6 +128,10 @@
                     android:id="@+id/text_view_player_info_after_leaving"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:lineSpacingExtra="3sp"
+                    android:layout_marginTop="8dp"
                     android:text=""
                     />
             </LinearLayout>

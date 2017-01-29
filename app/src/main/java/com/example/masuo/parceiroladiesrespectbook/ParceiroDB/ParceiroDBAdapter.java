@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.ParceiroDB;
 
 
 import android.content.Context;
@@ -26,14 +26,12 @@ public class ParceiroDBAdapter {
 
     }
 
-    public ParceiroDBAdapter open()
-    {
+    public ParceiroDBAdapter open() {
         mDb = mDbHelper.getReadableDatabase();
         return this;
     }
 
-    public void close()
-    {
+    public void close() {
         mDbHelper.close();
     }
 
@@ -70,28 +68,25 @@ public class ParceiroDBAdapter {
                     "on " + PlayerContract.PlayersTable.COL_ID + "=" + PlayerContract.MembersTable.COL_ID + " " +
                     "left join " + PlayerContract.JOININGS_TABLE_NAME + " " +
                     "on " + PlayerContract.JoiningsTable.COL_ID + " = " + PlayerContract.MembersTable.COL_ID + " " +
-                    "left join "+ PlayerContract.LEAVINGS_TABLE_NAME + " " +
+                    "left join " + PlayerContract.LEAVINGS_TABLE_NAME + " " +
                     "on " + PlayerContract.LeavingsTable.COL_ID + "= " + PlayerContract.MembersTable.COL_ID + " " +
                     "%2$s;";
 
     static String where_id = "where " + PlayerContract.PlayersTable.COL_ID + "=%d";
 
-    public Cursor getAllPlayers(int year)
-    {
+    public Cursor getAllPlayers(int year) {
         String q = String.format(seasonMemberQuery, year, "");
 
         Cursor c = mDb.rawQuery(q, null);
 
-        if (c != null)
-        {
+        if (c != null) {
             c.moveToFirst();
         }
 
         return c;
     }
 
-    public Cursor getPlayer(int year, int id)
-    {
+    public Cursor getPlayer(int year, int id) {
         String q = String.format(seasonMemberQuery, year, String.format(where_id, id));
 
         Log.i(LOG, q);
@@ -99,20 +94,17 @@ public class ParceiroDBAdapter {
 
         Cursor c = mDb.rawQuery(q, null);
 
-        if (c != null)
-        {
+        if (c != null) {
             c.moveToFirst();
         }
 
         return c;
     }
 
-    public Cursor getSeasonMembers()
-    {
+    public Cursor getSeasonMembers() {
         Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.PLAYERS_TABLE_NAME + ";", null);
 
-        if (c != null)
-        {
+        if (c != null) {
             c.moveToFirst();
         }
 
@@ -120,29 +112,27 @@ public class ParceiroDBAdapter {
     }
 
 
-    public Cursor getSeasonList()
-    {
+    public Cursor getAllSeasonList() {
         Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
-                " ORDER BY " + PlayerContract.SeasonTable.COL_YEAR + " DESC;", null);
+                " ORDER BY " + PlayerContract.SeasonTable.COL_SEASON + " DESC;", null);
 
-        if (c != null)
-        {
+        if (c != null) {
             c.moveToFirst();
         }
 
         return c;
-
-
-
     }
 
+    public Cursor getOneSeasonData(int year) {
+        Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
+                " WHERE " + PlayerContract.SeasonTable.COL_SEASON + "=" + year + ";", null);
 
+        if (c != null) {
+            c.moveToFirst();
+        }
 
-
-
-
-
-
+        return c;
+    }
 
 
 }

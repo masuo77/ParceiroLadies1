@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,8 +79,20 @@ public class PlayerInfoLeavingFragment extends Fragment {
 
         PlayerInfoItem item = playerInfoItem;
 
-        String leaving_season = item.getLeaving_season();
+        String leaving_season = item.getLeaving_season() + "シーズン";
         String leaving_announced_at = item.getLeaving_announced_at();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date date = format.parse(leaving_announced_at);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年M月d日");
+            String str2 = sdf1.format(date);
+            leaving_announced_at = str2;
+        }
+        catch (ParseException e)
+        {
+        }
+
         String leaving_comment = item.getLeaving_comment();
         String leaving_note = item.getLeaving_note();
         String after_leaving = item.getAfter_leaving();

@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,9 +91,22 @@ public class PlayerInfoMainFragment extends Fragment {
 //        String name = item.getName();
 //        String yomi = item.getYomi();
 //        String yomi_j = item.getYomi_j();
+
         String birthday = item.getBirthday();
-        String height = item.getHeight();
-        String weight = item.getWeight();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date date = format.parse(birthday);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy年M月d日");
+            String str2 = sdf1.format(date);
+            birthday = str2;
+        }
+        catch (ParseException e)
+        {
+        }
+
+
+        String height = item.getHeight() + "cm";
+        String weight = item.getWeight() +"Kg";
         String blood = item.getBlood();
         String home = item.getHome();
         String career = item.getCareer();

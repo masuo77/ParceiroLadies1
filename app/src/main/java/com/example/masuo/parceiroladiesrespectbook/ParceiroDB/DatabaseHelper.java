@@ -1,7 +1,6 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.ParceiroDB;
 
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final Context mContext;
     private final File mDatabaseFile;
-    private  boolean mCopyFromAssets = false;
+    private boolean mCopyFromAssets = false;
 
     private final String mAssetDatabaseName;
 
@@ -47,8 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.i(LOG, mDatabaseFile.toString());
     }
 
-    public void checkDataBaseExist()
-    {
+    public void checkDataBaseExist() {
         Log.i(LOG, "checkDataBaseExist");
 
         databaseExists();
@@ -120,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * assets に格納したデータベースをデフォルトのデータベースパスに作成したデータベースにコピーする
      */
-    private SQLiteDatabase copyDatabaseFromAssets(SQLiteDatabase db, Context context, File dbfile, String assetsname) throws IOException{
+    private SQLiteDatabase copyDatabaseFromAssets(SQLiteDatabase db, Context context, File dbfile, String assetsname) throws IOException {
 
         Log.i(LOG, "Copy from " + assetsname);
 
@@ -128,9 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             // asset 内のデータベースファイルにアクセス
             in = context.getAssets().open(assetsname);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             throw new Error("Error database in assets");
         }
 
@@ -141,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // フォルダがない場合は作成
         File checkDirectory = new File(dbfile.getParent());
-        if (! checkDirectory.exists()) {
+        if (!checkDirectory.exists()) {
             checkDirectory.mkdir();
             Log.i(LOG, "Create folder");
         }
@@ -171,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * 再コピーを防止するために、すでにデータベースがあるかどうか判定する
-     *
+     * <p>
      * データベースバージョンが古い場合、存在している古いデータベースを削除する。
      * アプリではデータベースを編集しないことが前提。
      *
@@ -187,17 +183,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (SQLiteException e) {
             // データベースはまだ存在していない
             Log.e(LOG, "SQLiteAbortException:Databaseは存在していない" + " " + e.toString());
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             Log.e(LOG, "Exception:Databaseは存在していない" + " " + ex.toString());
         }
 
         if (tempDb == null) {
             // データベースはまだ存在していない
             Log.i(LOG, "Databaseは存在していない");
-        }
-        else
-        {
+        } else {
             Log.i(LOG, "Databaseが存在している");
         }
 
