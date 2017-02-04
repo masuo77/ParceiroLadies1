@@ -6,16 +6,17 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 public class SeasonListItem {
 
-    private int year;
+    private String year;
     private String league;
     private String rank;
     private String slogan;
+    private String number_font;
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -41,6 +42,14 @@ public class SeasonListItem {
 
     public void setSlogan(String slogan) {
         this.slogan = slogan;
+    }
+
+    public String getNumber_font() {
+        return number_font;
+    }
+
+    public void setNumber_font(String number_font) {
+        this.number_font = number_font;
     }
 
 }

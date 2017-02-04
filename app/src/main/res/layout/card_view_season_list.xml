@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view_season_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="@drawable/ripple"
-        android:background="@drawable/ripple"
-        >
+        android:background="@drawable/ripple">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="72dp"
-            >
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:text="2016"
@@ -39,8 +36,7 @@
                 android:layout_marginRight="16dp"
                 android:orientation="vertical"
                 android:layout_toRightOf="@id/text_view_season"
-                android:layout_toLeftOf="@+id/image_button_season_info"
-                >
+                android:layout_toLeftOf="@+id/image_button_season_info">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -53,8 +49,7 @@
                         android:id="@+id/text_view_league"
                         android:layout_alignParentTop="true"
                         android:textSize="14dp"
-                        android:textColor="@color/textColorPrimary"
-                        />
+                        android:textColor="@color/textColorPrimary" />
 
                     <TextView
                         android:text="3位"
@@ -64,8 +59,7 @@
                         android:id="@+id/text_view_rank"
                         android:layout_marginLeft="16dp"
                         android:textColor="@color/textColorSecondary"
-                        android:layout_alignParentRight="true"
-                        />
+                        android:layout_alignParentRight="true" />
 
                 </RelativeLayout>
 
@@ -76,8 +70,7 @@
                     android:textSize="14dp"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/textColorSecondary"
-                    android:id="@+id/text_view_slogan"
-                    />
+                    android:id="@+id/text_view_slogan" />
 
 
             </LinearLayout>
@@ -100,6 +93,6 @@
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView >
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

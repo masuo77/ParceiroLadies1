@@ -2,6 +2,9 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,10 +16,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
@@ -35,8 +42,8 @@ public class PlayerInfoBaseFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mSeason;
-    private int mId;
+    private String mSeason;
+    private String mId;
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,12 +62,12 @@ public class PlayerInfoBaseFragment extends Fragment {
      * @return A new instance of fragment PlayerInfoBaseFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerInfoBaseFragment newInstance(int param1, int param2) {
+    public static PlayerInfoBaseFragment newInstance(String param1, String param2) {
         Log.i(LOG, "newInstance");
         PlayerInfoBaseFragment fragment = new PlayerInfoBaseFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,8 +77,8 @@ public class PlayerInfoBaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i(LOG, "onCreate");
         if (getArguments() != null) {
-            mSeason = getArguments().getInt(ARG_PARAM1);
-            mId = getArguments().getInt(ARG_PARAM2);
+            mSeason = getArguments().getString(ARG_PARAM1);
+            mId = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -85,15 +92,35 @@ public class PlayerInfoBaseFragment extends Fragment {
 
         Context context = view.getContext();
 
+        SeasonListItem seasonItem = TeamData.getOneSeasonListItem(context, mSeason);
+
         PlayerInfoItem item = TeamData.getPlayerInfo(context, mSeason, mId);
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.player_info_layout);
 
+
+        ImageView face = (ImageView) layout.findViewById(R.id.faceImageView);
         TextView name = (TextView) layout.findViewById(R.id.tv_name);
         TextView yomi = (TextView) layout.findViewById(R.id.tv_yomi);
         TextView yomi_j = (TextView) layout.findViewById(R.id.tv_yomi_j);
         TextView number = (TextView) layout.findViewById(R.id.tv_number);
         TextView position = (TextView) layout.findViewById(R.id.tv_position);
+
+        if (!TextUtils.isEmpty(item.getFace())) {
+            try {
+                InputStream istream = context.getResources().getAssets().open("face/" + item.getFace());
+                Bitmap bitmap = BitmapFactory.decodeStream(istream);
+                face.setImageBitmap(bitmap);
+                face.setAlpha(1f);
+            } catch (IOException e) {
+                Log.d("Assets", "Error");
+                face.setImageResource(R.drawable.ic_account_circle_black_48dp);
+                face.setAlpha(0.26f);
+            }
+        } else {
+            face.setImageResource(R.drawable.ic_account_circle_black_48dp);
+            face.setAlpha(0.26f);
+        }
 
         name.setText(item.getName());
         if (item.getName().length() >= 10) {
@@ -105,9 +132,23 @@ public class PlayerInfoBaseFragment extends Fragment {
         yomi_j.setText(item.getYomi_j());
         number.setText(item.getNumber());
 
-        Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
-        number.setTypeface(face);
+//        Log.i(LOG, "Length=" + item.getName().length() + " " + name.getTextSize());
 
+        if (!TextUtils.isEmpty(seasonItem.getNumber_font())) {
+            Typeface tface = Typeface.createFromAsset(context.getAssets(), seasonItem.getNumber_font());
+            number.setTypeface(tface);
+        } else {
+            number.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD));
+            number.setTextColor(Color.rgb(16, 32, 68));
+        }
+
+//        if (Integer.valueOf(mSeason) >= 2016) {
+//            Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
+//            number.setTypeface(face);
+//        } else {
+//            number.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD));
+//            number.setTextColor(Color.rgb(16, 32, 68));
+//        }
         position.setText(item.getPosition());
 
         Boolean leaving = false;

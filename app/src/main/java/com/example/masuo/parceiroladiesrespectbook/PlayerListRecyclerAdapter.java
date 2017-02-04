@@ -1,17 +1,25 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -23,12 +31,15 @@ public class PlayerListRecyclerAdapter
     private static final String LOG = "PRecyclerAdapter";
 
     private Context context;
+    private SeasonListItem seasonListItem;
     private List<PlayerListItem> playerListItems;
     private onItemClickListener listener;
 
     public PlayerListRecyclerAdapter(Context context,
+                                     SeasonListItem seasonListItem,
                                      List<PlayerListItem> playerListItems) {
         this.context = context;
+        this.seasonListItem = seasonListItem;
         this.playerListItems = playerListItems;
     }
 
@@ -43,7 +54,7 @@ public class PlayerListRecyclerAdapter
 
         PlayerListItem item = playerListItems.get(position);
         if (item != null) {
-            holder.bind(context, item);
+            holder.bind(context, seasonListItem, item);
         }
 
         // Itemクリック
@@ -76,7 +87,7 @@ public class PlayerListRecyclerAdapter
     }
 
     public interface onItemClickListener {
-        void onClick(View view, int position, int id, String name);
+        void onClick(View view, int position, String id, String name);
     }
 
 // ここでViewの中の要素を登録する。
@@ -84,6 +95,7 @@ public class PlayerListRecyclerAdapter
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
         final int id;
         final CardView linearLayout;
+        final ImageView imageViewFace;
         final TextView textViewName;
         final TextView textViewNumber;
         final TextView textViewPosition;
@@ -96,6 +108,7 @@ public class PlayerListRecyclerAdapter
             super(itemView);
             id = 0;
             linearLayout = (CardView) itemView.findViewById(R.id.card_view_player_list);
+            imageViewFace = (ImageView) itemView.findViewById(R.id.faceImageView);
             textViewName = (TextView) itemView.findViewById(R.id.list_item_name);
             textViewNumber = (TextView) itemView.findViewById(R.id.list_item_number);
             textViewPosition = (TextView) itemView.findViewById(R.id.list_item_position);
@@ -105,7 +118,7 @@ public class PlayerListRecyclerAdapter
             imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
 
-        public void bind(Context context, @NonNull PlayerListItem item) {
+        public void bind(Context context, @NonNull SeasonListItem seasonListItem, @NonNull PlayerListItem item) {
             String name = item.getName();
             String number = item.getNumber();
             String pos = item.getPosition();
@@ -113,10 +126,34 @@ public class PlayerListRecyclerAdapter
             String join = item.getJoin();
             String leaving = item.getLeaving();
 
+            if (!TextUtils.isEmpty(item.getFace())) {
+                try {
+                    InputStream istream = context.getResources().getAssets().open("face/" + item.getFace());
+                    Bitmap bitmap = BitmapFactory.decodeStream(istream);
+                    imageViewFace.setImageBitmap(bitmap);
+                    imageViewFace.setAlpha(1f);
+                } catch (IOException e) {
+                    Log.d("Assets", "Error");
+                    imageViewFace.setImageResource(R.drawable.ic_account_circle_black_48dp);
+                    imageViewFace.setAlpha(0.26f);
+                }
+            } else {
+                imageViewFace.setImageResource(R.drawable.ic_account_circle_black_48dp);
+                imageViewFace.setAlpha(0.26f);
+            }
+
             textViewName.setText(name);
             textViewNumber.setText(number);
-            Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
-            textViewNumber.setTypeface(face);
+
+            if (!TextUtils.isEmpty(seasonListItem.getNumber_font())) {
+                Typeface face = Typeface.createFromAsset(context.getAssets(), seasonListItem.getNumber_font());
+                textViewNumber.setTypeface(face);
+            } else {
+                Typeface face = (Typeface.create(Typeface.MONOSPACE, Typeface.BOLD));
+                textViewNumber.setTypeface(face);
+                textViewNumber.setTextColor(Color.rgb(16, 32, 68));
+            }
+
             textViewPosition.setText(pos);
             textViewNote.setText(note);
             textViewJoin.setText(join);

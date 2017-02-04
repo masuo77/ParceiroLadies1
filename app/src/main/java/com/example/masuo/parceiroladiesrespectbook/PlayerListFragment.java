@@ -48,7 +48,7 @@ public class PlayerListFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mSeason;
+    private String mSeason;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -75,10 +75,10 @@ public class PlayerListFragment extends Fragment {
      * @return A new instance of fragment PlayerListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerListFragment newInstance(Context context, int param1, String param2) {
+    public static PlayerListFragment newInstance(Context context, String param1, String param2) {
         PlayerListFragment fragment = new PlayerListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
@@ -94,7 +94,7 @@ public class PlayerListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i(LOG, "onCreate");
         if (getArguments() != null) {
-            mSeason = getArguments().getInt(ARG_PARAM1);
+            mSeason = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -116,31 +116,6 @@ public class PlayerListFragment extends Fragment {
 
         createPlayerList(v);
 
-//        // ダイアログ
-//        final String[] items = {"背番号", "ポジション", "item_2"};
-//        int defaultItem = 0; // デフォルトでチェックされているアイテム
-//        final List<Integer> checkedItems = new ArrayList<>();
-//        checkedItems.add(defaultItem);
-//        new AlertDialog.Builder(getActivity())
-//                .setTitle("並び替え")
-//                .setSingleChoiceItems(items, defaultItem, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        checkedItems.clear();
-//                        checkedItems.add(which);
-//                    }
-//                })
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        if (!checkedItems.isEmpty()) {
-//                            Log.d("checkedItem:", "" + checkedItems.get(0));
-//                        }
-//                    }
-//                })
-//                .setNegativeButton("Cancel", null)
-//                .show();
-//
         return v;
     }
 
@@ -159,7 +134,7 @@ public class PlayerListFragment extends Fragment {
                 // ボタンをタップした際の処理を記述
 //                Toast.makeText(getActivity(), "Reorder", Toast.LENGTH_SHORT).show();
 
-                final String[] items = {"ポジション", "背番号", "キャンセル"};
+                final String[] items = {"背番号", "ポジション", "キャンセル"};
                 new AlertDialog.Builder(getActivity())
                         .setTitle("並び替え")
                         .setItems(items, new DialogInterface.OnClickListener() {
@@ -167,16 +142,16 @@ public class PlayerListFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // item_which pressed
                                 switch (which) {
-                                    case 0: // ポジション
-                                        // ポジション順
-                                        Collections.sort(listItems, new PositionComparator());
+                                    case 0: // 背番号
+                                        Collections.sort(listItems, new NumberComparator());
                                         onNoteListChanged(listItems);
 //                                        adapter.notify();
                                         adapter.notifyDataSetChanged();
                                         adapter.notifyItemRangeChanged(0, listItems.size());
                                         break;
-                                    case 1: // 背番号
-                                        Collections.sort(listItems, new NumberComparator());
+                                    case 1: // ポジション
+                                        // ポジション順
+                                        Collections.sort(listItems, new PositionComparator());
                                         onNoteListChanged(listItems);
 //                                        adapter.notify();
                                         adapter.notifyDataSetChanged();
@@ -202,7 +177,7 @@ public class PlayerListFragment extends Fragment {
         SeasonListItem seasonItem = TeamData.getOneSeasonListItem(context, mSeason);
 
         TextView textView = (TextView) v.findViewById(R.id.text_view_season);
-        textView.setText(String.valueOf(seasonItem.getYear()));
+        textView.setText(seasonItem.getYear());
 
         textView = (TextView) v.findViewById(R.id.text_view_league);
         textView.setText(seasonItem.getLeague());
@@ -225,7 +200,7 @@ public class PlayerListFragment extends Fragment {
 //        recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
 //        final PlayerListRecyclerAdapter adapter = new PlayerListRecyclerAdapter(context, listItems);
-        adapter = new PlayerListRecyclerAdapter(context, listItems);
+        adapter = new PlayerListRecyclerAdapter(context, seasonItem, listItems);
         recyclerView.setAdapter(adapter);
 
         ItemTouchHelper itemDecor = new ItemTouchHelper(
@@ -261,7 +236,7 @@ public class PlayerListFragment extends Fragment {
 
         adapter.setOnItemClickListener(new PlayerListRecyclerAdapter.onItemClickListener() {
             @Override
-            public void onClick(View view, int position, int id, String name) {
+            public void onClick(View view, int position, String id, String name) {
 //                Toast.makeText(getActivity(), Integer.toString(position) + " " + id + " " + name, Toast.LENGTH_SHORT).show();
 //                Log.i(LOG, Integer.toString(position) + " " +  id + " " + name);
 
@@ -316,7 +291,7 @@ public class PlayerListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onPlayerListFragmentInteraction(int year, int id);
+        void onPlayerListFragmentInteraction(String year, String id);
     }
 
 
@@ -329,7 +304,7 @@ public class PlayerListFragment extends Fragment {
         List<Integer> listOfSortedPlayerId = new ArrayList<>();
 
         for (PlayerListItem playerListItem : playerListItems) {
-            listOfSortedPlayerId.add(playerListItem.getId());
+            listOfSortedPlayerId.add(Integer.valueOf(playerListItem.getId()));
 //            Log.i(LOG, "id=" + playerListItem.getId() + " name=" + playerListItem.getName());
         }
 
@@ -342,7 +317,7 @@ public class PlayerListFragment extends Fragment {
         mEditor.commit();
     }
 
-    private List<PlayerListItem> getAllPlayersData(Context context, int season) {
+    private List<PlayerListItem> getAllPlayersData(Context context, String season) {
 
         //Get the sample data
         List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
@@ -395,7 +370,7 @@ public class PlayerListFragment extends Fragment {
     }
 
 
-    private List<PlayerListItem> getAllPlayersDataPositionOrder(Context context, int season) {
+    private List<PlayerListItem> getAllPlayersDataPositionOrder(Context context, String season) {
 
         //Get the sample data
         List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
@@ -501,9 +476,10 @@ public class PlayerListFragment extends Fragment {
 
         //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
         public int compare(PlayerListItem data1, PlayerListItem data2) {
-            if (data1.getId() > data2.getId()) {
+
+            if (Integer.valueOf(data1.getId()) > Integer.valueOf(data2.getId())) {
                 return 1;
-            } else if (data1.getId() == data2.getId()) {
+            } else if (Integer.valueOf(data1.getId()) == Integer.valueOf(data2.getId())) {
                 return 0;
             } else {
                 return -1;
@@ -517,7 +493,7 @@ public class PlayerListFragment extends Fragment {
         public int compare(PlayerListItem data1, PlayerListItem data2) {
             if (Integer.valueOf(data1.getNumber()) > Integer.valueOf(data2.getNumber())) {
                 return 1;
-            } else if (data1.getId() == data2.getId()) {
+            } else if (Integer.valueOf(data1.getId()) == Integer.valueOf(data2.getId())) {
                 return 0;
             } else {
                 return -1;

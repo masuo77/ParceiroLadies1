@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Log.i(LOG, "Start2");
 
-
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setTitle("Parceiro Ladies 1");
         ab.setSubtitle(Html.fromHtml("<small>AC長野パルセイロレディース リスペクトブック</small>"));
@@ -32,33 +31,36 @@ public class MainActivity extends AppCompatActivity
 
         SeasonListFragment fragment = new SeasonListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
         transaction.add(R.id.fragment_container, fragment);
         transaction.commit();
-
     }
 
     @Override
     public void onTestFragmentInteraction() {
         SeasonListFragment fragment = new SeasonListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 
     @Override
-    public void onSeasonListFragmentInteraction(int year) {
+    public void onSeasonListFragmentInteraction(String year) {
         PlayerListFragment fragment = PlayerListFragment.newInstance(this, year, "");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     @Override
-    public void onPlayerListFragmentInteraction(int year, int id) {
+    public void onPlayerListFragmentInteraction(String year, String id) {
         Log.i(LOG, "onPlayerListFragmentInteraction " + year + " " + id);
         PlayerInfoBaseFragment fragment = PlayerInfoBaseFragment.newInstance(year, id);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

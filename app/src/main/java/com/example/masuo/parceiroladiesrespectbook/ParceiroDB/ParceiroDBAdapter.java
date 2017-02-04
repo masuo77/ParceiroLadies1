@@ -55,15 +55,32 @@ public class ParceiroDBAdapter {
 //                    "and " + PlayerContract.LeavingsTable.COL_SEASON + "= %1$s" + " " +
 //                    "%2$s;";
 
+//    static String seasonMemberQuery =
+//            "SELECT " +
+//                    "*," + " " +
+//                    "case" + " " +
+//                    "when " + PlayerContract.JoiningsTable.COL_SEASON + "= %1$d then '☆'" + " " +
+//                    "else ''" + " " +
+//                    "end as " + PlayerContract.PlayersInfoTable.COL_NEW_MEMBER + " " +
+//                    "FROM (SELECT * FROM " + PlayerContract.MEMBERS_TABLE_NAME + " " +
+//                    "WHERE " + PlayerContract.MembersTable.COL_SEASON + "= %1$d)" + " " +
+//                    "left join " + PlayerContract.PLAYERS_TABLE_NAME + " " +
+//                    "on " + PlayerContract.PlayersTable.COL_ID + "=" + PlayerContract.MembersTable.COL_ID + " " +
+//                    "left join " + PlayerContract.JOININGS_TABLE_NAME + " " +
+//                    "on " + PlayerContract.JoiningsTable.COL_ID + " = " + PlayerContract.MembersTable.COL_ID + " " +
+//                    "left join " + PlayerContract.LEAVINGS_TABLE_NAME + " " +
+//                    "on " + PlayerContract.LeavingsTable.COL_ID + "= " + PlayerContract.MembersTable.COL_ID + " " +
+//                    "%2$s;";
+
     static String seasonMemberQuery =
             "SELECT " +
                     "*," + " " +
                     "case" + " " +
-                    "when " + PlayerContract.JoiningsTable.COL_SEASON + "= %1$d then '☆'" + " " +
+                    "when " + PlayerContract.JoiningsTable.COL_SEASON + "='%1$s' then '☆'" + " " +
                     "else ''" + " " +
                     "end as " + PlayerContract.PlayersInfoTable.COL_NEW_MEMBER + " " +
                     "FROM (SELECT * FROM " + PlayerContract.MEMBERS_TABLE_NAME + " " +
-                    "WHERE " + PlayerContract.MembersTable.COL_SEASON + "= %1$d)" + " " +
+                    "WHERE " + PlayerContract.MembersTable.COL_SEASON + "='%1$s')" + " " +
                     "left join " + PlayerContract.PLAYERS_TABLE_NAME + " " +
                     "on " + PlayerContract.PlayersTable.COL_ID + "=" + PlayerContract.MembersTable.COL_ID + " " +
                     "left join " + PlayerContract.JOININGS_TABLE_NAME + " " +
@@ -72,9 +89,10 @@ public class ParceiroDBAdapter {
                     "on " + PlayerContract.LeavingsTable.COL_ID + "= " + PlayerContract.MembersTable.COL_ID + " " +
                     "%2$s;";
 
-    static String where_id = "where " + PlayerContract.PlayersTable.COL_ID + "=%d";
 
-    public Cursor getAllPlayers(int year) {
+    static String where_id = "where " + PlayerContract.PlayersTable.COL_ID + "='%s'";
+
+    public Cursor getAllPlayers(String year) {
         String q = String.format(seasonMemberQuery, year, "");
 
         Cursor c = mDb.rawQuery(q, null);
@@ -86,11 +104,10 @@ public class ParceiroDBAdapter {
         return c;
     }
 
-    public Cursor getPlayer(int year, int id) {
+    public Cursor getPlayer(String year, String id) {
         String q = String.format(seasonMemberQuery, year, String.format(where_id, id));
 
         Log.i(LOG, q);
-
 
         Cursor c = mDb.rawQuery(q, null);
 
@@ -113,8 +130,15 @@ public class ParceiroDBAdapter {
 
 
     public Cursor getAllSeasonList() {
-        Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
-                " ORDER BY " + PlayerContract.SeasonTable.COL_SEASON + " DESC;", null);
+        String q = "SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
+                " ORDER BY " + PlayerContract.SeasonTable.COL_SEASON + " DESC;";
+
+        Log.i(LOG, q);
+
+        Cursor c = mDb.rawQuery(q, null);
+
+//        Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
+//                " ORDER BY " + PlayerContract.SeasonTable.COL_SEASON + " DESC;", null);
 
         if (c != null) {
             c.moveToFirst();
@@ -123,9 +147,9 @@ public class ParceiroDBAdapter {
         return c;
     }
 
-    public Cursor getOneSeasonData(int year) {
+    public Cursor getOneSeasonData(String year) {
         Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
-                " WHERE " + PlayerContract.SeasonTable.COL_SEASON + "=" + year + ";", null);
+                " WHERE " + PlayerContract.SeasonTable.COL_SEASON + "='" + year + "';", null);
 
         if (c != null) {
             c.moveToFirst();

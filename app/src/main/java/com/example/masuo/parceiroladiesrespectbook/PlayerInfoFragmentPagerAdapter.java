@@ -5,8 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 /**
  * Created by Masuo on 2017/01/21.
  */
@@ -24,7 +22,6 @@ public class PlayerInfoFragmentPagerAdapter extends FragmentPagerAdapter {
         this.leaving = leaving;
     }
 
-
     String[] title = {"選手情報", "入団情報", "退団情報"};
 
     @Override
@@ -41,7 +38,6 @@ public class PlayerInfoFragmentPagerAdapter extends FragmentPagerAdapter {
             default:
                 return PlayerInfoLeavingFragment.newInstance(playerInfoItem, "");
         }
-
     }
 
     @Override
@@ -53,7 +49,5 @@ public class PlayerInfoFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return title[position]; //"Page " + position;  //super.getPageTitle(position);
     }
-
-
 
 }

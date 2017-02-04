@@ -6,13 +6,15 @@ package com.example.masuo.parceiroladiesrespectbook;
 
 public class PlayerListItem {
     private int imageRes;
-    private int id;
+    private String id;
     private String name;
     private String number;
     private String position;
     private String note;
     private String join;
     private String leaving;
+    private String season;
+    private String face;
 
     public PlayerListItem() {
     }
@@ -29,11 +31,11 @@ public class PlayerListItem {
         return name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,5 +82,22 @@ public class PlayerListItem {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
+    }
+
 
 }

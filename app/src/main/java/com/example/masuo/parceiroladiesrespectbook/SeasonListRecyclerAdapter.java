@@ -1,6 +1,7 @@
 package com.example.masuo.parceiroladiesrespectbook;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -36,29 +37,46 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
 
     @Override
     public void onBindViewHolder(final CustomViewHolder holder, int position) {
-        int year = seasonListItems.get(position).getYear();
+        String year = seasonListItems.get(position).getYear();
         String league = seasonListItems.get(position).getLeague();
         String rank = seasonListItems.get(position).getRank();
         String slogan = seasonListItems.get(position).getSlogan();
 
-        holder.textViewYear.setText(String.valueOf(year));
+        holder.textViewYear.setText(year);
         holder.textViewLeague.setText(league);
         holder.textViewRank.setText(rank);
         holder.textViewSlogan.setText("「" + slogan + "」");
+        if (position == 0) {
+            holder.linearLayout.getLayoutParams().height = (int) context.getResources().getDimension(R.dimen.seasonview_height);
+            holder.linearLayout.requestLayout();
+            holder.textViewLeague.setTextSize(18.0f);
+            holder.textViewSlogan.setTextSize(18.0f);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                int color = context.getResources().getColor(R.color.colorControlHighlight, context.getTheme());
+                holder.linearLayout.setBackgroundColor(color);
+            } else {
+                int color = context.getResources().getColor(R.color.colorControlHighlight);
+                holder.linearLayout.setBackgroundColor(color);
+            }
+        }
 
         // Itemクリック
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.onClick(view, holder.getAdapterPosition(), seasonListItems.get(holder.getAdapterPosition()).getYear());
-                    }
-                }, 240);
-            }
-        });
+        holder.linearLayout.setOnClickListener(new View.OnClickListener()
+
+                                               {
+                                                   @Override
+                                                   public void onClick(final View view) {
+                                                       Handler handler = new Handler();
+                                                       handler.postDelayed(new Runnable() {
+                                                           @Override
+                                                           public void run() {
+                                                               listener.onClick(view, holder.getAdapterPosition(), seasonListItems.get(holder.getAdapterPosition()).getYear());
+                                                           }
+                                                       }, 240);
+                                                   }
+                                               }
+
+        );
 
 
 //        // Buttonクリック
@@ -81,7 +99,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
     }
 
     public interface onItemClickListener {
-        void onClick(View view, int position, int year);
+        void onClick(View view, int position, String year);
     }
 
     // Buttonクリック
@@ -93,7 +111,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         void onClick(View view, int position);
     }
 
-    // ここでViewの中の要素を登録する。
+// ここでViewの中の要素を登録する。
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         final CardView linearLayout;

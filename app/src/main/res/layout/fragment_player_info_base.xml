@@ -13,15 +13,17 @@
         android:minHeight="150dp">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/faceImageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            app:srcCompat="@drawable/ic_account_circle_black_48dp"
-            android:alpha="0.26" />
+            app:srcCompat="@drawable/ic_account_circle_black_48dp" />
+
+        <!--android:layout_marginLeft="8dp"-->
+
+        <!--android:alpha="0.26"-->
 
         <TextView
             android:id="@+id/tv_number"
@@ -29,18 +31,19 @@
             android:layout_height="wrap_content"
             android:textSize="36sp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="1"
             android:background="#F57000"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/faceImageView"
             android:textColor="@android:color/background_light"
             android:textStyle="normal"
             android:letterSpacing="-0.08"
             android:gravity="center_horizontal"
             android:paddingBottom="6dp"
             android:paddingTop="6dp" />
+
+        <!--android:layout_marginLeft="8dp"-->
 
         <LinearLayout
             android:id="@+id/textview_container"
@@ -64,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FW"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:layout_weight="1" />
 
@@ -114,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:text="Name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
@@ -123,18 +126,20 @@
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_yomi"
+                android:id="@+id/tv_yomi_j"
                 android:textSize="12sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="4dp" />
+
 
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_yomi_j"
+                android:id="@+id/tv_yomi"
                 android:textSize="12sp"
-                android:layout_marginTop="4dp" />
-
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="4dp" />
 
         </LinearLayout>
 

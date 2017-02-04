@@ -17,6 +17,7 @@ public class PlayerInfoItem implements Serializable {
     private String blood;
     private String home;
     private String career;
+    private String face;
 
     private String number;
     private String position;
@@ -32,6 +33,8 @@ public class PlayerInfoItem implements Serializable {
     private String leaving_comment;
     private String leaving_note;
     private String after_leaving;
+
+    private String number_font;
 
 
     public int getImageRes() {
@@ -112,6 +115,14 @@ public class PlayerInfoItem implements Serializable {
 
     public void setCareer(String career) {
         this.career = career;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(String face) {
+        this.face = face;
     }
 
     public String getNumber() {
@@ -211,6 +222,14 @@ public class PlayerInfoItem implements Serializable {
     }
 
     public PlayerInfoItem() {
+    }
+
+    public String getNumber_font() {
+        return number_font;
+    }
+
+    public void setNumber_font(String number_font) {
+        this.number_font = number_font;
     }
 
 

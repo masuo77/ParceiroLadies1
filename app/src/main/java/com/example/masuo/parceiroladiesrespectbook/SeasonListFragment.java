@@ -93,7 +93,7 @@ public class SeasonListFragment extends Fragment {
 
         adapter.setOnItemClickListener(new SeasonListRecyclerAdapter.onItemClickListener() {
             @Override
-            public void onClick(View view, int position, final int year) {
+            public void onClick(View view, int position, final String year) {
                 if (mListener != null) {
                     mListener.onSeasonListFragmentInteraction(year);
                 }
@@ -109,7 +109,7 @@ public class SeasonListFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(int year) {
+    public void onButtonPressed(String year) {
         if (mListener != null) {
             mListener.onSeasonListFragmentInteraction(year);
         }
@@ -144,7 +144,7 @@ public class SeasonListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSeasonListFragmentInteraction(int year);
+        void onSeasonListFragmentInteraction(String year);
 
     }
 

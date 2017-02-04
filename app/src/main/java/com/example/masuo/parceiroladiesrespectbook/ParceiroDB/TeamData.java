@@ -32,7 +32,7 @@ public class TeamData {
         if (c.moveToFirst()) {
             do {
                 SeasonListItem item = new SeasonListItem();
-                item.setYear(c.getInt(c.getColumnIndex(PlayerContract.SeasonTable.COL_SEASON)));
+                item.setYear(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SEASON)));
                 item.setLeague(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_LEAGUE)));
                 item.setRank(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_RANK)));
                 item.setSlogan(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SLOGAN)));
@@ -49,7 +49,7 @@ public class TeamData {
         return listItems;
     }
 
-    public static SeasonListItem getOneSeasonListItem(Context context, int year) {
+    public static SeasonListItem getOneSeasonListItem(Context context, String year) {
 
         ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
 
@@ -59,10 +59,11 @@ public class TeamData {
 
         SeasonListItem item = new SeasonListItem();
         if (c.moveToFirst()) {
-            item.setYear(c.getInt(c.getColumnIndex(PlayerContract.SeasonTable.COL_SEASON)));
+            item.setYear(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SEASON)));
             item.setLeague(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_LEAGUE)));
             item.setRank(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_RANK)));
             item.setSlogan(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_SLOGAN)));
+            item.setNumber_font(c.getString(c.getColumnIndex(PlayerContract.SeasonTable.COL_NUMBER_FONT)));
         }
 
         c.close();
@@ -71,7 +72,7 @@ public class TeamData {
         return item;
     }
 
-    public static List<PlayerListItem> getAllPlayersListItem(Context context, int season) {
+    public static List<PlayerListItem> getAllPlayersListItem(Context context, String season) {
 
         ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
 
@@ -86,10 +87,12 @@ public class TeamData {
 
                 PlayerListItem item = new PlayerListItem();
                 item.setImageRes(R.mipmap.ic_launcher);
-                item.setId(c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_ID)));
+                item.setId(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_ID)));
                 item.setName(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
                 item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
                 item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
+                item.setSeason(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_SEASON)));
+                item.setFace(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE)));
 
                 // 追加情報
                 List<String> infoList = new ArrayList<>();
@@ -98,14 +101,18 @@ public class TeamData {
                     infoList.add(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
                 }
 
-                int joinSeason = c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON));
-                int leaveSeason = c.getInt(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON));
+                String joinSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON));
+                String leaveSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON));
 
-                if (joinSeason == season) {
-                    infoList.add("新加入");
+                if (!TextUtils.isEmpty(joinSeason)) {
+                    if (joinSeason.equals(season)) {
+                        infoList.add("新加入");
+                    }
                 }
-                if (leaveSeason == season) {
-                    infoList.add("退団");
+                if (!TextUtils.isEmpty(leaveSeason)) {
+                    if (leaveSeason.equals(season)) {
+                        infoList.add("退団");
+                    }
                 }
 
 //                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
@@ -137,8 +144,6 @@ public class TeamData {
 
                 listItems.add(item);
 
-//                nameList.add(item.getName());
-
             } while (c.moveToNext());
 
         }
@@ -150,7 +155,7 @@ public class TeamData {
     }
 
 
-    public static PlayerInfoItem getPlayerInfo(Context context, int season, int id) {
+    public static PlayerInfoItem getPlayerInfo(Context context, String season, String id) {
 
         ParceiroDBAdapter parceiroDBAdapter = new ParceiroDBAdapter(context);
         parceiroDBAdapter.open();
@@ -170,6 +175,7 @@ public class TeamData {
             item.setBlood(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BLOOD)));
             item.setHome(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
             item.setCareer(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_CAREER)));
+            item.setFace(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE)));
             item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
             item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
             item.setSeason_note(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
