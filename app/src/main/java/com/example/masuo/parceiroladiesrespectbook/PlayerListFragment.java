@@ -134,7 +134,7 @@ public class PlayerListFragment extends Fragment {
                 // ボタンをタップした際の処理を記述
 //                Toast.makeText(getActivity(), "Reorder", Toast.LENGTH_SHORT).show();
 
-                final String[] items = {"背番号", "ポジション", "キャンセル"};
+                final String[] items = {"背番号順", "ポジション順", "キャンセル"};
                 new AlertDialog.Builder(getActivity())
                         .setTitle("並び替え")
                         .setItems(items, new DialogInterface.OnClickListener() {
@@ -233,7 +233,6 @@ public class PlayerListFragment extends Fragment {
                 });
         itemDecor.attachToRecyclerView(recyclerView);
 
-
         adapter.setOnItemClickListener(new PlayerListRecyclerAdapter.onItemClickListener() {
             @Override
             public void onClick(View view, int position, String id, String name) {
@@ -246,7 +245,6 @@ public class PlayerListFragment extends Fragment {
                 }
             }
         });
-
     }
 
     @Override
@@ -370,74 +368,77 @@ public class PlayerListFragment extends Fragment {
     }
 
 
-    private List<PlayerListItem> getAllPlayersDataPositionOrder(Context context, String season) {
-
-        //Get the sample data
-        List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
-
-        //create an empty array to hold the list of sorted Customers
-        List<PlayerListItem> sortedPlayersListItems = new ArrayList<>();
-
-        //get the JSON array of the ordered of sorted customers
-        String jsonListOfSortedPlayerId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
-
-        //check for null
-        if (!jsonListOfSortedPlayerId.isEmpty()) {
-
-            //convert JSON array into a List<Long>
-            Gson gson = new Gson();
-            List<Integer> listOfSortedCustomersId =
-                    gson.fromJson(jsonListOfSortedPlayerId,
-                            new TypeToken<List<Integer>>() {
-                            }.getType());
-
-            //build sorted list
-            if (listOfSortedCustomersId != null && listOfSortedCustomersId.size() > 0) {
-                for (Integer id : listOfSortedCustomersId) {
-                    for (PlayerListItem playerListItem : playerListItems) {
-                        Long l = Long.valueOf(playerListItem.getId());
-                        if (l.equals(Long.valueOf(id))) {
-                            sortedPlayersListItems.add(playerListItem);
-                            playerListItems.remove(playerListItem);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            //if there are still customers that were not in the sorted list
-            //maybe they were added after the last drag and drop
-            //add them to the sorted list
-            if (playerListItems.size() > 0) {
-                sortedPlayersListItems.addAll(playerListItems);
-            }
-
-            Log.i(LOG, "Found Jason");
-
-            return sortedPlayersListItems;
-        } else {
-            Log.i(LOG, "No Jason");
-
-            return playerListItems;
-        }
-    }
+//    private List<PlayerListItem> getAllPlayersDataPositionOrder(Context context, String season) {
+//
+//        //Get the sample data
+//        List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
+//
+//        //create an empty array to hold the list of sorted Customers
+//        List<PlayerListItem> sortedPlayersListItems = new ArrayList<>();
+//
+//        //get the JSON array of the ordered of sorted customers
+//        String jsonListOfSortedPlayerId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
+//
+//        //check for null
+//        if (!jsonListOfSortedPlayerId.isEmpty()) {
+//
+//            //convert JSON array into a List<Long>
+//            Gson gson = new Gson();
+//            List<Integer> listOfSortedCustomersId =
+//                    gson.fromJson(jsonListOfSortedPlayerId,
+//                            new TypeToken<List<Integer>>() {
+//                            }.getType());
+//
+//            //build sorted list
+//            if (listOfSortedCustomersId != null && listOfSortedCustomersId.size() > 0) {
+//                for (Integer id : listOfSortedCustomersId) {
+//                    for (PlayerListItem playerListItem : playerListItems) {
+//                        Long l = Long.valueOf(playerListItem.getId());
+//                        if (l.equals(Long.valueOf(id))) {
+//                            sortedPlayersListItems.add(playerListItem);
+//                            playerListItems.remove(playerListItem);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//
+//            //if there are still customers that were not in the sorted list
+//            //maybe they were added after the last drag and drop
+//            //add them to the sorted list
+//            if (playerListItems.size() > 0) {
+//                sortedPlayersListItems.addAll(playerListItems);
+//            }
+//
+//            Log.i(LOG, "Found Jason");
+//
+//            return sortedPlayersListItems;
+//        } else {
+//            Log.i(LOG, "No Jason");
+//
+//            return playerListItems;
+//        }
+//    }
 
 
     public class PositionComparator implements Comparator<PlayerListItem> {
 
         //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
         public int compare(PlayerListItem data1, PlayerListItem data2) {
+            String position1 = data1.getPosition();
+            String position2 = data2.getPosition();
+
             // GK, DF, MF, FW
-            switch (data1.getPosition()) {
+            switch (position1) {
                 case "GK":
-                    switch (data2.getPosition()) {
+                    switch (position2) {
                         case "GK":
                             return 0;
                         default:
                             return -1;
                     }
                 case "DF":
-                    switch (data2.getPosition()) {
+                    switch (position2) {
                         case "GK":
                             return +1;
                         case "DF":
@@ -446,7 +447,7 @@ public class PlayerListFragment extends Fragment {
                             return -1;
                     }
                 case "MF":
-                    switch (data2.getPosition()) {
+                    switch (position2) {
                         case "GK":
                         case "DF":
                             return +1;
@@ -456,7 +457,7 @@ public class PlayerListFragment extends Fragment {
                             return -1;
                     }
                 case "FW":
-                    switch (data2.getPosition()) {
+                    switch (position2) {
                         case "GK":
                         case "DF":
                         case "MF":
@@ -467,33 +468,35 @@ public class PlayerListFragment extends Fragment {
                             return -1;
                     }
             }
-
-            return data1.getPosition().charAt(0) - data2.getPosition().charAt(0);
+            return position1.charAt(0) - position2.charAt(0);
         }
     }
 
-    public class IDComparator implements Comparator<PlayerListItem> {
-
-        //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
-        public int compare(PlayerListItem data1, PlayerListItem data2) {
-
-            if (Integer.valueOf(data1.getId()) > Integer.valueOf(data2.getId())) {
-                return 1;
-            } else if (Integer.valueOf(data1.getId()) == Integer.valueOf(data2.getId())) {
-                return 0;
-            } else {
-                return -1;
-            }
-        }
-    }
+//    public class IDComparator implements Comparator<PlayerListItem> {
+//
+//        //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
+//        public int compare(PlayerListItem data1, PlayerListItem data2) {
+//            int id1 = Integer.valueOf(data1.getId());
+//            int id2 = Integer.valueOf(data2.getId());
+//            if (id1 > id2) {
+//                return 1;
+//            } else if (id1 == id2) {
+//                return 0;
+//            } else {
+//                return -1;
+//            }
+//        }
+//    }
 
     public class NumberComparator implements Comparator<PlayerListItem> {
 
         //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
         public int compare(PlayerListItem data1, PlayerListItem data2) {
-            if (Integer.valueOf(data1.getNumber()) > Integer.valueOf(data2.getNumber())) {
+            int number1 = Integer.valueOf(data1.getNumber());
+            int number2 = Integer.valueOf(data2.getNumber());
+            if (number1 > number2) {
                 return 1;
-            } else if (Integer.valueOf(data1.getId()) == Integer.valueOf(data2.getId())) {
+            } else if (number1 == number2) {
                 return 0;
             } else {
                 return -1;

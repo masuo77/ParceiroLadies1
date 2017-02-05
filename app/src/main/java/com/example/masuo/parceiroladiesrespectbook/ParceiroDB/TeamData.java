@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.example.masuo.parceiroladiesrespectbook.PlayerInfoItem;
 import com.example.masuo.parceiroladiesrespectbook.PlayerListItem;
-import com.example.masuo.parceiroladiesrespectbook.R;
 import com.example.masuo.parceiroladiesrespectbook.SeasonListItem;
 
 import java.util.ArrayList;
@@ -86,7 +85,7 @@ public class TeamData {
             do {
 
                 PlayerListItem item = new PlayerListItem();
-                item.setImageRes(R.mipmap.ic_launcher);
+//                item.setImageRes(R.mipmap.ic_launcher);
                 item.setId(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_ID)));
                 item.setName(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NAME)));
                 item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
@@ -97,29 +96,31 @@ public class TeamData {
                 // 追加情報
                 List<String> infoList = new ArrayList<>();
 
-                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)))) {
-                    infoList.add(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));
+                String captain = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE));
+                if (!TextUtils.isEmpty(captain)) {
+                    infoList.add(captain);
                 }
 
-                String joinSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON));
-                String leaveSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON));
-
-                if (!TextUtils.isEmpty(joinSeason)) {
-                    if (joinSeason.equals(season)) {
-                        infoList.add("新加入");
-                    }
+                String joinStatus = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_STATUS));
+                if (!TextUtils.isEmpty(joinStatus)) {
+                    infoList.add(joinStatus);
                 }
-                if (!TextUtils.isEmpty(leaveSeason)) {
-                    if (leaveSeason.equals(season)) {
-                        infoList.add("退団");
-                    }
+                String leaveStatus = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_STATUS));
+                if (!TextUtils.isEmpty(leaveStatus)) {
+                    infoList.add(leaveStatus);
                 }
 
-//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_COMMENT)))) {
-//                    infoList.add("新加入");
+//                String joinSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_JOINING_SEASON));
+//                String leaveSeason = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_SEASON));
+//                if (!TextUtils.isEmpty(joinSeason)) {
+//                    if (joinSeason.equals(season)) {
+//                        infoList.add("新加入");
+//                    }
 //                }
-//                if (!TextUtils.isEmpty(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LEAVING_COMMENT)))) {
-//                    infoList.add("退団");
+//                if (!TextUtils.isEmpty(leaveSeason)) {
+//                    if (leaveSeason.equals(season)) {
+//                        infoList.add("退団");
+//                    }
 //                }
 
                 int i = 0;

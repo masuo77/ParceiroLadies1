@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 1;
     public static final String ASSETS_DATABASE_NAME = "ParceiroLadies.sqlite";
     public static final String DATABASE_NAME = "ParceiroLadies.db";
     private static final String TEXT_TYPE = " TEXT";
@@ -101,6 +101,8 @@ public class PlayerContract {
         public static final String COL_NUMBER = "member_season_number";
         public static final String COL_POSITION = "member_season_position";
         public static final String COL_NOTE = "member_season_note";
+        public static final String COL_JOINING_STATUS = "member_join_status";
+        public static final String COL_LEAVING_STATUS = "member_leaving_status";
     }
 
     //テーブル生成定義
@@ -113,6 +115,8 @@ public class PlayerContract {
             MembersTable.COL_NUMBER + TEXT_TYPE + COMMA_SEP +
             MembersTable.COL_POSITION + TEXT_TYPE + COMMA_SEP +
             MembersTable.COL_NOTE + TEXT_TYPE + COMMA_SEP +
+            MembersTable.COL_JOINING_STATUS + TEXT_TYPE + COMMA_SEP +
+            MembersTable.COL_LEAVING_STATUS + TEXT_TYPE + COMMA_SEP +
             " )";
 
 
@@ -174,6 +178,8 @@ public class PlayerContract {
         public static final String COL_NUMBER = MembersTable.COL_NUMBER;
         public static final String COL_POSITION = MembersTable.COL_POSITION;
         public static final String COL_NOTE = MembersTable.COL_NOTE;
+        public static final String COL_JOINING_STATUS = MembersTable.COL_JOINING_STATUS;
+        public static final String COL_LEAVING_STATUS = MembersTable.COL_LEAVING_STATUS;
 
         public static final String COL_YOMI = PlayersTable.COL_YOMI;
         public static final String COL_YOMI_J = PlayersTable.COL_YOMI_J;
