@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="0dp">
+            android:padding="4dp">
 
             <!--<TextView-->
             <!--android:text="退団情報"-->
@@ -43,6 +43,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_leaving_note"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -112,6 +113,7 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
+                    android:id="@+id/tv_after_leaving_note_label"
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
                     android:text="退団後"
@@ -121,10 +123,11 @@
                     android:id="@+id/text_view_player_info_after_leaving"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:lineSpacingExtra="3sp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:text="" />
             </LinearLayout>
 

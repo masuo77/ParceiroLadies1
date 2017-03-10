@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.PlayerList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.masuo.parceiroladiesrespectbook.R;
+import com.example.masuo.parceiroladiesrespectbook.SeasonList.SeasonListItem;
 
 import java.io.IOException;
 import java.io.InputStream;

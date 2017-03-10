@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.PlayerList;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData;
+import com.example.masuo.parceiroladiesrespectbook.R;
+import com.example.masuo.parceiroladiesrespectbook.SeasonList.SeasonListItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -97,6 +99,9 @@ public class PlayerListFragment extends Fragment {
             mSeason = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        // 並び替えメニュー
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -106,13 +111,14 @@ public class PlayerListFragment extends Fragment {
         Log.i(LOG, "onCreateView");
 //        Toast.makeText(getActivity(), "onCreateView", Toast.LENGTH_SHORT).show();
 
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_player_list, container, false);
 
-//        TextView textView = (TextView)v.findViewById(R.id.text_view_season);
-//        textView.setText(String.valueOf(mSeason));
+        //TEST
+//        RecyclerView rv = (RecyclerView) v.findViewById(R.id.player_list_recycler_view);
+//        rv.setVisibility(View.GONE);
 
         createPlayerList(v);
 
@@ -122,13 +128,18 @@ public class PlayerListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
+        // 並び替えメニュー表示
         inflater.inflate(R.menu.menu_player_list, menu);
-
         super.onCreateOptionsMenu(menu, inflater);
+
+        // NavigationDrawer
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(LOG, "onBackpressed");
         switch (item.getItemId()) {
             case R.id.menu_reorder:
                 // ボタンをタップした際の処理を記述
@@ -164,6 +175,10 @@ public class PlayerListFragment extends Fragment {
                             }
                         })
                         .show();
+                break;
+            case android.R.id.home:
+                Log.d(LOG, "onBackpressed");
+                getActivity().onBackPressed();
                 break;
         }
         return true;
@@ -275,6 +290,14 @@ public class PlayerListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d(LOG, "PlayerListFragment/onResume");
+
     }
 
     /**

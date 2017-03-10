@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.SeasonList;
 
 /**
  * Created by Masuo on 2017/01/14.

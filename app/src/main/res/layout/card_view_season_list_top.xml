@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_view_season_list"
+        android:id="@+id/card_view_season_list_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="@drawable/ripple"
@@ -14,7 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="72dp"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorControlHighlight">
 
             <TextView
                 android:text="2016"
@@ -34,6 +35,7 @@
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
                 android:layout_toRightOf="@id/text_view_season"
                 android:layout_toLeftOf="@+id/image_button_season_info">
@@ -48,11 +50,11 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/text_view_league"
                         android:layout_alignParentTop="true"
-                        android:textSize="14dp"
+                        android:textSize="18sp"
                         android:textColor="@color/textColorPrimary" />
 
                     <TextView
-                        android:text="3位"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
@@ -67,13 +69,53 @@
                     android:text="共超"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="18sp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:textColor="@color/textColorSecondary"
                     android:id="@+id/text_view_slogan" />
 
+                <TextView
+                    android:text="南長野に集う仲間よ\n声の限り唄おう 勝利のために"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:lineSpacingExtra="3sp"
+
+                    android:textStyle="normal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/textColorSecondary"
+                    android:id="@+id/text_view_chant" />
+
+                <TextView
+                    android:text="応援チャントより"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:gravity="right"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/textColorSecondary"
+                    android:id="@+id/text_view_chant_readme" />
 
             </LinearLayout>
+
+
+            <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:srcCompat="@drawable/ic_info_black_18dp"-->
+            <!--android:id="@+id/image_button_season_info"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:background="@null"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:tint="@android:color/darker_gray"-->
+            <!--/>-->
 
         </RelativeLayout>
 

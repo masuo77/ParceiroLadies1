@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
 
-import com.example.masuo.parceiroladiesrespectbook.PlayerInfoItem;
-import com.example.masuo.parceiroladiesrespectbook.PlayerListItem;
-import com.example.masuo.parceiroladiesrespectbook.SeasonListItem;
+import com.example.masuo.parceiroladiesrespectbook.PlayerInfo.PlayerInfoItem;
+import com.example.masuo.parceiroladiesrespectbook.PlayerList.PlayerListItem;
+import com.example.masuo.parceiroladiesrespectbook.SeasonList.SeasonListItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +91,11 @@ public class TeamData {
                 item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
                 item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
                 item.setSeason(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_SEASON)));
-                item.setFace(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE)));
+                String face = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LATEST_FACE));
+                if (TextUtils.isEmpty(face)) {
+                    face = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE));
+                }
+                item.setFace(face);
 
                 // 追加情報
                 List<String> infoList = new ArrayList<>();
@@ -176,7 +180,11 @@ public class TeamData {
             item.setBlood(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_BLOOD)));
             item.setHome(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_HOMETOWN)));
             item.setCareer(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_CAREER)));
-            item.setFace(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE)));
+            String face = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_LATEST_FACE));
+            if (TextUtils.isEmpty(face)) {
+                face = c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_FACE));
+            }
+            item.setFace(face);
             item.setNumber(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NUMBER)));
             item.setPosition(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_POSITION)));
             item.setSeason_note(c.getString(c.getColumnIndex(PlayerContract.PlayersInfoTable.COL_NOTE)));

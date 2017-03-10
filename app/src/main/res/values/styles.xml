@@ -3,14 +3,46 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!-- - See more at: http://android.keicode.com/basics/ui-navigation-drawer.php#sthash.YlHy6v5W.dpuf-->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
+
+        <item name="toolbarStyle">@style/MyApp.Toolbar</item>
     </style>
     <!--&lt;!&ndash;<item name="android:selectableItemBackground">@drawable/ripple</item>&ndash;&gt;-->
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyApp.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">
+            @style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse
+        </item>
+        <item name="subtitleTextAppearance">
+            @style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse
+        </item>
+    </style>
+
+    <style name="ToolbarText">
+        <item name="android:textSize">@dimen/abc_text_size_title_material</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="ToolbarSubtitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>

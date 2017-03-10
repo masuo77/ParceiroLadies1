@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.PlayerInfo;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,6 +14,8 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData;
+import com.example.masuo.parceiroladiesrespectbook.R;
+import com.example.masuo.parceiroladiesrespectbook.SeasonList.SeasonListItem;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,6 +84,19 @@ public class PlayerInfoBaseFragment extends Fragment {
             mSeason = getArguments().getString(ARG_PARAM1);
             mId = getArguments().getString(ARG_PARAM2);
         }
+
+        // NavigationDrawer
+        //setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // NavigationDrawer
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
     }
 
     @Override
@@ -97,7 +114,6 @@ public class PlayerInfoBaseFragment extends Fragment {
         PlayerInfoItem item = TeamData.getPlayerInfo(context, mSeason, mId);
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.player_info_layout);
-
 
         ImageView face = (ImageView) layout.findViewById(R.id.faceImageView);
         TextView name = (TextView) layout.findViewById(R.id.tv_name);
@@ -142,13 +158,6 @@ public class PlayerInfoBaseFragment extends Fragment {
             number.setTextColor(Color.rgb(16, 32, 68));
         }
 
-//        if (Integer.valueOf(mSeason) >= 2016) {
-//            Typeface face = Typeface.createFromAsset(context.getAssets(), "ParNum2016.ttf");
-//            number.setTypeface(face);
-//        } else {
-//            number.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD));
-//            number.setTextColor(Color.rgb(16, 32, 68));
-//        }
         position.setText(item.getPosition());
 
         Boolean leaving = false;
@@ -156,7 +165,7 @@ public class PlayerInfoBaseFragment extends Fragment {
             leaving = true;
         }
 
-//        FragmentManager manager = getActivity().getSupportFragmentManager();
+        // Fragmentの戻りのための作法
         FragmentManager manager = this.getChildFragmentManager();
         PlayerInfoFragmentPagerAdapter adapter = new PlayerInfoFragmentPagerAdapter(manager, item, leaving);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
@@ -168,8 +177,8 @@ public class PlayerInfoBaseFragment extends Fragment {
         viewPager.setPageMarginDrawable(R.drawable.shape_view_pager_divider);
 
         // Inflate the layout for this fragment
-        return view;
         //inflater.inflate(R.layout.fragment_player_info_base, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -196,6 +205,13 @@ public class PlayerInfoBaseFragment extends Fragment {
         super.onDetach();
         Log.i(LOG, "onDetach");
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d(LOG, "PlayerInfoBaseFragment/onResume");
     }
 
     /**

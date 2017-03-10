@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Parceiro Ladies 1</string>
+    <string name="app_sub_title">AC長野パルセイロレディース リスペクトブック</string>
+
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- - See more at: http://android.keicode.com/basics/ui-navigation-drawer.php#sthash.YlHy6v5W.dpuf-->
+    <!-- TODO: Remove or change this placeholder text -->
     <!--<string name="hello_blank_fragment">Heーllo blank fragment</string>-->
+
+    <string name="app_version">バージョン 1.0.0.2017</string>
+    <string name="about">Special thanks:\n
+写真提供 AC長野パルセイロ （C)2008 PARCEIRO\n
+背番号フォント(2016- ) ぬけがらさん @nukegaradotnet\n
+    </string>
 </resources>

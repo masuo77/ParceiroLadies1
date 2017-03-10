@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 4;
     public static final String ASSETS_DATABASE_NAME = "ParceiroLadies.sqlite";
     public static final String DATABASE_NAME = "ParceiroLadies.db";
     private static final String TEXT_TYPE = " TEXT";
@@ -71,6 +71,7 @@ public class PlayerContract {
         public static final String COL_HOMETOWN = "home";
         public static final String COL_CAREER = "career";
         public static final String COL_FACE = "face";
+        public static final String COL_FACE2 = "face2";
     }
 
     //テーブル生成定義
@@ -88,6 +89,7 @@ public class PlayerContract {
             PlayersTable.COL_HOMETOWN + TEXT_TYPE + COMMA_SEP +
             PlayersTable.COL_CAREER + TEXT_TYPE + COMMA_SEP +
             PlayersTable.COL_FACE + TEXT_TYPE + COMMA_SEP +
+            PlayersTable.COL_FACE2 + TEXT_TYPE + COMMA_SEP +
             " )";
 
 
@@ -103,6 +105,7 @@ public class PlayerContract {
         public static final String COL_NOTE = "member_season_note";
         public static final String COL_JOINING_STATUS = "member_join_status";
         public static final String COL_LEAVING_STATUS = "member_leaving_status";
+        public static final String COL_FACE = "member_face";
     }
 
     //テーブル生成定義
@@ -117,6 +120,7 @@ public class PlayerContract {
             MembersTable.COL_NOTE + TEXT_TYPE + COMMA_SEP +
             MembersTable.COL_JOINING_STATUS + TEXT_TYPE + COMMA_SEP +
             MembersTable.COL_LEAVING_STATUS + TEXT_TYPE + COMMA_SEP +
+            MembersTable.COL_FACE + TEXT_TYPE + COMMA_SEP +
             " )";
 
 
@@ -180,6 +184,7 @@ public class PlayerContract {
         public static final String COL_NOTE = MembersTable.COL_NOTE;
         public static final String COL_JOINING_STATUS = MembersTable.COL_JOINING_STATUS;
         public static final String COL_LEAVING_STATUS = MembersTable.COL_LEAVING_STATUS;
+        public static final String COL_LATEST_FACE = MembersTable.COL_FACE;
 
         public static final String COL_YOMI = PlayersTable.COL_YOMI;
         public static final String COL_YOMI_J = PlayersTable.COL_YOMI_J;

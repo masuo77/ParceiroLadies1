@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.SeasonList;
 
 import android.content.Context;
 import android.os.Build;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.masuo.parceiroladiesrespectbook.R;
+
 import java.util.List;
 
 
@@ -18,11 +20,11 @@ import java.util.List;
  * Created by Masuo on 2017/01/04.
  */
 
+//public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRecyclerAdapter.CustomViewHolder> {
 public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRecyclerAdapter.CustomViewHolder> {
     private Context context;
     private List<SeasonListItem> seasonListItems;
     private onItemClickListener listener;
-    private onImageButtonInfoClickListener onImageButtonInfoClickListener;
 
     public SeasonListRecyclerAdapter(Context context, List<SeasonListItem> seasonListItems) {
         this.context = context;
@@ -43,33 +45,8 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
             holder.bind(context, item, position);
         }
 
-//        String year = seasonListItems.get(position).getYear();
-//        String league = seasonListItems.get(position).getLeague();
-//        String rank = seasonListItems.get(position).getRank();
-//        String slogan = seasonListItems.get(position).getSlogan();
-//
-//        holder.textViewYear.setText(year);
-//        holder.textViewLeague.setText(league);
-//        holder.textViewRank.setText(rank);
-//        holder.textViewSlogan.setText("「" + slogan + "」");
-//        if (position == 0) {
-//            holder.linearLayout.getLayoutParams().height = (int) context.getResources().getDimension(R.dimen.seasonview_height);
-//            holder.linearLayout.requestLayout();
-//            holder.textViewLeague.setTextSize(18.0f);
-//            holder.textViewSlogan.setTextSize(18.0f);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                int color = context.getResources().getColor(R.color.colorControlHighlight, context.getTheme());
-//                holder.linearLayout.setBackgroundColor(color);
-//            } else {
-//                int color = context.getResources().getColor(R.color.colorControlHighlight);
-//                holder.linearLayout.setBackgroundColor(color);
-//            }
-//        }
-
         // Itemクリック
-        holder.linearLayout.setOnClickListener(new View.OnClickListener()
-
-                                               {
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(final View view) {
                                                        Handler handler = new Handler();
@@ -81,18 +58,9 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
                                                        }, 240);
                                                    }
                                                }
-
         );
-
-
-//        // Buttonクリック
-//        holder.imageButtonInfo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onImageButtonInfoClickListener.onClick(v, holder.getAdapterPosition());
-//            }
-//        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -100,6 +68,7 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
     }
 
     // Itemクリック
+
     public void setOnItemClickListener(onItemClickListener listener) {
         this.listener = listener;
     }
@@ -108,14 +77,14 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         void onClick(View view, int position, String year);
     }
 
-    // Buttonクリック
-    public void setOnImageButtonInfoClickListener(onImageButtonInfoClickListener listener) {
-        this.onImageButtonInfoClickListener = listener;
-    }
+//    // Buttonクリック
+//    public void setOnImageButtonInfoClickListener(onImageButtonInfoClickListener listener) {
+//        this.onImageButtonInfoClickListener = listener;
+//    }
 
-    public interface onImageButtonInfoClickListener {
-        void onClick(View view, int position);
-    }
+//    public interface onImageButtonInfoClickListener {
+//        void onClick(View view, int position);
+//    }
 
 // ここでViewの中の要素を登録する。
 
@@ -125,7 +94,6 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
         final TextView textViewLeague;
         final TextView textViewRank;
         final TextView textViewSlogan;
-//        final ImageButton imageButtonInfo;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -135,9 +103,9 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
             textViewLeague = (TextView) itemView.findViewById(R.id.text_view_league);
             textViewRank = (TextView) itemView.findViewById(R.id.text_view_rank);
             textViewSlogan = (TextView) itemView.findViewById(R.id.text_view_slogan);
-//            imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
 
+        @SuppressWarnings("deprecation")
         public void bind(Context context, @NonNull SeasonListItem seasonListItem, int position) {
             String year = seasonListItem.getYear();
             String league = seasonListItem.getLeague();
@@ -158,10 +126,12 @@ public class SeasonListRecyclerAdapter extends RecyclerView.Adapter<SeasonListRe
                     int color = context.getResources().getColor(R.color.colorControlHighlight, context.getTheme());
                     linearLayout.setBackgroundColor(color);
                 } else {
+                    @SuppressWarnings("noinspection deprecation")
                     int color = context.getResources().getColor(R.color.colorControlHighlight);
                     linearLayout.setBackgroundColor(color);
                 }
             }
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.PlayerList;
 
 /**
  * Created by Masuo on 2016/12/11.
@@ -15,6 +15,7 @@ public class PlayerListItem {
     private String leaving;
     private String season;
     private String face;
+//    private String latest_face;
 
     public PlayerListItem() {
     }
@@ -98,6 +99,14 @@ public class PlayerListItem {
     public void setFace(String face) {
         this.face = face;
     }
+
+//    public String getLatestFace() {
+//        return latest_face;
+//    }
+//
+//    public void setLatestFace(String latest_face) {
+//        this.latest_face = latest_face;
+//    }
 
 
 }
