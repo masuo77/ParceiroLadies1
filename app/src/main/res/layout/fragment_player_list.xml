@@ -8,70 +8,70 @@
     tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerList.PlayerListFragment">
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="72dp"
-        android:background="@color/colorControlHighlight">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:minHeight="72dp"-->
+    <!--android:background="@color/colorControlHighlight">-->
 
-        <TextView
-            android:text="2016"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textSize="24dp"
-            android:textColor="@color/textColorPrimary"
-            android:id="@+id/text_view_season" />
+    <!--<TextView-->
+    <!--android:text="2016"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--android:textSize="24dp"-->
+    <!--android:textColor="@color/textColorPrimary"-->
+    <!--android:id="@+id/text_view_season" />-->
 
-        <LinearLayout
-            android:id="@+id/textview_container"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignWithParentIfMissing="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical"
-            android:layout_toRightOf="@id/text_view_season"
-            android:layout_toLeftOf="@+id/image_button_season_info">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/textview_container"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignWithParentIfMissing="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_toRightOf="@id/text_view_season"-->
+    <!--android:layout_toLeftOf="@+id/image_button_season_info">-->
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
 
-                <TextView
-                    android:text="プレナスチャレンジリーグ　EAST"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text_view_league"
-                    android:layout_alignParentTop="true"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorPrimary" />
+    <!--<TextView-->
+    <!--android:text="プレナスチャレンジリーグ　EAST"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/text_view_league"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:textSize="14dp"-->
+    <!--android:textColor="@color/textColorPrimary" />-->
 
-                <TextView
-                    android:text="3位"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:id="@+id/text_view_rank"
-                    android:layout_marginLeft="16dp"
-                    android:layout_alignParentRight="true" />
+    <!--<TextView-->
+    <!--android:text="3位"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="14dp"-->
+    <!--android:id="@+id/text_view_rank"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_alignParentRight="true" />-->
 
-            </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-            <TextView
-                android:text="共超"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/text_view_slogan" />
+    <!--<TextView-->
+    <!--android:text="共超"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="14dp"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:id="@+id/text_view_slogan" />-->
 
 
-        </LinearLayout>
+    <!--</LinearLayout>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/player_list_recycler_view"

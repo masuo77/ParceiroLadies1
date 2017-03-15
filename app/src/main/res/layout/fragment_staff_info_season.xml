@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/staff_info_season_layout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <!--<TextView-->
+            <!--android:text="入団情報"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/textView2"-->
+            <!--android:textSize="10sp"-->
+            <!--android:padding="50dp"/>-->
+
+            <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--&gt;-->
+            <!--<TextView-->
+            <!--android:layout_width="96dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="シーズンノート"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--/>-->
+            <!--<TextView-->
+            <!--android:id="@+id/text_view_player_info_season_note"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="あああ"-->
+            <!--/>-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="年度"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:id="@+id/text_view_staff_comment_season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2015" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="コメント"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:id="@+id/text_view_staff_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="12dp"
+                    android:lineSpacingExtra="3sp"
+                    android:text="あ"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

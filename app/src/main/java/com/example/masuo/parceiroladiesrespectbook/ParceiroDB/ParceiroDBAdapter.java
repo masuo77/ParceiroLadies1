@@ -89,7 +89,6 @@ public class ParceiroDBAdapter {
                     "on " + PlayerContract.LeavingsTable.COL_ID + "= " + PlayerContract.MembersTable.COL_ID + " " +
                     "%2$s;";
 
-
     static String where_id = "where " + PlayerContract.PlayersTable.COL_ID + "='%s'";
 
     public Cursor getAllPlayers(String year) {
@@ -158,5 +157,47 @@ public class ParceiroDBAdapter {
         return c;
     }
 
+
+//    SELECT
+//    *
+//    FROM (SELECT * FROM season_staff WHERE staff_season_year = '2016')
+//    left join staff on id = staff_season_id
+
+    static String seasonStaffQuery =
+            "SELECT " +
+                    "*" + " " +
+                    "FROM (SELECT * FROM " + PlayerContract.STAFF_SEASON_TABLE_NAME + " " +
+                    "WHERE " + PlayerContract.StaffSeasonTable.COL_SEASON + "='%1$s')" + " " +
+                    "left join " + PlayerContract.STAFF_TABLE_NAME + " " +
+                    "on " + PlayerContract.StaffTable.COL_ID + "=" + PlayerContract.StaffSeasonTable.COL_ID + " " +
+                    "%2$s;";
+
+    static String where_staff_id = "where " + PlayerContract.StaffTable.COL_ID + "='%s'";
+
+    public Cursor getAllStaff(String year) {
+        String q = String.format(seasonStaffQuery, year, "");
+
+        Cursor c = mDb.rawQuery(q, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+    public Cursor getStaff(String year, String id) {
+        String q = String.format(seasonStaffQuery, year, String.format(where_staff_id, id));
+
+        Log.i(LOG, q);
+
+        Cursor c = mDb.rawQuery(q, null);
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
 
 }

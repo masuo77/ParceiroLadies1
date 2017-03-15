@@ -7,6 +7,10 @@
             android:icon="@android:drawable/ic_menu_gallery"
             android:title="ホーム" />
 
+        <item
+            android:id="@+id/menu_app_description"
+            android:title="このアプリについて" />
+
         <!--<item-->
         <!--android:id="@+id/menu_mypage"-->
         <!--android:icon="@android:drawable/ic_menu_gallery"-->
@@ -18,14 +22,14 @@
         <!--android:title="Youtube" />-->
 
     </group>
-    <item android:title="">
-        <menu android:checkableBehavior="single">
-            <item
-                android:id="@+id/menu_app_description"
-                android:title="このアプリについて" />
-            <item
-                android:id="@+id/menu_setting"
-                android:title=" " />
-        </menu>
-    </item>
+    <!--<item android:title="">-->
+    <!--<menu android:checkableBehavior="single">-->
+    <!--<item-->
+    <!--android:id="@+id/menu_app_description"-->
+    <!--android:title="このアプリについて" />-->
+    <!--<item-->
+    <!--android:id="@+id/menu_setting"-->
+    <!--android:title=" " />-->
+    <!--</menu>-->
+    <!--</item>-->
 </menu>

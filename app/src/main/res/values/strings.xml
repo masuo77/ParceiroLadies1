@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Parceiro Ladies 1</string>
     <string name="app_sub_title">AC長野パルセイロレディース リスペクトブック</string>
+    <string name="app_team">AC長野パルセイロレディース</string>
 
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
@@ -16,4 +17,7 @@
 写真提供 AC長野パルセイロ （C)2008 PARCEIRO\n
 背番号フォント(2016- ) ぬけがらさん @nukegaradotnet\n
     </string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

@@ -76,7 +76,7 @@
                     android:id="@+id/text_view_slogan" />
 
                 <TextView
-                    android:text="南長野に集う仲間よ\n声の限り唄おう 勝利のために"
+                    android:text="南長野に集う仲間よ\n声の限り唄おう 勝利のために！"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
@@ -89,7 +89,7 @@
                     android:id="@+id/text_view_chant" />
 
                 <TextView
-                    android:text="応援チャントより"
+                    android:text="AC長野パルセイロ応援チャントより"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"

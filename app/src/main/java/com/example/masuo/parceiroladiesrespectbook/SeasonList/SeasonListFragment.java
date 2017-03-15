@@ -102,9 +102,9 @@ public class SeasonListFragment extends Fragment {
 
         adapter.setOnItemClickListener(new SeasonListRecyclerAdapter2.onItemClickListener() {
             @Override
-            public void onClick(View view, int position, final String year) {
+            public void onClick(View view, int position, final String year, final String league, final String slogan) {
                 if (mListener != null) {
-                    mListener.onSeasonListFragmentInteraction(year);
+                    mListener.onSeasonListFragmentInteraction(year, league, slogan);
                 }
             }
         });
@@ -119,9 +119,9 @@ public class SeasonListFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String year) {
+    public void onButtonPressed(String year, String league, String slogan) {
         if (mListener != null) {
-            mListener.onSeasonListFragmentInteraction(year);
+            mListener.onSeasonListFragmentInteraction(year, league, slogan);
         }
     }
 
@@ -164,7 +164,7 @@ public class SeasonListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSeasonListFragmentInteraction(String year);
+        void onSeasonListFragmentInteraction(String year, String league, String slogan);
 
     }
 

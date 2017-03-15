@@ -1,12 +1,10 @@
-package com.example.masuo.parceiroladiesrespectbook.PlayerList;
+package com.example.masuo.parceiroladiesrespectbook.StaffList;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,22 +22,20 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import static com.example.masuo.parceiroladiesrespectbook.ParceiroDB.TeamData.getAllPlayersListItem;
+import static com.example.masuo.parceiroladiesrespectbook.ParceiroDB.StaffData.getAllStaffListItem;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlayerListFragment.OnFragmentInteractionListener} interface
+ * {@link StaffListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PlayerListFragment#newInstance} factory method to
+ * Use the {@link StaffListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlayerListFragment extends Fragment {
+public class StaffListFragment extends Fragment {
     private static final String LOG = "PlayerListFragment";
 
     // TODO: Rename parameter arguments, choose names that match
@@ -60,13 +55,13 @@ public class PlayerListFragment extends Fragment {
     // 順番の保存
     private static SharedPreferences mSharedPreferences;
     private static SharedPreferences.Editor mEditor;
-    public static final String LIST_OF_SORTED_DATA_ID = "json_list_sorted_data_id";
+    public static final String LIST_OF_SORTED_DATA_ID = "json_list_sorted_data_staff_id";
     public final static String PREFERENCE_FILE = "preference_file";
 
-    private List<PlayerListItem> listItems;
-    private PlayerListRecyclerAdapter adapter;
+    private List<StaffListItem> listItems;
+    private StaffListRecyclerAdapter adapter;
 
-    public PlayerListFragment() {
+    public StaffListFragment() {
         // Required empty public constructor
     }
 
@@ -79,8 +74,8 @@ public class PlayerListFragment extends Fragment {
      * @return A new instance of fragment PlayerListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayerListFragment newInstance(Context context, String param1, String param2) {
-        PlayerListFragment fragment = new PlayerListFragment();
+    public static StaffListFragment newInstance(Context context, String param1, String param2) {
+        StaffListFragment fragment = new StaffListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -131,60 +126,60 @@ public class PlayerListFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         // 並び替えメニュー表示
-        inflater.inflate(R.menu.menu_player_list, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.menu_player_list, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
 
         // NavigationDrawer
         //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(LOG, "onBackpressed");
-        switch (item.getItemId()) {
-            case R.id.menu_reorder:
-                // ボタンをタップした際の処理を記述
-//                Toast.makeText(getActivity(), "Reorder", Toast.LENGTH_SHORT).show();
-
-                final String[] items = {"背番号順", "ポジション順", "キャンセル"};
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("並び替え")
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // item_which pressed
-                                switch (which) {
-                                    case 0: // 背番号
-                                        Collections.sort(listItems, new NumberComparator());
-                                        onNoteListChanged(listItems);
-//                                        adapter.notify();
-                                        adapter.notifyDataSetChanged();
-                                        adapter.notifyItemRangeChanged(0, listItems.size());
-                                        break;
-                                    case 1: // ポジション
-                                        // ポジション順
-                                        Collections.sort(listItems, new PositionComparator());
-                                        onNoteListChanged(listItems);
-//                                        adapter.notify();
-                                        adapter.notifyDataSetChanged();
-                                        adapter.notifyItemRangeChanged(0, listItems.size());
-                                        break;
-                                    case 2: // キャンセル
-//                                        Toast.makeText(getActivity(), which + "selected", Toast.LENGTH_SHORT).show();
-                                        break;
-                                }
-                            }
-                        })
-                        .show();
-                break;
-            case android.R.id.home:
-                Log.d(LOG, "onBackpressed");
-                getActivity().onBackPressed();
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        Log.d(LOG, "onBackpressed");
+//        switch (item.getItemId()) {
+//            case R.id.menu_reorder:
+//                // ボタンをタップした際の処理を記述
+////                Toast.makeText(getActivity(), "Reorder", Toast.LENGTH_SHORT).show();
+//
+//                final String[] items = {"背番号順", "ポジション順", "キャンセル"};
+//                new AlertDialog.Builder(getActivity())
+//                        .setTitle("並び替え")
+//                        .setItems(items, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                // item_which pressed
+//                                switch (which) {
+//                                    case 0: // 背番号
+//                                        Collections.sort(listItems, new NumberComparator());
+//                                        onNoteListChanged(listItems);
+////                                        adapter.notify();
+//                                        adapter.notifyDataSetChanged();
+//                                        adapter.notifyItemRangeChanged(0, listItems.size());
+//                                        break;
+//                                    case 1: // ポジション
+//                                        // ポジション順
+//                                        Collections.sort(listItems, new PositionComparator());
+//                                        onNoteListChanged(listItems);
+////                                        adapter.notify();
+//                                        adapter.notifyDataSetChanged();
+//                                        adapter.notifyItemRangeChanged(0, listItems.size());
+//                                        break;
+//                                    case 2: // キャンセル
+////                                        Toast.makeText(getActivity(), which + "selected", Toast.LENGTH_SHORT).show();
+//                                        break;
+//                                }
+//                            }
+//                        })
+//                        .show();
+//                break;
+//            case android.R.id.home:
+//                Log.d(LOG, "onBackpressed");
+//                getActivity().onBackPressed();
+//                break;
+//        }
+//        return true;
+//    }
 
     private void createPlayerList(View v) {
         Context context = v.getContext();
@@ -196,8 +191,6 @@ public class PlayerListFragment extends Fragment {
         league = seasonItem.getLeague();
         slogan = seasonItem.getSlogan();
 
-// 1行目の表示を加える場合
-//
 //        TextView textView = (TextView) v.findViewById(R.id.text_view_season);
 //        textView.setText(seasonItem.getYear());
 //
@@ -212,8 +205,8 @@ public class PlayerListFragment extends Fragment {
 
         // 選手リスト
 
-//        final List<PlayerListItem> listItems = getAllPlayersListItem(context, mSeason);
-//        final List<PlayerListItem> listItems = getAllPlayersData(context, mSeason);
+//        final List<StaffListItem> listItems = getAllPlayersListItem(context, mSeason);
+//        final List<StaffListItem> listItems = getAllPlayersData(context, mSeason);
         listItems = getAllPlayersData(context, mSeason);
 
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.player_list_recycler_view);
@@ -222,7 +215,7 @@ public class PlayerListFragment extends Fragment {
 //        recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
 //        final PlayerListRecyclerAdapter adapter = new PlayerListRecyclerAdapter(context, listItems);
-        adapter = new PlayerListRecyclerAdapter(context, seasonItem, listItems);
+        adapter = new StaffListRecyclerAdapter(context, listItems);
         recyclerView.setAdapter(adapter);
 
         ItemTouchHelper itemDecor = new ItemTouchHelper(
@@ -236,7 +229,7 @@ public class PlayerListFragment extends Fragment {
                         adapter.notifyItemMoved(fromPos, toPos);
 
                         // リスト内の移動
-                        PlayerListItem temp = listItems.get(fromPos);
+                        StaffListItem temp = listItems.get(fromPos);
                         listItems.remove(fromPos);
                         listItems.add(toPos, temp);
 
@@ -255,7 +248,7 @@ public class PlayerListFragment extends Fragment {
                 });
         itemDecor.attachToRecyclerView(recyclerView);
 
-        adapter.setOnItemClickListener(new PlayerListRecyclerAdapter.onItemClickListener() {
+        adapter.setOnItemClickListener(new StaffListRecyclerAdapter.onItemClickListener() {
             @Override
             public void onClick(View view, int position, String id, String name) {
 //                Toast.makeText(getActivity(), Integer.toString(position) + " " + id + " " + name, Toast.LENGTH_SHORT).show();
@@ -263,7 +256,7 @@ public class PlayerListFragment extends Fragment {
 
                 if (mListener != null) {
                     Log.i(LOG, Integer.toString(position) + " " + mSeason);
-                    mListener.onPlayerListFragmentInteraction(mSeason, id, league, slogan);
+                    mListener.onStaffListFragmentInteraction(mSeason, id, league, slogan);
                 }
             }
         });
@@ -319,61 +312,61 @@ public class PlayerListFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onPlayerListFragmentInteraction(String year, String id, String league, String slogan);
+        void onStaffListFragmentInteraction(String year, String id, String league, String slogan);
     }
 
 
     //    @Override
-    public void onNoteListChanged(List<PlayerListItem> playerListItems) {
+    public void onNoteListChanged(List<StaffListItem> playerListItems) {
         //after drag and drop operation, the new list of Customers is passed in here
 
         //create a List of Long to hold the Ids of the
         //Customers in the List
-        List<Integer> listOfSortedPlayerId = new ArrayList<>();
+        List<Integer> listOfSortedStaffId = new ArrayList<>();
 
-        for (PlayerListItem playerListItem : playerListItems) {
-            listOfSortedPlayerId.add(Integer.valueOf(playerListItem.getId()));
+        for (StaffListItem playerListItem : playerListItems) {
+            listOfSortedStaffId.add(Integer.valueOf(playerListItem.getId()));
 //            Log.i(LOG, "id=" + playerListItem.getId() + " name=" + playerListItem.getName());
         }
 
         //convert the List of Longs to a JSON string
         Gson gson = new Gson();
-        String jsonListOfSortedPlayerIds = gson.toJson(listOfSortedPlayerId);
+        String jsonListOfSortedStaffIds = gson.toJson(listOfSortedStaffId);
 
         //save to SharedPreference
-        mEditor.putString(LIST_OF_SORTED_DATA_ID + mSeason, jsonListOfSortedPlayerIds).commit();
+        mEditor.putString(LIST_OF_SORTED_DATA_ID + mSeason, jsonListOfSortedStaffIds).commit();
         mEditor.commit();
     }
 
-    private List<PlayerListItem> getAllPlayersData(Context context, String season) {
+    private List<StaffListItem> getAllPlayersData(Context context, String season) {
 
         //Get the sample data
-        List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
+        List<StaffListItem> staffListItems = getAllStaffListItem(context, season);
 
         //create an empty array to hold the list of sorted Customers
-        List<PlayerListItem> sortedPlayersListItems = new ArrayList<>();
+        List<StaffListItem> sortedStaffListItems = new ArrayList<>();
 
         //get the JSON array of the ordered of sorted customers
-        String jsonListOfSortedPlayerId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
+        String jsonListOfSortedStaffId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
 
         //check for null
-        if (!jsonListOfSortedPlayerId.isEmpty()) {
+        if (!jsonListOfSortedStaffId.isEmpty()) {
 
             //convert JSON array into a List<Long>
             Gson gson = new Gson();
             List<Integer> listOfSortedCustomersId =
-                    gson.fromJson(jsonListOfSortedPlayerId,
+                    gson.fromJson(jsonListOfSortedStaffId,
                             new TypeToken<List<Integer>>() {
                             }.getType());
 
             //build sorted list
             if (listOfSortedCustomersId != null && listOfSortedCustomersId.size() > 0) {
                 for (Integer id : listOfSortedCustomersId) {
-                    for (PlayerListItem playerListItem : playerListItems) {
+                    for (StaffListItem playerListItem : staffListItems) {
                         Long l = Long.valueOf(playerListItem.getId());
                         if (l.equals(Long.valueOf(id))) {
-                            sortedPlayersListItems.add(playerListItem);
-                            playerListItems.remove(playerListItem);
+                            sortedStaffListItems.add(playerListItem);
+                            staffListItems.remove(playerListItem);
                             break;
                         }
                     }
@@ -383,50 +376,50 @@ public class PlayerListFragment extends Fragment {
             //if there are still customers that were not in the sorted list
             //maybe they were added after the last drag and drop
             //add them to the sorted list
-            if (playerListItems.size() > 0) {
-                sortedPlayersListItems.addAll(playerListItems);
+            if (staffListItems.size() > 0) {
+                sortedStaffListItems.addAll(staffListItems);
             }
 
             Log.i(LOG, "Found Jason");
 
-            return sortedPlayersListItems;
+            return sortedStaffListItems;
         } else {
             Log.i(LOG, "No Jason");
 
-            return playerListItems;
+            return staffListItems;
         }
     }
 
 
-//    private List<PlayerListItem> getAllPlayersDataPositionOrder(Context context, String season) {
+//    private List<StaffListItem> getAllPlayersDataPositionOrder(Context context, String season) {
 //
 //        //Get the sample data
-//        List<PlayerListItem> playerListItems = getAllPlayersListItem(context, season);
+//        List<StaffListItem> staffListItems = getAllPlayersListItem(context, season);
 //
 //        //create an empty array to hold the list of sorted Customers
-//        List<PlayerListItem> sortedPlayersListItems = new ArrayList<>();
+//        List<StaffListItem> sortedStaffListItems = new ArrayList<>();
 //
 //        //get the JSON array of the ordered of sorted customers
-//        String jsonListOfSortedPlayerId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
+//        String jsonListOfSortedStaffId = mSharedPreferences.getString(LIST_OF_SORTED_DATA_ID + season, "");
 //
 //        //check for null
-//        if (!jsonListOfSortedPlayerId.isEmpty()) {
+//        if (!jsonListOfSortedStaffId.isEmpty()) {
 //
 //            //convert JSON array into a List<Long>
 //            Gson gson = new Gson();
 //            List<Integer> listOfSortedCustomersId =
-//                    gson.fromJson(jsonListOfSortedPlayerId,
+//                    gson.fromJson(jsonListOfSortedStaffId,
 //                            new TypeToken<List<Integer>>() {
 //                            }.getType());
 //
 //            //build sorted list
 //            if (listOfSortedCustomersId != null && listOfSortedCustomersId.size() > 0) {
 //                for (Integer id : listOfSortedCustomersId) {
-//                    for (PlayerListItem playerListItem : playerListItems) {
+//                    for (StaffListItem playerListItem : staffListItems) {
 //                        Long l = Long.valueOf(playerListItem.getId());
 //                        if (l.equals(Long.valueOf(id))) {
-//                            sortedPlayersListItems.add(playerListItem);
-//                            playerListItems.remove(playerListItem);
+//                            sortedStaffListItems.add(playerListItem);
+//                            staffListItems.remove(playerListItem);
 //                            break;
 //                        }
 //                    }
@@ -436,102 +429,19 @@ public class PlayerListFragment extends Fragment {
 //            //if there are still customers that were not in the sorted list
 //            //maybe they were added after the last drag and drop
 //            //add them to the sorted list
-//            if (playerListItems.size() > 0) {
-//                sortedPlayersListItems.addAll(playerListItems);
+//            if (staffListItems.size() > 0) {
+//                sortedStaffListItems.addAll(staffListItems);
 //            }
 //
 //            Log.i(LOG, "Found Jason");
 //
-//            return sortedPlayersListItems;
+//            return sortedStaffListItems;
 //        } else {
 //            Log.i(LOG, "No Jason");
 //
-//            return playerListItems;
+//            return staffListItems;
 //        }
 //    }
 
-
-    public class PositionComparator implements Comparator<PlayerListItem> {
-
-        //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
-        public int compare(PlayerListItem data1, PlayerListItem data2) {
-            String position1 = data1.getPosition();
-            String position2 = data2.getPosition();
-
-            // GK, DF, MF, FW
-            switch (position1) {
-                case "GK":
-                    switch (position2) {
-                        case "GK":
-                            return 0;
-                        default:
-                            return -1;
-                    }
-                case "DF":
-                    switch (position2) {
-                        case "GK":
-                            return +1;
-                        case "DF":
-                            return 0;
-                        default:
-                            return -1;
-                    }
-                case "MF":
-                    switch (position2) {
-                        case "GK":
-                        case "DF":
-                            return +1;
-                        case "MF":
-                            return 0;
-                        default:
-                            return -1;
-                    }
-                case "FW":
-                    switch (position2) {
-                        case "GK":
-                        case "DF":
-                        case "MF":
-                            return +1;
-                        case "FW":
-                            return 0;
-                        default:
-                            return -1;
-                    }
-            }
-            return position1.charAt(0) - position2.charAt(0);
-        }
-    }
-
-//    public class IDComparator implements Comparator<PlayerListItem> {
-//
-//        //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
-//        public int compare(PlayerListItem data1, PlayerListItem data2) {
-//            int id1 = Integer.valueOf(data1.getId());
-//            int id2 = Integer.valueOf(data2.getId());
-//            if (id1 > id2) {
-//                return 1;
-//            } else if (id1 == id2) {
-//                return 0;
-//            } else {
-//                return -1;
-//            }
-//        }
-//    }
-
-    public class NumberComparator implements Comparator<PlayerListItem> {
-
-        //比較メソッド（データクラスを比較して-1, 0, 1を返すように記述する）
-        public int compare(PlayerListItem data1, PlayerListItem data2) {
-            int number1 = Integer.valueOf(data1.getNumber());
-            int number2 = Integer.valueOf(data2.getNumber());
-            if (number1 > number2) {
-                return 1;
-            } else if (number1 == number2) {
-                return 0;
-            } else {
-                return -1;
-            }
-        }
-    }
 
 }

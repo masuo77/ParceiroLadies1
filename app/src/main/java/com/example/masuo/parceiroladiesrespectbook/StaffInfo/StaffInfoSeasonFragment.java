@@ -1,4 +1,4 @@
-package com.example.masuo.parceiroladiesrespectbook;
+package com.example.masuo.parceiroladiesrespectbook.StaffInfo;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,30 +7,34 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.masuo.parceiroladiesrespectbook.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TestFragment.OnFragmentInteractionListener} interface
+ * {@link StaffInfoSeasonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TestFragment#newInstance} factory method to
+ * Use the {@link StaffInfoSeasonFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment extends Fragment {
+public class StaffInfoSeasonFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    //private String mParam1;
+    private StaffInfoItem staffInfoItem;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public TestFragment() {
+    public StaffInfoSeasonFragment() {
         // Required empty public constructor
     }
 
@@ -40,13 +44,13 @@ public class TestFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TestFragment.
+     * @return A new instance of fragment PlayerInfoJoiningFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TestFragment newInstance(String param1, String param2) {
-        TestFragment fragment = new TestFragment();
+    public static StaffInfoSeasonFragment newInstance(StaffInfoItem param1, String param2) {
+        StaffInfoSeasonFragment fragment = new StaffInfoSeasonFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putSerializable(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +60,7 @@ public class TestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            staffInfoItem = (StaffInfoItem) getArguments().getSerializable(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -64,38 +68,41 @@ public class TestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.fragment_staff_info_season, container, false);
+
+        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.staff_info_season_layout);
+
+        StaffInfoSeasonFragment.CustomViewHolder holder = new StaffInfoSeasonFragment.CustomViewHolder(linearLayout);
+
+        StaffInfoItem item = staffInfoItem;
+
+        String comment_season = item.getSeason();
+        holder.comment_season.setText(comment_season);
+
+        String comment = item.getSeasonComment();
+        holder.comment.setText(comment);
+
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_test, container, false);
-
-        Button b = (Button)v.findViewById(R.id.buttonTest);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onTestFragmentInteraction();
-                }
-            }
-        });
-
         return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onTestFragmentInteraction();
+            mListener.onFragmentInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override
@@ -116,6 +123,24 @@ public class TestFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onTestFragmentInteraction();
+        void onFragmentInteraction(Uri uri);
     }
+
+
+    static class CustomViewHolder {
+//        final TextView season_note;
+
+        final TextView comment_season;
+        final TextView comment;
+
+        public CustomViewHolder(LinearLayout layout) {
+
+//            super(itemView);
+//            season_note = (TextView) layout.findViewById(R.id.text_view_player_info_season_note);
+            comment_season = (TextView) layout.findViewById(R.id.text_view_staff_comment_season);
+            comment = (TextView) layout.findViewById(R.id.text_view_staff_comment);
+
+        }
+    }
+
 }

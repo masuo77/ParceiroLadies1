@@ -45,7 +45,10 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
                                                 handler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        listener.onClick(view, getAdapterPosition(), seasonListItems.get(getAdapterPosition()).getYear());
+                                                        listener.onClick(view, getAdapterPosition(),
+                                                                seasonListItems.get(getAdapterPosition()).getYear(),
+                                                                seasonListItems.get(getAdapterPosition()).getLeague(),
+                                                                seasonListItems.get(getAdapterPosition()).getSlogan());
                                                     }
                                                 }, 240);
                                             }
@@ -118,7 +121,7 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
     }
 
     public interface onItemClickListener {
-        void onClick(View view, int position, String year);
+        void onClick(View view, int position, String year, String league, String slogan);
     }
 
 //    // Buttonクリック
