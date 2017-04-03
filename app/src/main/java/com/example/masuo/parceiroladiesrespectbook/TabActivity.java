@@ -58,8 +58,17 @@ public class TabActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle(season + " " + league);
-        toolbar.setSubtitle(getString(R.string.app_team) + " " + "「" + slogan + "」");
+        toolbar.setTitle(season + " " + getString(R.string.app_team));
+        toolbar.setSubtitle("「" + slogan + "」");
+
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -228,4 +237,63 @@ public class TabActivity extends AppCompatActivity
 //        transaction.addToBackStack(null);
 //        transaction.commit();
     }
+
+
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        FragmentTransaction transaction;
+//        FragmentManager manager;
+//
+//        switch (id) {
+//            case R.id.menu_home:
+//                //処理
+//
+//                finish();
+//
+////                SeasonListFragment fragment = new SeasonListFragment();
+////                transaction = getSupportFragmentManager().beginTransaction();
+////
+////                manager = getSupportFragmentManager();
+////                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+////
+////                transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
+////                transaction.add(R.id.fragment_container, fragment);
+////                transaction.commit();
+//                break;
+////            case R.id.menu_mypage:
+////                Toast.makeText(MainActivity.this, "マイページ", Toast.LENGTH_SHORT).show();
+////                break;
+////            case R.id.menu_youtube:
+////                Toast.makeText(MainActivity.this, "Youtube", Toast.LENGTH_SHORT).show();
+////                break;
+//
+//            case R.id.menu_app_description:
+////                getSupportActionBar().hide();
+//                AboutThisAppFragment aboutThisAppFragment = new AboutThisAppFragment();
+//                transaction = getSupportFragmentManager().beginTransaction();
+//                transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
+//                transaction.replace(R.id.fragment_container, aboutThisAppFragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+//                break;
+////            case R.id.menu_setting:
+////                Toast.makeText(MainActivity.this, "設定", Toast.LENGTH_SHORT).show();
+////                break;
+//            default:
+//                Toast.makeText(this, "?", Toast.LENGTH_SHORT).show();
+//                break;
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
+
+//    @Override
+//    public void onAboutThisAppFragmentInteraction(Uri uri) {
+//
+//    }
+
 }

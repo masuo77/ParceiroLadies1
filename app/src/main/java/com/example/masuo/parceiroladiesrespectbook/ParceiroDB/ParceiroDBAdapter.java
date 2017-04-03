@@ -23,7 +23,6 @@ public class ParceiroDBAdapter {
         mContext = context;
 
         mDbHelper = new DatabaseHelper(mContext, PlayerContract.DATABASE_NAME, PlayerContract.DATABASE_VERSION, PlayerContract.ASSETS_DATABASE_NAME);
-
     }
 
     public ParceiroDBAdapter open() {
@@ -135,9 +134,6 @@ public class ParceiroDBAdapter {
         Log.i(LOG, q);
 
         Cursor c = mDb.rawQuery(q, null);
-
-//        Cursor c = mDb.rawQuery("SELECT * FROM " + PlayerContract.SEASON_TABLE_NAME +
-//                " ORDER BY " + PlayerContract.SeasonTable.COL_SEASON + " DESC;", null);
 
         if (c != null) {
             c.moveToFirst();

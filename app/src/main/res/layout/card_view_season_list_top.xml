@@ -13,8 +13,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="72dp"
-            android:layout_gravity="center_vertical"
+            android:minHeight="144dp"
             android:background="@color/colorControlHighlight">
 
             <TextView
@@ -22,8 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="8dp"
                 android:textSize="24dp"
                 android:textColor="@color/textColorPrimary"
                 android:id="@+id/text_view_season" />
@@ -32,58 +30,52 @@
                 android:id="@+id/textview_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignWithParentIfMissing="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginLeft="16dp"
                 android:orientation="vertical"
-                android:layout_toRightOf="@id/text_view_season"
-                android:layout_toLeftOf="@+id/image_button_season_info">
+                android:layout_toRightOf="@id/text_view_season">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:text="プレナスチャレンジリーグ　EAST"
+                        android:text="共超"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/text_view_league"
-                        android:layout_alignParentTop="true"
-                        android:textSize="18sp"
+                        android:id="@+id/text_view_slogan"
+                        android:textSize="24sp"
                         android:textColor="@color/textColorPrimary" />
 
                     <TextView
                         android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:id="@+id/text_view_rank"
                         android:layout_marginLeft="16dp"
-                        android:textColor="@color/textColorSecondary"
-                        android:layout_alignParentRight="true" />
+                        android:textColor="@color/textColorSecondary" />
 
                 </RelativeLayout>
 
                 <TextView
-                    android:text="共超"
+                    android:text="プレナスチャレンジリーグ　EAST"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="8dp"
                     android:textColor="@color/textColorSecondary"
-                    android:id="@+id/text_view_slogan" />
+                    android:id="@+id/text_view_league" />
 
                 <TextView
-                    android:text="南長野に集う仲間よ\n声の限り唄おう 勝利のために！"
+                    android:text="南長野に集う仲間よ\n声の限り唄おう 勝利のために"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="16dp"
                     android:lineSpacingExtra="3sp"
-
                     android:textStyle="normal"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/textColorSecondary"
                     android:id="@+id/text_view_chant" />
@@ -95,27 +87,11 @@
                     android:textSize="10sp"
                     android:gravity="right"
                     android:layout_marginTop="4dp"
-                    android:layout_marginRight="32dp"
+                    android:layout_marginRight="16dp"
                     android:textColor="@color/textColorSecondary"
                     android:id="@+id/text_view_chant_readme" />
 
             </LinearLayout>
-
-
-            <!--<ImageButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:srcCompat="@drawable/ic_info_black_18dp"-->
-            <!--android:id="@+id/image_button_season_info"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:background="@null"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:tint="@android:color/darker_gray"-->
-            <!--/>-->
 
         </RelativeLayout>
 

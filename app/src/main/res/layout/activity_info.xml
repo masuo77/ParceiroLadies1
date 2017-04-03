@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <!--tools:context="com.example.masuo.parceiroladiesrespectbook.PlayerInfoActivity"-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -14,19 +13,6 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <include layout="@layout/tool_bar_parceiro" />
-
-        <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--app:layout_scrollFlags="scroll|enterAlways"-->
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
-        <!--app:titleTextAppearance="@style/TabTitleAppearance"-->
-        <!--app:title="2016 プレナスなでしこリーグ1部"-->
-        <!--app:subtitle="AC長野パルセイロレディス 「一体感」"-->
-        <!--app:subtitleTextAppearance="@style/TabSubtitleAppearance">-->
-        <!--</android.support.v7.widget.Toolbar>-->
 
     </android.support.design.widget.AppBarLayout>
 

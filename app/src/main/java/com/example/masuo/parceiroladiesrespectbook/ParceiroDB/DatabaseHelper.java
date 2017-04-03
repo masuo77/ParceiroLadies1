@@ -25,7 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private final String mAssetDatabaseName;
 
-
     // プリセットデータベースの利用法：
     // assetsにデータベースを格納し、ビルドする。
     // 実行時にassetからデフォルトのデータベースパスへコピーして使用する。
@@ -82,9 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i(LOG, "onUpgrade" + " " + Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
 
-
         // データベースは存在するが、最新ではない
-
         Log.i(LOG, Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
 
         // 削除し、データベースが存在しないことを示す
@@ -99,8 +96,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        super.onDowngrade(db, oldVersion, newVersion);
-
         Log.i(LOG, "onDowngrade" + " " + Integer.toString(oldVersion) + ":" + Integer.toString(newVersion));
 
         // データベースは存在するが、最新ではない

@@ -162,7 +162,6 @@ public class PlayerInfoJoiningFragment extends Fragment {
 
 
         public CustomViewHolder(LinearLayout layout) {
-
 //            super(itemView);
 //            season_note = (TextView) layout.findViewById(R.id.text_view_player_info_season_note);
             joining_season = (TextView) layout.findViewById(R.id.text_view_player_info_joining_season);

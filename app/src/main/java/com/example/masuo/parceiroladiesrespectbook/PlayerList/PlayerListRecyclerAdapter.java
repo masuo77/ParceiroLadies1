@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,18 +64,52 @@ public class PlayerListRecyclerAdapter
             @Override
             public void onClick(final View view) {
                 // 行のクリック
+                if (!isClickEvent()) {
+                    return;
+                }
+
+//                holder.linearLayout.setEnabled(false);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+//                        holder.linearLayout.setEnabled(true);
                         listener.onClick(view,
                                 holder.getAdapterPosition(),
                                 playerListItems.get(holder.getAdapterPosition()).getId(),
                                 playerListItems.get(holder.getAdapterPosition()).getName());
                     }
-                }, 240);
+                }, 200);
             }
         });
+    }
+
+    /**
+     * クリック連打制御時間(ミリ秒)
+     */
+    private static final long CLICK_DELAY = 1000;
+    /**
+     * 前回のクリックイベント実行時間
+     */
+    private static long mOldClickTime;
+
+    /**
+     * クリックイベントが実行可能か判断する。
+     *
+     * @return クリックイベントの実行可否 (true:可, false:否)
+     */
+    public static boolean isClickEvent() {
+        // 現在時間を取得する
+        long time = System.currentTimeMillis();
+
+        // 一定時間経過していなければクリックイベント実行不可
+        if (time - mOldClickTime < CLICK_DELAY) {
+            return false;
+        }
+
+        // 一定時間経過したらクリックイベント実行可能
+        mOldClickTime = time;
+        return true;
     }
 
     @Override
@@ -105,7 +138,6 @@ public class PlayerListRecyclerAdapter
         final TextView textViewNote;
         final TextView textViewJoin;
         final TextView textViewLeaving;
-        final ImageButton imageButtonInfo;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
@@ -118,7 +150,6 @@ public class PlayerListRecyclerAdapter
             textViewNote = (TextView) itemView.findViewById(R.id.list_item_note);
             textViewJoin = (TextView) itemView.findViewById(R.id.list_item_join);
             textViewLeaving = (TextView) itemView.findViewById(R.id.list_item_leaving);
-            imageButtonInfo = (ImageButton) itemView.findViewById(R.id.image_button_season_info);
         }
 
         public void bind(Context context, @NonNull SeasonListItem seasonListItem, @NonNull PlayerListItem item) {

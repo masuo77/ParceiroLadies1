@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         SeasonListFragment.OnFragmentInteractionListener,
         AboutThisAppFragment.OnFragmentInteractionListener {
+
     private static final String LOG = "MainActivity";
     private Toolbar toolbar;
 
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity
     public void onSeasonListFragmentInteraction(String year, String league, String slogan) {
         Log.i(LOG, "onSeasonListFragmentInteraction " + year);
 
-        Intent intent = new Intent(this, TabActivity.class);
+        Intent intent = new Intent(getApplication(), TabActivity.class);
         intent.putExtra("season", year);
         intent.putExtra("league", league);
         intent.putExtra("slogan", slogan);
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onAboutThisAppFragmentInteraction(Uri uri) {
-
     }
 
     @Override
@@ -94,18 +94,18 @@ public class MainActivity extends AppCompatActivity
         FragmentManager manager;
 
         switch (id) {
-            case R.id.menu_home:
-                //処理
-                SeasonListFragment fragment = new SeasonListFragment();
-                transaction = getSupportFragmentManager().beginTransaction();
-
-                manager = getSupportFragmentManager();
-                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-                transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
-                transaction.add(R.id.fragment_container, fragment);
-                transaction.commit();
-                break;
+//            case R.id.menu_home:
+            //処理
+//                SeasonListFragment fragment = new SeasonListFragment();
+//                transaction = getSupportFragmentManager().beginTransaction();
+//
+//                manager = getSupportFragmentManager();
+//                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//
+//                transaction.setCustomAnimations(R.anim.fade_in, 0, R.anim.fade_in, 0);
+//                transaction.add(R.id.fragment_container, fragment);
+//                transaction.commit();
+//            break;
 //            case R.id.menu_mypage:
 //                Toast.makeText(MainActivity.this, "マイページ", Toast.LENGTH_SHORT).show();
 //                break;

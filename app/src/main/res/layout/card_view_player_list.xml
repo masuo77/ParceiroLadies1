@@ -18,24 +18,20 @@
 
             <ImageView
                 android:id="@+id/faceImageView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_alignParentLeft="true"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
                 app:srcCompat="@drawable/ic_account_circle_black_48dp" />
-            <!--android:alpha="0.26"-->
 
             <TextView
                 android:id="@+id/list_item_number"
-                android:layout_width="24dp"
+                android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="1"
+                android:layout_marginLeft="4dp"
+                android:text="10"
                 android:background="@color/colorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:layout_toRightOf="@+id/faceImageView"
@@ -43,17 +39,16 @@
                 android:textStyle="normal"
                 android:letterSpacing="-0.08"
                 android:gravity="center_horizontal"
-                android:paddingBottom="6dp"
-                android:paddingTop="6dp" />
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp" />
 
             <LinearLayout
                 android:id="@+id/textview_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignWithParentIfMissing="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="4dp"
                 android:orientation="vertical"
                 android:layout_toRightOf="@+id/list_item_number">
 
@@ -117,22 +112,6 @@
                     android:text="Name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
             </LinearLayout>
-
-            <!--<ImageButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:srcCompat="@drawable/ic_info_black_18dp"-->
-            <!--android:id="@+id/image_button_season_info"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:background="@null"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginEnd="16dp"-->
-            <!--android:tint="@android:color/darker_gray"-->
-            <!--/>-->
 
         </RelativeLayout>
 

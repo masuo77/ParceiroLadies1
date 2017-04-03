@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -71,6 +72,27 @@ public class AboutThisAppFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_about_this_app, container, false);
+
+        final String[] special_thanks = getResources().getStringArray(R.array.special_thanks_list);
+
+        TextView textView = (TextView) v.findViewById(R.id.special_thanks);
+        textView.setText("");
+        for (String s : special_thanks) {
+            textView.append(s);
+        }
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+//        ImageView imageView = (ImageView) v.findViewById(R.id.applIcon);
+//        imageView.setOnClickListener(new ImageView.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
 
         // 戻るボタンでActionBar再表示
         v.setFocusableInTouchMode(true);

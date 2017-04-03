@@ -28,9 +28,8 @@ public class PlayerInfoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle(year + " " + league);
-        toolbar.setSubtitle(getString(R.string.app_team) + " " + "「" + slogan + "」");
-
+        toolbar.setTitle(year + " " + getString(R.string.app_team));
+        toolbar.setSubtitle("「" + slogan + "」");
 
         PlayerInfoBaseFragment fragment = PlayerInfoBaseFragment.newInstance(year, id);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

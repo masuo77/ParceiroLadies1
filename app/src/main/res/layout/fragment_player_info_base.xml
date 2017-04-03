@@ -54,8 +54,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:orientation="vertical"
-            android:layout_toRightOf="@+id/tv_number"
-            android:layout_toLeftOf="@+id/image_button_season_info">
+            android:layout_toRightOf="@+id/tv_number">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -158,8 +157,8 @@
             android:layout_gravity="top"
             android:background="@color/colorControlHighlight"
             android:textColor="#000000"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingTop="@dimen/info_pager_title_strip_margin"
+            android:paddingBottom="@dimen/info_pager_title_strip_margin" />
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>

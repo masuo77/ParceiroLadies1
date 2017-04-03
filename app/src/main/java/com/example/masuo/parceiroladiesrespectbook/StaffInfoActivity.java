@@ -28,8 +28,8 @@ public class StaffInfoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle(year + " " + league);
-        toolbar.setSubtitle(getString(R.string.app_team) + " " + "「" + slogan + "」");
+        toolbar.setTitle(year + " " + getString(R.string.app_team));
+        toolbar.setSubtitle("「" + slogan + "」");
 
         StaffInfoBaseFragment fragment = StaffInfoBaseFragment.newInstance(year, id);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

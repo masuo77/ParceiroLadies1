@@ -9,8 +9,8 @@
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/AppTheme.PopupOverlay"
     app:titleTextAppearance="@style/TabTitleAppearance"
-    app:title="2016 プレナスなでしこリーグ1部"
-    app:subtitle="AC長野パルセイロレディス 「一体感」"
+    app:title="2016 AC長野パルセイロレディス"
+    app:subtitle="「一体感」"
     app:subtitleTextAppearance="@style/TabSubtitleAppearance">
 
 </android.support.v7.widget.Toolbar>

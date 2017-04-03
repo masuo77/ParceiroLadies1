@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!--tools:context=".MainActivity"-->
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_home"
-            android:icon="@android:drawable/ic_menu_gallery"
-            android:title="ホーム" />
+        <!--<item-->
+        <!--android:id="@+id/menu_home"-->
+        <!--android:icon="@android:drawable/ic_menu_gallery"-->
+        <!--android:title="ホーム" />-->
 
         <item
             android:id="@+id/menu_app_description"

@@ -80,16 +80,7 @@ public class StaffInfoMainFragment extends Fragment {
 
         Log.i(LOG, "onCreateView");
 
-        View v = inflater.inflate(R.layout.fragment_staff_info_main, container, false);
-
-        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.staff_info_main_layout);
-
-        CustomViewHolder holder = new CustomViewHolder(linearLayout);
-
         StaffInfoItem item = staffInfoItem;
-
-        //Log.i(LOG, "career = " + item.getCareer());
-
         String birthday = item.getBirthday();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         try {
@@ -100,18 +91,18 @@ public class StaffInfoMainFragment extends Fragment {
         } catch (ParseException e) {
         }
 
-        String height = item.getHeight() + "cm";
-        String weight = item.getWeight() + "Kg";
-        String blood = item.getBlood();
         String home = item.getHome();
         String career = item.getCareer();
 
+        View v = inflater.inflate(R.layout.fragment_staff_info_main, container, false);
+        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.staff_info_main_layout);
+        CustomViewHolder holder = new CustomViewHolder(linearLayout);
+
         holder.birthday.setText(birthday);
-//        holder.height.setText(height);
-//        holder.weight.setText(weight);
-//        holder.blood.setText(blood);
         holder.home.setText(home);
         holder.career.setText(career);
+        // 下が切れる対応
+        holder.career.append("\n\n\n\n");
 
         return v;
     }
@@ -159,19 +150,13 @@ public class StaffInfoMainFragment extends Fragment {
 
     static class CustomViewHolder {
         final TextView birthday;
-        //        final TextView height;
-//        final TextView weight;
-//        final TextView blood;
         final TextView home;
         final TextView career;
 
         public CustomViewHolder(LinearLayout layout) {
-            birthday = (TextView) layout.findViewById(R.id.text_view_player_info_birthday);
-//            height = (TextView) layout.findViewById(R.id.text_view_player_info_height);
-//            weight = (TextView) layout.findViewById(R.id.text_view_player_info_weight);
-//            blood = (TextView) layout.findViewById(R.id.text_view_player_info_blood);
-            home = (TextView) layout.findViewById(R.id.text_view_player_info_home);
-            career = (TextView) layout.findViewById(R.id.text_view_player_info_career);
+            birthday = (TextView) layout.findViewById(R.id.text_view_stuff_info_birthday);
+            home = (TextView) layout.findViewById(R.id.text_view_stuff_info_home);
+            career = (TextView) layout.findViewById(R.id.text_view_stuff_info_career);
         }
     }
 }

@@ -84,19 +84,6 @@ public class PlayerInfoBaseFragment extends Fragment {
             mSeason = getArguments().getString(ARG_PARAM1);
             mId = getArguments().getString(ARG_PARAM2);
         }
-
-        // NavigationDrawer
-        //setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        // NavigationDrawer
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
     }
 
     @Override
@@ -171,13 +158,12 @@ public class PlayerInfoBaseFragment extends Fragment {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setAdapter(adapter);
 
+        // 縦線
         Resources resources = this.getResources();
         int viewPagerPageMargin = resources.getDimensionPixelSize(R.dimen.view_pager_page_margin);
         viewPager.setPageMargin(viewPagerPageMargin);
         viewPager.setPageMarginDrawable(R.drawable.shape_view_pager_divider);
 
-        // Inflate the layout for this fragment
-        //inflater.inflate(R.layout.fragment_player_info_base, container, false);
         return view;
     }
 
@@ -186,6 +172,11 @@ public class PlayerInfoBaseFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -210,7 +201,6 @@ public class PlayerInfoBaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         Log.d(LOG, "PlayerInfoBaseFragment/onResume");
     }
 

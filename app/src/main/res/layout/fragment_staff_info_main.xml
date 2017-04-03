@@ -1,113 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/staff_info_main_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/staff_info_main_layout">
 
-    >
+    <!--<HorizontalScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginTop="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
-                    android:text="誕生日"
-                    android:layout_marginLeft="16dp" />
+                    android:text="誕生日" />
 
                 <TextView
-                    android:id="@+id/text_view_player_info_birthday"
+                    android:id="@+id/text_view_stuff_info_birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2017/1/17" />
             </LinearLayout>
 
-            <!--<LinearLayout-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="8dp">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="96dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="身長"-->
-            <!--android:layout_marginLeft="16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/text_view_player_info_height"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="160cm" />-->
-
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="8dp">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="96dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="体重"-->
-            <!--android:layout_marginLeft="16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/text_view_player_info_weight"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="50kg: " />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="8dp">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="96dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="血液型"-->
-            <!--android:layout_marginLeft="16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/text_view_player_info_blood"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="O" />-->
-            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
-                    android:text="出身"
-                    android:layout_marginLeft="16dp" />
+                    android:text="出身" />
 
                 <TextView
-                    android:id="@+id/text_view_player_info_home"
+                    android:id="@+id/text_view_stuff_info_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="長野県" />
@@ -115,22 +61,19 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="96dp"
                     android:layout_height="wrap_content"
-                    android:text="経歴"
-                    android:layout_marginLeft="16dp" />
+                    android:text="経歴" />
 
                 <TextView
-                    android:id="@+id/text_view_player_info_career"
+                    android:id="@+id/text_view_stuff_info_career"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:lineSpacingExtra="3sp"
 
@@ -140,6 +83,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </ScrollView><!--</HorizontalScrollView>-->
 
 </LinearLayout>

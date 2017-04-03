@@ -35,12 +35,16 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(final View view) {
+                                                // 行のクリック
+                                                if (!isClickEvent()) {
+                                                    return;
+                                                }
                                                 Handler handler = new Handler();
                                                 handler.postDelayed(new Runnable() {
                                                     @Override
@@ -50,12 +54,40 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
                                                                 seasonListItems.get(getAdapterPosition()).getLeague(),
                                                                 seasonListItems.get(getAdapterPosition()).getSlogan());
                                                     }
-                                                }, 240);
+                                                }, 200);
                                             }
                                         }
             );
 
         }
+    }
+
+    /**
+     * クリック連打制御時間(ミリ秒)
+     */
+    private static final long CLICK_DELAY = 1000;
+    /**
+     * 前回のクリックイベント実行時間
+     */
+    private static long mOldClickTime;
+
+    /**
+     * クリックイベントが実行可能か判断する。
+     *
+     * @return クリックイベントの実行可否 (true:可, false:否)
+     */
+    public static boolean isClickEvent() {
+        // 現在時間を取得する
+        long time = System.currentTimeMillis();
+
+        // 一定時間経過していなければクリックイベント実行不可
+        if (time - mOldClickTime < CLICK_DELAY) {
+            return false;
+        }
+
+        // 一定時間経過したらクリックイベント実行可能
+        mOldClickTime = time;
+        return true;
     }
 
     @Override
@@ -162,7 +194,7 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
             textViewYear.setText(year);
             textViewLeague.setText(league);
             textViewRank.setText(rank);
-            textViewSlogan.setText("「" + slogan + "」");
+            textViewSlogan.setText(slogan);
         }
     }
 
@@ -199,7 +231,7 @@ public class SeasonListRecyclerAdapter2 extends RecyclerView.Adapter<SeasonListR
             textViewYear.setText(year);
             textViewLeague.setText(league);
             textViewRank.setText(rank);
-            textViewSlogan.setText("「" + slogan + "」");
+            textViewSlogan.setText(slogan);
 
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                int color = context.getResources().getColor(R.color.colorControlHighlight, context.getTheme());

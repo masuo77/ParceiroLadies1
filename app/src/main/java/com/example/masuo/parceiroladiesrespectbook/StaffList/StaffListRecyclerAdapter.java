@@ -60,19 +60,53 @@ public class StaffListRecyclerAdapter
             @Override
             public void onClick(final View view) {
                 // 行のクリック
+                if (!isClickEvent()) {
+                    return;
+                }
+//                holder.linearLayout.setEnabled(false);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+//                        holder.linearLayout.setEnabled(true);
                         listener.onClick(view,
                                 holder.getAdapterPosition(),
                                 staffListItems.get(holder.getAdapterPosition()).getId(),
                                 staffListItems.get(holder.getAdapterPosition()).getName());
                     }
-                }, 240);
+                }, 200);
             }
         });
     }
+
+    /**
+     * クリック連打制御時間(ミリ秒)
+     */
+    private static final long CLICK_DELAY = 1000;
+    /**
+     * 前回のクリックイベント実行時間
+     */
+    private static long mOldClickTime;
+
+    /**
+     * クリックイベントが実行可能か判断する。
+     *
+     * @return クリックイベントの実行可否 (true:可, false:否)
+     */
+    public static boolean isClickEvent() {
+        // 現在時間を取得する
+        long time = System.currentTimeMillis();
+
+        // 一定時間経過していなければクリックイベント実行不可
+        if (time - mOldClickTime < CLICK_DELAY) {
+            return false;
+        }
+
+        // 一定時間経過したらクリックイベント実行可能
+        mOldClickTime = time;
+        return true;
+    }
+
 
     @Override
     public int getItemCount() {

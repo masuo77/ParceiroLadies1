@@ -21,30 +21,6 @@
             android:layout_marginTop="8dp"
             app:srcCompat="@drawable/ic_account_circle_black_48dp" />
 
-        <!--android:layout_marginLeft="8dp"-->
-
-        <!--android:alpha="0.26"-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/tv_number"-->
-        <!--android:layout_width="48dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="36sp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="1"-->
-        <!--android:background="#F57000"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
-        <!--android:layout_toRightOf="@+id/faceImageView"-->
-        <!--android:textColor="@android:color/background_light"-->
-        <!--android:textStyle="normal"-->
-        <!--android:letterSpacing="-0.08"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:paddingBottom="6dp"-->
-        <!--android:paddingTop="6dp" />-->
-
-        <!--android:layout_marginLeft="8dp"-->
-
         <LinearLayout
             android:id="@+id/textview_container"
             android:layout_width="wrap_content"
@@ -54,8 +30,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:orientation="vertical"
-            android:layout_toRightOf="@+id/faceImageView"
-            android:layout_toLeftOf="@+id/image_button_season_info">
+            android:layout_toRightOf="@+id/faceImageView">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -71,45 +46,6 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:layout_weight="1" />
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="right"-->
-                <!--&gt;-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/list_item_note"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="aaa"-->
-                <!--android:textSize="12dp"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-                <!--android:textColor="@color/colorPrimary"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/list_item_join"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="aaa"-->
-                <!--android:textSize="12dp"-->
-                <!--android:layout_marginLeft="4dp"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-                <!--android:textColor="@color/colorPrimary"-->
-                <!--/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/list_item_leaving"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="aaa"-->
-                <!--android:textSize="12dp"-->
-                <!--android:layout_marginLeft="4dp"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-                <!--android:textColor="@color/colorPrimary"-->
-                <!--/>-->
-
-                <!--</LinearLayout>-->
             </LinearLayout>
 
             <TextView
@@ -131,7 +67,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="4dp" />
 
-
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
@@ -142,10 +77,7 @@
                 android:layout_marginLeft="4dp" />
 
         </LinearLayout>
-
-
     </RelativeLayout>
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -158,8 +90,8 @@
             android:layout_gravity="top"
             android:background="@color/colorControlHighlight"
             android:textColor="#000000"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingTop="@dimen/info_pager_title_strip_margin"
+            android:paddingBottom="@dimen/info_pager_title_strip_margin" />
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>

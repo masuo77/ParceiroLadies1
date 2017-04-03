@@ -21,7 +21,7 @@
             app:titleTextAppearance="@style/ToolbarText"
             app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
             app:title="@string/app_name"
-            app:subtitle="AC長野パルセイロレディース リスペクトブック" />
+            app:subtitle="@string/app_sub_title" />
 
     </android.support.design.widget.AppBarLayout>
 

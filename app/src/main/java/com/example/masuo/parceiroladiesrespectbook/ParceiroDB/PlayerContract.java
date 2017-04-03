@@ -32,7 +32,6 @@ public class PlayerContract {
     // シーズンごとのスタッフリスト
     public static final String STAFF_SEASON_TABLE_NAME = "staff_seasons";
 
-
     // 新加入マーク
     public static final String NEW_MEMBER_MARK = "☆";
 

@@ -47,7 +47,7 @@ public class PlayerInfoFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return title[position]; //"Page " + position;  //super.getPageTitle(position);
+        return title[position];
     }
 
 }
