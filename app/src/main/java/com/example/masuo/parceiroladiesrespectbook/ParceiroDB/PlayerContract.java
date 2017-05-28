@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class PlayerContract {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 1;
     public static final String ASSETS_DATABASE_NAME = "ParceiroLadies.sqlite";
     public static final String DATABASE_NAME = "ParceiroLadies.db";
     private static final String TEXT_TYPE = " TEXT";
