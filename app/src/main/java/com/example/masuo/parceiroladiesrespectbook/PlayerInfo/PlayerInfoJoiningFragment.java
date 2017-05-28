@@ -105,6 +105,11 @@ public class PlayerInfoJoiningFragment extends Fragment {
         if (TextUtils.isEmpty(joining_note)) {
             holder.joining_note_label.setText("");
         }
+        else
+        {
+            // 下が切れる対応
+            holder.joining_note.append("\n\n\n\n");
+        }
 
         // Inflate the layout for this fragment
         return v;

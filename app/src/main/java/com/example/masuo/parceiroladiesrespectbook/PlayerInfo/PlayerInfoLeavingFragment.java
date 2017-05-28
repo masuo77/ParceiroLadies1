@@ -114,6 +114,10 @@ public class PlayerInfoLeavingFragment extends Fragment {
         if (TextUtils.isEmpty(after_leaving)) {
             holder.after_leaving_note_label.setText("");
         }
+        else {
+            // 下が切れる対応
+            holder.after_leaving.append("\n\n\n\n");
+        }
         // Inflate the layout for this fragment
         return v;
     }

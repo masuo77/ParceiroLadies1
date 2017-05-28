@@ -132,7 +132,7 @@ public class PlayerInfoBaseFragment extends Fragment {
         }
 
         yomi.setText(item.getYomi());
-        yomi_j.setText(item.getYomi_j());
+        yomi_j.setText(item.getYomi_j() + " ");
         number.setText(item.getNumber());
 
 //        Log.i(LOG, "Length=" + item.getName().length() + " " + name.getTextSize());

@@ -3,7 +3,7 @@
     xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_reorder"
-        android:title="並び替え"
         android:icon="@drawable/ic_reorder_white_24dp"
+        android:title="並び替え"
         compat:showAsAction="always" />
 </menu>
